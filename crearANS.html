@@ -186,6 +186,7 @@
       <h4 class="mb-3"></h4>
       <form id="ansForm" class="needs-validation" novalidate>
         <div class="row g-3">
+
           <div class="col-sm-12">
             <label for="nombre" class="form-label">Nombre o descripcion</label>
             <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="" value=""
@@ -197,8 +198,26 @@
 
           <div class="col-sm-6">
             <label for="categoria" class="form-label">Categoria</label>
-            <input type="text" class="form-control" name="nombreCategoria" id="categoria" placeholder="" value=""
+            <select type="text" class="form-control" name="nombreCategoria" id="categoria" placeholder="" value=""
               required>
+              <script>
+                window.onload = function () {
+                  fetch('http://localhost:8080/categoria')
+                    .then(response => response.json())
+                    .then(data => {
+                      const select = document.getElementById("categoria");
+                      data.forEach(element => {
+                        var option = document.createElement("option");
+                        var categoriaText = document.createTextNode(element.nombreCategoria);
+                        option.appendChild(categoriaText);
+                        select.appendChild(option);
+                      });
+                    });
+                }
+
+              </script>
+
+            </select>
             <div class="invalid-feedback">
               Ingrese la categoria.
             </div>
@@ -294,4 +313,5 @@
   integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
 <script src="dashboard.js"></script>
 </body>
+
 </html>

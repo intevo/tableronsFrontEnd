@@ -49,7 +49,7 @@ window.onload = function () {
         td.appendChild(porcentajeText);
         tr.appendChild(td);
         
-        tbody.appendChild(tr)
+        tbody.appendChild(tr);
       });
 
       var chart = new CanvasJS.Chart("chartContainer", {
