@@ -5,6 +5,7 @@ window.onload = function () {
       const PRESUSPUESTOTOTAL = 8444800000;
       const tbody = document.getElementById("tbody");
       var valorTotal = 0;
+      var valorGrafica = 0; 
       data.forEach((element) => {
         // {idFactura: 44444, fechaRegistro: '2022-09-09', fechaEntrega: '2022-08-09', valorTotal: 987000000}
         valorTotal += element.valorTotal;
@@ -45,12 +46,21 @@ window.onload = function () {
 
         var td = document.createElement("td");
         td.setAttribute("style", "text-align: center;");
-        var porcentajeText = document.createTextNode(porcentaje);
+        var porcentajeText = document.createTextNode(porcentaje.toFixed(2));
         td.appendChild(porcentajeText);
         tr.appendChild(td);
         
         tbody.appendChild(tr);
+
       });
+
+      const points = data.map((element) => {
+        valorGrafica += element.valorTotal;
+        const date = new Date(element.fechaRegistro + "T10:20:30Z");
+        const obj = {x: date, y: valorGrafica}
+        return obj
+      })
+      console.log(points)
 
       var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
@@ -91,13 +101,7 @@ window.onload = function () {
             markerType: "square",
             xValueFormatString: "DD MMM, YYYY",
             color: "#874bd7",
-            dataPoints: [
-              { x: new Date(2020, 11, 01), y: 1120000000 },
-              { x: new Date(2020, 12, 01), y: 1895136100 },
-              { x: new Date(2021, 01, 01), y: 2468058167 },
-              { x: new Date(2021, 03, 01), y: 3439264400 },
-              { x: new Date(2021, 04, 01), y: 3751980201 },
-            ],
+            dataPoints: points
           },
           {},
         ],
