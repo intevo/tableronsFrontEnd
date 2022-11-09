@@ -2,24 +2,54 @@ window.onload = function () {
   fetch("http://localhost:8080/factura")
     .then((response) => response.json())
     .then((data) => {
+      const PRESUSPUESTOTOTAL = 8444800000;
       const tbody = document.getElementById("tbody");
-
+      var valorTotal = 0;
       data.forEach((element) => {
         // {idFactura: 44444, fechaRegistro: '2022-09-09', fechaEntrega: '2022-08-09', valorTotal: 987000000}
-        const date = new Date(element.fechaRegistro + 'T10:20:30Z')
-        const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                            "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        valorTotal += element.valorTotal;
+        var porcentaje = (valorTotal / PRESUSPUESTOTOTAL) * 100 
+        const date = new Date(element.fechaRegistro + "T10:20:30Z");
+        const monthNames = [
+          "Enero",
+          "Febrero",
+          "Marzo",
+          "Abril",
+          "Mayo",
+          "Junio",
+          "Julio",
+          "Agosto",
+          "Septiembre",
+          "Octubre",
+          "Noviembre",
+          "Diciembre",
+        ];
 
-        console.log(element)
-        console.log(monthNames[date.getMonth()])
-
+        console.log(monthNames[date.getMonth()]);
 
         var tr = document.createElement("tr");
 
         var td = document.createElement("td");
-        var nameText = document.createTextNode(name);
-        td.appendChild(nameText);
+        td.setAttribute("style", "text-align: center;");
+        var facturadoText = document.createTextNode(
+          `Facturado a ${monthNames[date.getMonth()]}`
+        );
+        td.appendChild(facturadoText);
         tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.setAttribute("style", "text-align: center;");
+        var valorTotalText = document.createTextNode(valorTotal);
+        td.appendChild(valorTotalText);
+        tr.appendChild(td);
+
+        var td = document.createElement("td");
+        td.setAttribute("style", "text-align: center;");
+        var porcentajeText = document.createTextNode(porcentaje);
+        td.appendChild(porcentajeText);
+        tr.appendChild(td);
+        
+        tbody.appendChild(tr)
       });
 
       var chart = new CanvasJS.Chart("chartContainer", {
