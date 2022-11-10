@@ -213,8 +213,19 @@
                         select.appendChild(option);
                       });
                     });
-                }
 
+                    fetch('http://localhost:8080/factura')
+                    .then(response => response.json())
+                    .then(data => {
+                      const select = document.getElementById("idFactura");
+                      data.forEach(element => {
+                        var option = document.createElement("option");
+                        var facturaText = document.createTextNode(element.idFactura);
+                        option.appendChild(facturaText);
+                        select.appendChild(option);
+                      });
+                    });
+                }
               </script>
 
             </select>
@@ -248,6 +259,15 @@
             </div>
           </div>
 
+          <div class="col-6">
+            <label for="pretotal" class="form-label">Seleccione la Factura</label>
+            <select type="text" class="form-control" name="idFactura" id="idFactura" placeholder="" value=""
+              required>
+            </select>
+            <div class="invalid-feedback">
+            </div>
+          </div>
+
           <hr class="my-4">
 
           <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
@@ -271,6 +291,7 @@
           precioUnit: formData.get('precioUnit'),
           cantidadEntrega: formData.get('cantidadEntrega'),
           valorTotal: formData.get('valorTotal'),
+          idFactura: formData.get('idFactura'),
         }
 
         console.log(ans);
@@ -305,7 +326,6 @@
 </div>
 
 <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="form-validation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
   integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
