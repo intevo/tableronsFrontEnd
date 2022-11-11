@@ -204,8 +204,8 @@
 
           <div class="col-sm-6">
             <label for="categoria" class="form-label">Categoria</label>
-            <select type="text" class="form-control" name="nombreCategoria" id="categoria" placeholder="" value=""
-              required>
+            <input list="categoria" name="nombreCategoria" class="form-control"placeholder="" value="" required>
+            <datalist type="text"  name="nombreCategoria" id="categoria">
               <script>
                 window.onload = function () {
                   fetch('http://localhost:8080/categoria')
@@ -234,7 +234,7 @@
                 }
               </script>
 
-            </select>
+            </datalist>
             <div class="invalid-feedback">
               Ingrese la categoria.
             </div>
@@ -267,8 +267,7 @@
 
           <div class="col-6">
             <label for="pretotal" class="form-label">Seleccione la Factura</label>
-            <select type="text" class="form-control" name="idFactura" id="idFactura" placeholder="" value=""
-              required>
+            <select type="text" class="form-control" name="idFactura" id="idFactura" placeholder="" value="">
             </select>
             <div class="invalid-feedback">
             </div>
