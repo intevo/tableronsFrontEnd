@@ -64,6 +64,7 @@
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
     }
+
   </style>
 
   <!-- Custom styles for this template -->
@@ -82,7 +83,8 @@
     </button>
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar sesion</a>
+        <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar
+          sesion</a>
       </div>
     </div>
   </header>
@@ -158,16 +160,68 @@
             </div>
           </div>
         </div>
+        <table>
+          <tr>
+            <td style="width:45%;">
+                <form id="invoiceData" class="needs-validation" novalidate>
+                  <div class="row g-3">
+                    <div class="col-3">
+                      <label for="Idfact" class="form-label">Id Factura</label>
+                      <input type="number" class="form-control" name="idFactura" id="idFactura" placeholder="" value=""
+                        required>
+                      <div class="invalid-feedback">
+                        Ingrese el id de la factura.
+                      </div>
+                    </div>
 
-        <div class="table-responsive">
-          <table id="ansList" class="table table-striped table-sm">
+                    <div class="col-3">
+                      <label for="registro" class="form-label">Fecha de registro</label>
+                      <input type="number" class="form-control" id="fechaActual" name="fechaRegistro" placeholder=""
+                        value="" required>
+                      <div class="invalid-feedback">
+                        Ingrese la fecha de registro.
+                      </div>
+                    </div>
 
+                    <div class="col-3">
+                      <label for="entrega" class="form-label">Fecha de entrega</label>
+                      <div class="input-group has-validation">
+                        <input type="number" class="form-control" id="fechaEntrega" name="fechaEntrega" placeholder=""
+                          required>
+                        <div class="invalid-feedback">
+                          Ingrese la fecha de entrega.
+                        </div>
+                      </div>
+                    </div>
 
-          </table>
+                    <div class="col-3">
+                      <label for="entrega" class="form-label">Cargar Factura</label>
+                      <div class="input-group has-validation">
+                        <input type="number" class="form-control" id="cargaDocumento" name="cargaDocumento" required>
+                        <div class="invalid-feedback">
+                        </div>
+                      </div>
+                    </div>
 
-        </div>
-      </main>
+                  </div>
+                  <hr class="my-4">
+
+                  <button class="w-50 btn btn-light" type="submit" onClick="saveData()">Crear</button>
+                </form>
+            </td>
+            <td style="width:55%;">
+             
+              <div class="table-responsive">
+                
+                <table id="ansList" class="table table-striped table-sm" style="margin-left: 20px;">
+                  <h5 >Resultados</h5>
+            </td>
+          </tr>
+        </table>
+        </table>
     </div>
+    </main>
+  </div>
   </div>
 
   <script>
@@ -234,4 +288,5 @@
     crossorigin="anonymous"></script>
   <script src="dashboard.js"></script>
 </body>
+
 </html>
