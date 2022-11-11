@@ -148,12 +148,12 @@
                 </div>
             </div>
             <h4 class="mb-3"></h4>
-            <form id="invoiceData" class="needs-validation" novalidate>
+            <form id="contratoFormulario" class="needs-validation" novalidate>
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="Idfact" class="form-label">Num. Contrato</label>
-                        <input type="number" class="form-control" name="numeroContrato" id="numeroContrato" placeholder=""
-                            value="" required>
+                        <input type="number" class="form-control" name="numeroContrato" id="numeroContrato"
+                            placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Ingrese el id deL Contrato.
                         </div>
@@ -170,9 +170,9 @@
 
                     <div class="col-6">
                         <label for="entrega" class="form-label">Fecha de Finalización</label>
-                        <div class="input-group has-validation" >
-                            <input type="date" class="form-control" id="fechaFinalizacionContrato" name="fechaEntrega" placeholder=""
-                                required>
+                        <div class="input-group has-validation">
+                            <input type="date" class="form-control" id="fechaFinalizacionContrato" name="fechaFinalizacionContrato"
+                                placeholder="" required>
                             <div class="invalid-feedback">
                                 Ingrese la fecha de Finalización.
                             </div>
@@ -182,8 +182,8 @@
                     <div class="col-6">
                         <label for="entrega" class="form-label">Ingrese Valor del Contrato</label>
                         <div class="input-group has-validation">
-                            <input type="number" class="form-control" id="fechaEntregaContrato" name="fechaEntregaContrato" placeholder=""
-                                required>
+                            <input type="number" class="form-control" id="valorContrato" name="valorContrato"
+                                placeholder="" required>
                             <div class="invalid-feedback">
                                 Valor del Contrato
                             </div>
@@ -193,8 +193,7 @@
                     <div class="col-6">
                         <div class="input-group has-validation">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch"
-                                    id="prorroga">
+                                <input class="form-check-input" type="checkbox" role="switch" id="prorroga" name="prorroga">
                                 <label class="form-check-label" for="flexSwitchCheckChecked">Generar Prorroga</label>
                             </div>
                         </div>
@@ -204,8 +203,8 @@
                 </div>
         </div>
         <hr class="my-4" style="max-width: 140.4vh; margin-left: 235px;">
-        <button style="max-width: 140.4vh; margin-left: 235px;" class="btn btn-secondary btn-lg" type="submit"
-            onClick="saveData()">Ingresar</button>
+        <input style="max-width: 140.4vh; margin-left: 235px;" class="btn btn-secondary btn-lg" type="button"
+            onClick="saveData()" value="Enviar">
         </form>
     </div>
 </div>
@@ -216,19 +215,24 @@
         const API_URL = 'http://localhost:8080/contrato';
 
         const createInvoice = () => {
-            const formData = new FormData(document.querySelector('#invoiceData'));
-
-
-            const factura = {
-                idFactura: formData.get('idFactura'),
-                fechaRegistro: formData.get('fechaRegistro'),
-                fechaEntrega: formData.get('fechaEntrega'),
-                valorEntrega: '',
-                valorToral: '',
+            const formData = new FormData(document.querySelector('#contratoFormulario'));
+            var prorroga = document.getElementById("prorroga").value
+            const contrato = {
+                numeroDeContrato: formData.get('numeroContrato'),
+                fechaInicioContrato: formData.get('fechaIncioContrato'),
+                fechaFinalizacionContrato: formData.get('fechaFinalizacionContrato'),
+                valorContrato: formData.get('valorContrato'),
+                prorroga: prorroga
             }
 
-            console.log(factura);
+            console.log(contrato)
+                if(prorroga==="on"){
+                    console.log("true")
+                }else{
+                    console.log("false")
+                }
 
+            
             fetch(API_URL, {
                 method: 'POST',
                 body: JSON.stringify(factura),
