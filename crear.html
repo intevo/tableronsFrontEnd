@@ -87,7 +87,7 @@
   </button>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="index.html">Cerrar sesion</a>
+      <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar sesion</a>
     </div>
   </div>
 </header>
@@ -99,25 +99,25 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="grafica.html">
-              <span data-feather="bar-chart-2" class="align-text-bottom"></span>
+              <span data-feather="bar-chart" class="align-text-bottom"></span>
               Grafico
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="hipervinculos/administrador.html">
-              <span data-feather="file" data-feather="bar-chart-2" class="align-text-bottom"></span>
+              <span data-feather="user" data-feather="bar-chart-2" class="align-text-bottom"></span>
               Administrador
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="crear.html">
-              <span data-feather="trello" class="align-text-bottom"></span>
+              <span data-feather="upload-cloud" class="align-text-bottom"></span>
               Cargar Factura
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="facturas.html">
-              <span data-feather="layers" class="align-text-bottom"></span>
+              <span data-feather="eye" class="align-text-bottom"></span>
               Ver Facturas
             </a>
           </li>
@@ -129,8 +129,8 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="ans.html">
-              <span data-feather="file" class="align-text-bottom"></span>
-              Ver ANS
+              <span data-feather="percent" class="align-text-bottom"></span>
+              Calcular ANS
             </a>
           </li>
       </div>
@@ -174,6 +174,16 @@
                 if (mes < 10)
                   mes = '0' + mes
                 document.getElementById('fechaActual').value = ano + "-" + mes + "-" + dia;
+
+                var fecha = new Date();
+                var mes = fecha.getMonth() + 1;
+                var dia = fecha.getDate();
+                var ano = fecha.getFullYear();
+                if (dia < 10)
+                  dia = '0' + dia;
+                if (mes < 10)
+                  mes = '0' + mes
+                document.getElementById('fechaEntrega').value = ano + "-" + mes + "-" + dia;
               }
             </script>
 
@@ -188,7 +198,7 @@
           <div class="col-6">
             <label for="entrega" class="form-label">Fecha de entrega</label>
             <div class="input-group has-validation">
-              <input type="date" class="form-control" id="entrega" name="fechaEntrega" placeholder="" required>
+              <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega" placeholder="" required>
               <div class="invalid-feedback">
                 Ingrese la fecha de entrega.
               </div>
@@ -199,9 +209,8 @@
             <label for="entrega" class="form-label">Cargar Factura (PDF)</label>
             <div class="input-group has-validation">
               <input type="file" class="form-control" id="cargaDocumento" name="cargaDocumento" required><button
-                class="btn btn-light"><img
-                  src="https://cdn-icons-png.flaticon.com/512/159/159465.png"
-                  width="25px" height="25px"></button>
+                class="btn btn-light"><img src="https://cdn-icons-png.flaticon.com/512/159/159465.png" width="25px"
+                  height="25px"></button>
               <div class="invalid-feedback">
               </div>
             </div>
@@ -263,13 +272,13 @@
   </footer>
 </div>
 
-  <script src="http://localhost/FrontEnd/assets/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="form-validation.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-    integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-  <script src="dashboard.js"></script>
+<script src="http://localhost/FrontEnd/assets/dist/js/bootstrap.bundle.min.js"></script>
+<script src="form-validation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+  integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+  integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+<script src="dashboard.js"></script>
 </body>
 
 </html>
