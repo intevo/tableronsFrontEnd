@@ -81,7 +81,8 @@
     </button>
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="../index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar sesion</a>
+            <a class="nav-link px-3" href="../index.html"><span data-feather="log-out" class="align-text-bottom"></span>
+                Cerrar sesion</a>
         </div>
     </div>
 </header>
@@ -151,7 +152,7 @@
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="Idfact" class="form-label">Num. Contrato</label>
-                        <input type="number" class="form-control" name="idFactura" id="idFactura" placeholder=""
+                        <input type="number" class="form-control" name="numeroContrato" id="numeroContrato" placeholder=""
                             value="" required>
                         <div class="invalid-feedback">
                             Ingrese el id deL Contrato.
@@ -159,22 +160,8 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <script>
-                            window.onload = function () {
-                                var fecha = new Date();
-                                var mes = fecha.getMonth() + 1;
-                                var dia = fecha.getDate();
-                                var ano = fecha.getFullYear();
-                                if (dia < 10)
-                                    dia = '0' + dia;
-                                if (mes < 10)
-                                    mes = '0' + mes
-                                document.getElementById('fechaActual').value = ano + "-" + mes + "-" + dia;
-                            }
-                        </script>
-
                         <label for="registro" class="form-label">Fecha de Incio</label>
-                        <input type="date" class="form-control" id="fechaincioContrato" name="fechaincioContrato"
+                        <input type="date" class="form-control" id="fechaIncioContrato" name="fechaIncioContrato"
                             placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Ingrese la fecha de Incio.
@@ -183,8 +170,8 @@
 
                     <div class="col-6">
                         <label for="entrega" class="form-label">Fecha de Finalización</label>
-                        <div class="input-group has-validation">
-                            <input type="date" class="form-control" id="entrega" name="fechaEntrega" placeholder=""
+                        <div class="input-group has-validation" >
+                            <input type="date" class="form-control" id="fechaFinalizacionContrato" name="fechaEntrega" placeholder=""
                                 required>
                             <div class="invalid-feedback">
                                 Ingrese la fecha de Finalización.
@@ -195,7 +182,7 @@
                     <div class="col-6">
                         <label for="entrega" class="form-label">Ingrese Valor del Contrato</label>
                         <div class="input-group has-validation">
-                            <input type="number" class="form-control" id="entrega" name="fechaEntrega" placeholder=""
+                            <input type="number" class="form-control" id="fechaEntregaContrato" name="fechaEntregaContrato" placeholder=""
                                 required>
                             <div class="invalid-feedback">
                                 Valor del Contrato
@@ -207,7 +194,7 @@
                         <div class="input-group has-validation">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckChecked" checked>
+                                    id="prorroga">
                                 <label class="form-check-label" for="flexSwitchCheckChecked">Generar Prorroga</label>
                             </div>
                         </div>
@@ -217,7 +204,8 @@
                 </div>
         </div>
         <hr class="my-4" style="max-width: 140.4vh; margin-left: 235px;">
-        <button style="max-width: 140.4vh; margin-left: 235px;"  class="btn btn-secondary btn-lg" type="submit" onClick="saveData()">Ingresar</button>
+        <button style="max-width: 140.4vh; margin-left: 235px;" class="btn btn-secondary btn-lg" type="submit"
+            onClick="saveData()">Ingresar</button>
         </form>
     </div>
 </div>
@@ -225,7 +213,7 @@
 
 <script>
     function saveData() {
-        const API_URL = 'http://localhost:8080/factura';
+        const API_URL = 'http://localhost:8080/contrato';
 
         const createInvoice = () => {
             const formData = new FormData(document.querySelector('#invoiceData'));
