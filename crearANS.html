@@ -285,11 +285,8 @@
   <script>
     function saveData() {
       const API_URL = 'http://localhost:8080/ans';
-
       const createInvoice = () => {
         const formData = new FormData(document.querySelector('#ansForm'));
-
-
         const ans = {
           descripcion: formData.get('descripcion'),
           nombreCategoria: formData.get('nombreCategoria'),
@@ -299,8 +296,6 @@
           valorTotal: formData.get('valorTotal'),
           idFactura: formData.get('idFactura'),
         }
-
-        console.log(ans);
 
         fetch(API_URL, {
           method: 'POST',
@@ -312,12 +307,10 @@
           .then(res = res.json())
           .then(response => {
             console.log(response)
-          })
-
+          }).catch(error => console.log(error))
       }
 
       createInvoice();
-
     }
   </script>
 
