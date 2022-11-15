@@ -12,7 +12,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
-    <link href="http://localhost/FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -159,10 +158,34 @@
                         </div>
                     </div>
 
+                    <script>
+                        window.onload = function () {
+                            var fecha = new Date();
+                            var mes = fecha.getMonth() + 1;
+                            var dia = fecha.getDate();
+                            var ano = fecha.getFullYear();
+                            if (dia < 10)
+                                dia = '0' + dia;
+                            if (mes < 10)
+                                mes = '0' + mes
+                            document.getElementById('fechaIncioContrato').value = ano + "-" + mes + "-" + dia;
+
+                            var fecha = new Date();
+                            var mes = fecha.getMonth() + 1;
+                            var dia = fecha.getDate();
+                            var ano = fecha.getFullYear();
+                            if (dia < 10)
+                                dia = '0' + dia;
+                            if (mes < 10)
+                                mes = '0' + mes
+                            document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
+                        }
+                    </script>
+
                     <div class="col-sm-6">
                         <label for="registro" class="form-label">Fecha de Incio</label>
                         <input type="date" class="form-control" id="fechaIncioContrato" name="fechaIncioContrato"
-                            placeholder="" value="" required>
+                            required>
                         <div class="invalid-feedback">
                             Ingrese la fecha de Incio.
                         </div>
@@ -171,8 +194,8 @@
                     <div class="col-6">
                         <label for="entrega" class="form-label">Fecha de Finalización</label>
                         <div class="input-group has-validation">
-                            <input type="date" class="form-control" id="fechaFinalizacionContrato" name="fechaFinalizacionContrato"
-                                placeholder="" required>
+                            <input type="date" class="form-control" id="fechaFinalizacionContrato"
+                                name="fechaFinalizacionContrato" required>
                             <div class="invalid-feedback">
                                 Ingrese la fecha de Finalización.
                             </div>
@@ -190,16 +213,16 @@
                         </div>
                     </div>
 
-                    <div class="col-6">
-                        <div class="input-group has-validation">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="prorroga" name="prorroga" id="flexCheckChecked" checked>
-                                <label class="form-check-label" for="flexCheckChecked">Generar Prorroga</label>
-                            </div>
+                    <div class="onoffswitch-container">
+                        <span class="onoffswitch-title">Prorroga</span>
+                        <span class="onoffswitch">
+                        <input type="checkbox" class="onoffswitch-checkbox" id="Prorroga"> 
+                        <label class="onoffswitch-label" for="inline">
+                        <span class="onoffswitch-inner" data-swchoff-text="OFF" data-swchon-text="ON"></span>
+                        <span class="onoffswitch-switch"></span> 
+                        </label>
+                         </span>
                         </div>
-                        <div class="invalid-feedback">
-                        </div>
-                    </div>
                 </div>
         </div>
         <hr class="my-4" style="max-width: 140.4vh; margin-left: 235px;">
@@ -213,39 +236,32 @@
 <script>
     function saveData() {
         const API_URL = 'http://localhost:8080/contrato';
-
         const createInvoice = () => {
             const formData = new FormData(document.querySelector('#contratoFormulario'));
-            var prorroga = document.getElementById("prorroga").value
             const contrato = {
-                numeroDeContrato: formData.get('numeroContrato'),
-                fechaInicioContrato: formData.get('fechaIncioContrato'),
+                numeroContrato: formData.get('numeroContrato'),
+                fechaIncioContrato: formData.get('fechaIncioContrato'),
                 fechaFinalizacionContrato: formData.get('fechaFinalizacionContrato'),
-                valorContrato: formData.get('valorContrato'),
-                prorroga: prorroga
+                valorContrato: formData.get('valorContrato')
             }
 
-            console.log(contrato)
-                if(prorroga==="on"){
-                    console.log("true")
-                }else{
-                    console.log("false")
-                }
 
-            
             fetch(API_URL, {
                 method: 'POST',
-                body: JSON.stringify(factura),
+                body: JSON.stringify(contrato),
                 headers: {
                     'Content-Type': 'application/json'
                 }
+
             })
+
                 .then(res = res.json())
                 .then(response => {
                     console.log(response)
-                })
+                }).catch(error => console.log(error))
 
         }
+        console.log(numeroContrato);
 
         createInvoice();
 
@@ -262,7 +278,6 @@
 </footer>
 </div>
 
-<script src="http://localhost/FrontEnd/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="form-validation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
     integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
