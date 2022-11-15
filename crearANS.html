@@ -7,15 +7,15 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.104.2">
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Last-Modified" content="0">
+  <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+
   <title>formulario</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
-
-
-
-
-
   <link href="http://localhost/FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
@@ -84,7 +84,8 @@
   </button>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar sesion</a>
+      <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar
+        sesion</a>
     </div>
   </div>
 </header>
@@ -131,48 +132,47 @@
             </a>
           </li>
           <!--       
-  <body class="bg-light">
-    <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Never expand</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-  
-        <div class="collapse navbar-collapse" id="navbarsExample01">
-          <ul class="navbar-nav me-auto mb-2">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+      <body class="bg-light">
+        <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Never expand</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+      
+            <div class="collapse navbar-collapse" id="navbarsExample01">
+              <ul class="navbar-nav me-auto mb-2">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled">Disabled</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
               </ul>
-            </li>
-          </ul>
-          <form role="search">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-          </form>
-        </div>
-      </div>
-    </nav>
-<div class="container">
-  <main>
-    <div>
-      &nbsp;
-      &nbsp;
-    </div>
--->
-      </div>
+              <form role="search">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </nav>-->
+          <div class="container">
+            <main>
+              <div>
+                &nbsp;
+                &nbsp;
+              </div>
+          </div>
 
     </nav>
 
@@ -189,202 +189,187 @@
           </div>
         </div>
       </div>
-      <h4 class="mb-3"></h4>
-      <form id="ansForm" class="needs-validation" novalidate>
-        <div class="row g-3">
 
-          <div class="col-sm-12">
-            <label for="nombre" class="form-label">Nombre o descripcion</label>
-            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="" value=""
-              required>
-            <div class="invalid-feedback">
-              Ingrese el nombre o descripcion.
-            </div>
-          </div>
-
-          <div class="col-sm-6">
-            <label for="categoria" class="form-label">Categoria</label>
-            <input list="categoria" name="nombreCategoria" class="form-control"placeholder="" value="" required>
-            <datalist type="text"  name="nombreCategoria" id="categoria">
-              <script>
-                window.onload = function () {
-                  fetch('http://localhost:8080/categoria')
-                    .then(response => response.json())
-                    .then(data => {
-                      const select = document.getElementById("categoria");
-                      data.forEach(element => {
-                        var option = document.createElement("option");
-                        var categoriaText = document.createTextNode(element.nombreCategoria);
-                        option.appendChild(categoriaText);
-                        select.appendChild(option);
-                      });
-                    });
-
-                    fetch('http://localhost:8080/factura')
-                    .then(response => response.json())
-                    .then(data => {
-                      const select = document.getElementById("idFactura");
-                      data.forEach(element => {
-                        var option = document.createElement("option");
-                        var facturaText = document.createTextNode(element.idFactura);
-                        option.appendChild(facturaText);
-                        select.appendChild(option);
-                      });
-                    });
-                }
-              </script>
-
-            </datalist>
-            <div class="invalid-feedback">
-              Ingrese la categoria.
-            </div>
-          </div>
-
-          <div class="col-6">
-            <label for="cantidad" class="form-label">Cantidad Ans</label>
-            <div class="input-group has-validation">
-              <input type="number" class="form-control" name="cantidadAns" id="cantidadAns" placeholder="" required>
-              <div class="invalid-feedback">
-                Ingrese la cantidad.
-              </div>
-            </div>
-          </div>
-
-          <div class="col-6">
-            <label for="precuni" class="form-label">Precio Unitario </label>
-            <input type="number" class="form-control" name="precioUnit" id="precioUnit" placeholder="" required>
-            <div class="invalid-feedback">
-              Ingrese el precio unitario.
-            </div>
-          </div>
-
-          <div class="col-6">
-            <label for="pretotal" class="form-label">Cantidad de Entrega</label>
-            <input type="number" class="form-control" name="cantidadEntrega" id="cantidadEntrega" placeholder="">
-            <div class="invalid-feedback">
-            </div>
-          </div>
-
-          <div class="col-6">
-            <label for="pretotal" class="form-label">Seleccione la Factura</label>
-            <select type="text" class="form-control" name="idFactura" id="idFactura" placeholder="" value="">
-            </select>
-            <div class="invalid-feedback">
-            </div>
-          </div>
-          <hr class="my-4">
-
-          <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
-      </form>
-    </div>
-  </div>
-  </main>
-
-  <div style="margin-bottom: 50px;">
-    <table id="ansList" class="table table-striped table-sm" style="margin-left: 20px;">
-      <h5>Resultados</h5>
-  </table>
-
-  <script>
-    const bodyDoc = document.body;
-    bodyDoc.onload = getAns();
-
-    function getAns() {
-      const API_URL = 'http://localhost:8080/ans';
-      let ansItem = [];
-
-      const getAllAns = () => {
-        fetch(API_URL)
-          .then(res => res.json())
-          .then(json => {
-            ansRes = json;
-            console.log(json);
-            renderResult(ansRes);
-          })
-      }
-
-      getAllAns();
-
-      const ansList = document.querySelector('#ansList');
-
-      const renderResult = (ansItem) => {
-        let listHTML = `
-            <tr>
-              <th align="center">ANS</center></th>
-              <th scope="col"><center>Porcentaje</center></th>
-              <th scope="col"><center>Valor Factura</center></th>
-              <th scope="col"><center>Valor Descuento</center></th>
-              <th scope="col"><center>Valor Total </center></th>
-            </tr>
-      `;
-        ansItem.forEach(ansItem => {
-          listHTML += `
+      <table>
         <tr>
-              <td align="center">${ansItem.idAns}</td>
-              <td align="center">${ansItem.descripcion}</td>
-              <td align="center">${ansItem.nombreCategoria}</td>
-              <td align="center">${ansItem.cantidadAns}</td>
-              <td align="center">${ansItem.precioUnit}</td>
-              <td align="center">${ansItem.cantidadEntrega}</td>
-              <td align="center">${ansItem.valorTotal}</td>
-              <td align="center">${ansItem.idFactura}</td>
-        </tr>
-        `
-        })
-        ansList.innerHTML = listHTML;
-      }
-    }
-  </script>
+          <td>
+            <form id="ansForm" class="needs-validation" novalidate>
+              <div class="row g-3">
 
-  <script>
-    function saveData() {
-      const API_URL = 'http://localhost:8080/ans';
-      const createInvoice = () => {
-        const formData = new FormData(document.querySelector('#ansForm'));
-        const ans = {
-          descripcion: formData.get('descripcion'),
-          nombreCategoria: formData.get('nombreCategoria'),
-          cantidadAns: formData.get('cantidadAns'),
-          precioUnit: formData.get('precioUnit'),
-          cantidadEntrega: formData.get('cantidadEntrega'),
-          valorTotal: formData.get('valorTotal'),
-          idFactura: formData.get('idFactura'),
+                <div class="col-sm-12">
+                  <label for="nombre" class="form-label">Nombre de Ans</label>
+                  <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="" value=""
+                    required>
+                  <div class="invalid-feedback">
+                    Ingrese el nombre o descripcion.
+                  </div>
+                </div>
+
+                <!--<div class="col-sm-6">
+                  <label for="categoria" class="form-label">Categoria</label>
+                  <input list="categoria" name="nombreCategoria" class="form-control" placeholder="" value="" required>
+                  <datalist type="text" name="nombreCategoria" id="categoria">
+                    <script>
+                      window.onload = function () {
+                        fetch('http://localhost:8080/categoria')
+                        .then(response => response.json())
+                        .then(data => {
+                          const select = document.getElementById("categoria");
+                          data.forEach(element => {
+                            var option = document.createElement("option");
+                            var categoriaText = document.createTextNode(element.nombreCategoria);
+                            option.appendChild(categoriaText);
+                            select.appendChild(option);
+                          });
+                        });
+                    }
+                    </script>
+
+                   </datalist>
+                  <div class="invalid-feedback">
+                  ngrese la categoria.
+                  </div>
+            </div>-->
+
+                <div class="col-6">
+                  <label for="cantidad" class="form-label">Porcentaje (%)</label>
+                  <div class="input-group has-validation">
+                    <input type="number" class="form-control" name="porcentaje" id="porcentaje" required>
+                    <div class="invalid-feedback">
+                      Ingrese la Porcentaje.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <label for="precuni" class="form-label">Precio valor Facturado (Mensual)</label>
+                  <input type="number" class="form-control" name="valorFactura" id="valorFactura" required>
+                  <div class="invalid-feedback">
+                    Ingrese el valor Facturado.
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <label for="pretotal" class="form-label">Valor Descuento</label>
+                  <input type="number" class="form-control" name="valorDescuento" id="valorDescuento">
+                  <div class="invalid-feedback">
+                    Ingrese el Valor Descuento
+                  </div>
+                </div>
+
+                <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
+            </form>
+    </div>
+    </main>
+    <tr>
+      <td><br>
+        <center>
+          <table id="ansList" class="table table-striped table-sm">
+            <h5>Resultados</h5>
+          </table>
+        </center>
+      </td>
+    </tr>
+    </table>
+
+    <script>
+      const bodyDoc = document.body;
+      bodyDoc.onload = getAns();
+
+      function getAns() {
+        const API_URL = 'http://localhost:8080/ans';
+        let ansItem = [];
+
+        const getAllAns = () => {
+          fetch(API_URL)
+            .then(res => res.json())
+            .then(json => {
+              ansRes = json;
+              console.log(json);
+              renderResult(ansRes);
+            })
         }
 
-        fetch(API_URL, {
-          method: 'POST',
-          body: JSON.stringify(ans),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(res = res.json())
-          .then(response => {
-            console.log(response)
-          }).catch(error => console.log(error))
+        getAllAns();
+
+        const ansList = document.querySelector('#ansList');
+
+        const renderResult = (ansItem) => {
+          let listHTML = `
+              <tr>
+                <th align="center">ID ANS</center></th>
+                <th align="center">ANS</center></th>
+                <th scope="col"><center>Porcentaje</center></th>
+                <th scope="col"><center>Valor Factura</center></th>
+                <th scope="col"><center>Valor Descuento</center></th>
+                <th scope="col"><center>Valor Total </center></th>
+              </tr>
+        `;
+          ansItem.forEach(ansItem => {
+            listHTML += `
+          <tr>
+                <td align="center">${ansItem.idAns}</td>
+                <td align="center">${ansItem.descripcion}</td>
+                <td align="center">${ansItem.porcentaje}</td>
+                <td align="center">${ansItem.valorFactura}</td>
+                <td align="center">${ansItem.valorDescuento}</td>
+                <td align="center">${ansItem.valorTotal}</td>
+          </tr>
+          `
+          })
+          ansList.innerHTML = listHTML;
+        }
       }
 
-      createInvoice();
-    }
-  </script>
+      function saveData() {
+        const API_URL = 'http://localhost:8080/ans';
+        const createInvoice = () => {
+          const formData = new FormData(document.querySelector('#ansForm'));
+          const ans = {
+            descripcion: formData.get('descripcion'),
+            porcentaje: formData.get('porcentaje'),
+            valorFactura: formData.get('valorFactura'),
+            valorDescuento: formData.get('valorDescuento'),
+            valorTotal: formData.get('valorTotal'),
+          }
 
-  <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2022 Intevo S.A.S</p>
-    <ul class="list-inline">
-      <li class="list-inline-item"><a href="#">Privacy</a></li>
-      <li class="list-inline-item"><a href="#">Terms</a></li>
-      <li class="list-inline-item"><a href="#">Support</a></li>
-    </ul>
-  </footer>
-</div>
+          fetch(API_URL, {
+            method: 'POST',
+            body: JSON.stringify(ans),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then(res = res.json())
+            .then(response => {
+              console.log(response)
+            }).catch(error => console.log(error))
+        }
 
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="form-validation.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-  integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-  integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-<script src="dashboard.js"></script>
-</body>
+        createInvoice();
+      }
+    </script>
+
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2022 Intevo S.A.S</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    </footer>
+  </div>
+
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="form-validation.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+    integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+    crossorigin="anonymous"></script>
+  <script src="dashboard.js"></script>
+  </body>
 
 </html>
