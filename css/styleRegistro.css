@@ -62,6 +62,7 @@ body {
     position: relative;
     z-index: 2;
     color: #fff;
+    margin-top: 45px;
 }
 
 .info_title {
@@ -112,6 +113,11 @@ form.form_contact h2 {
     font-weight: 600;
     color: #303030;
     margin-bottom: 30px;
+    
+}
+
+.titulo{
+    margin-top: 40px;;
 }
 
 form.form_contact .user_info {
@@ -226,7 +232,7 @@ form.form_contact input[type="button"]:hover {
 }
 
 .volver-form{
-    margin-top: 80px;
+    margin-top: 160px;
     margin-right: 220px;
     position: relative;
 }
