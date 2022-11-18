@@ -212,7 +212,7 @@ form.form_contact input[type="button"]:hover {
     content: "\f00d";
     font-family: FontAwesome;
     display: inline-block;
-    color: #E25151;
+    color: gray;
     margin-right: 8px;
 }
 
