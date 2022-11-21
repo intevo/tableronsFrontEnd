@@ -21,7 +21,7 @@ body {
 
 .form_wrap {
     width: 1050px;
-    height: 630px;
+    height: 100%;
     margin: 50px auto;
     display: flex;
 
