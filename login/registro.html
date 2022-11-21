@@ -3,8 +3,57 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
     <title>Registro</title>
     <link rel="stylesheet" type="text/css" href="../css/styleRegistro.css">
+    <style>
+        .ocultar {
+            display: none;
+        }
+
+        .mostrar {
+            display: block;
+        }
+
+        .boton_enviar {
+            width: 180px;
+            background: #874BD7;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            margin-left: 400px;
+            align-self: flex-end;
+
+            color: #fff;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .boton_enviar:hover,
+        .btnClose:hover {
+            background: gray;
+        }
+
+        .btnClose {
+            width: 180px;
+            background: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 25px;
+            margin-left: 60px;
+            align-self: flex-end;
+            color: #874BD7;
+            font-family: "Poppins", sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,39 +68,97 @@
                 <img src="../logo.png" width="250px" height="100px" style="border-radius: 10%;">
             </section>
             <section class="volver-form">
-                <button type="button" id="btnClose"><a href="../index.html"
+                <button type="button" class="btnClose"><a href="../index.html"
                         style="text-decoration:none">Volver</a></button>
             </section>
         </section>
 
-        <form action="" class="form_contact">
+        <form id="dataRegistro" class="form_contact">
             <h2>Envia un mensaje</h2>
             <div class="user_info">
-                <label for="names">Nombres *</label>
-                <input type="text" id="names">
+                <div class="container">
 
-                <label for="phone">Telefono / Celular</label>
-                <input type="text" id="phone">
+                    <label for="names">Nombres</label>
+                    <input type="text" id="nombres" name="nombres" required>
 
-                <label for="email">Correo electronico *</label>
-                <input type="email" id="email">
+                    <label for="phone">Telefono / Celular</label>
+                    <input type="number" id="telefono" name="telefono" required>
 
-                <label for="terminos">Proyecto *</label>
-                <input type="text" id="email">
+                    <label for="email">Correo electronico</label>
+                    <input type="email" id="email" name="email" required>
 
-                <label for="control">Cargo *</label>
-                <input type="text" id="email">
+                    <label for="terminos">Proyecto</label>
+                    <input type="text" id="proyecto" name="proyecto" required>
 
-                <label for="password">Contraseña</label>
-                <input type="password" id="email">
+                    <label for="control">Cargo</label>
+                    <input type="text" id="cargo" name="cargo" required>
 
-                <label for="password">Repetir Contraseña</label>
-                <input type="password" id="email">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="pass" name="pass" required>
 
-                <input type="button" value="Registrarse" id="btnSend">
-            </div>
+                    <label for="password">Repetir Contraseña</label>
+                    <input type="password" id="pass1" name="pass1" required>
+
+                    <button type="submit" id="registrar" class="boton_enviar" onClick="saveData()">Registrarse</button>
+                </div>
         </form>
     </section>
-    </body>
+    <script>
+        
+        function saveData() {
+
+            // Ontenemos los valores de los campos de contraseñas 
+            pass = document.getElementById('pass');
+            pass1 = document.getElementById('pass1');
+
+            // Verificamos si las constraseñas no coinciden 
+            if (pass.value != pass1.value) {
+                alert("Contraseña no Coinciden");
+            }
+
+            else {
+                const API_URL = 'http://localhost:8080/registro';
+
+                const createInvoice = () => {
+                    const formData = new FormData(document.querySelector('#dataRegistro'));
+
+                    const registro = {
+                        nombres: formData.get('nombres'),
+                        telefono: formData.get('telefono'),
+                        email: formData.get('email'),
+                        proyecto: formData.get('proyecto'),
+                        cargo: formData.get('cargo'),
+                        pass: formData.get('pass'),
+                    }
+
+                    fetch(API_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(registro),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .then(res = res.json())
+                        .then(response => {
+                            console.log(response)
+                        })
+                        location.reload();
+                }
+                alert("Registro Exitoso");
+                createInvoice();
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
 
 </html>

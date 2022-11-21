@@ -21,7 +21,7 @@ body {
 
 .form_wrap {
     width: 1050px;
-    height: 630px;
+    height: 700px;
     margin: 50px auto;
     display: flex;
 
@@ -219,23 +219,9 @@ form.form_contact input[type="button"]:hover {
     margin-right: 8px;
 }
 
-#btnClose {
-    width: 120px;
-    height: 35px;
-    background: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 25px;
-    align-self: flex-end;
-    color: #874BD7;
-    font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
 .volver-form{
     margin-top: 160px;
     margin-right: 220px;
     position: relative;
 }
+ 
