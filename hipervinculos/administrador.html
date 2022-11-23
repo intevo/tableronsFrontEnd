@@ -242,30 +242,6 @@
                         </div>
                     </div>
 
-                    <script>
-                        window.onload = function () {
-                            var fecha = new Date();
-                            var mes = fecha.getMonth() + 1;
-                            var dia = fecha.getDate();
-                            var ano = fecha.getFullYear();
-                            if (dia < 10)
-                                dia = '0' + dia;
-                            if (mes < 10)
-                                mes = '0' + mes
-                            document.getElementById('fechaIncioContrato').value = ano + "-" + mes + "-" + dia;
-
-                            var fecha = new Date();
-                            var mes = fecha.getMonth() + 1;
-                            var dia = fecha.getDate();
-                            var ano = fecha.getFullYear();
-                            if (dia < 10)
-                                dia = '0' + dia;
-                            if (mes < 10)
-                                mes = '0' + mes
-                            document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
-                        }
-                    </script>
-
                     <div class="col-sm-6">
                         <label for="registro" class="form-label">Fecha de Incio</label>
                         <input type="date" class="form-control" id="fechaIncioContrato" name="fechaIncioContrato"
@@ -353,10 +329,15 @@
               <th scope="col"><center>fecha de Incio Contrato</center></th>
               <th scope="col"><center>fecha de Finalizacion Contrato</center></th>
               <th scope="col"><center>Valor Contrato</center></th>
-              <th scope="col"><center>Prorroga</center></th>
+              <th scope="col"><center>Estado</center></th>
             </tr>
     `;
                 intItem.forEach(intItem => {
+                    let stringProrroga = '';
+                    if (intItem.prorroga == 1) stringProrroga = `
+                    <span class="badge bg-success">Prorroga</span>
+                    `;
+                    else stringProrroga = '';
                     listHTML += `
       <tr>
               <td align="center">${intItem.idContrato}</td>
@@ -364,13 +345,34 @@
               <td align="center">${intItem.fechaIncioContrato}</td>
               <td align="center">${intItem.fechaFinalizacionContrato}</td>
               <td align="center">${intItem.valorContrato}</td>
-              <td align="center">${intItem.prorroga}</td>
-      </tr>
-      `
+              <td align="center">${stringProrroga}</td>
+              </tr>
+              `
                 })
                 intList.innerHTML = listHTML;
             }
         }
+
+        
+        var fecha = new Date();
+        var mes = fecha.getMonth() + 1;
+        var dia = fecha.getDate();
+        var ano = fecha.getFullYear();
+        if (dia < 10)
+            dia = '0' + dia;
+        if (mes < 10)
+            mes = '0' + mes
+        document.getElementById('fechaIncioContrato').value = ano + "-" + mes + "-" + dia;
+
+        var fecha = new Date();
+        var mes = fecha.getMonth() + 1;
+        var dia = fecha.getDate();
+        var ano = fecha.getFullYear();
+        if (dia < 10)
+            dia = '0' + dia;
+        if (mes < 10)
+            mes = '0' + mes
+        document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
     </script>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
