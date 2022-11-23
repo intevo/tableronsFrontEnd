@@ -239,7 +239,7 @@
     }
 
     //Función impresión datos de contrato
-    
+
     bodyDoc.onload = getContrato();
 
     function getContrato() {
@@ -258,29 +258,34 @@
 
       getAllInvoice();
 
-      const intList = document.querySelector('#datosContrato');
+                  const intList = document.querySelector('#datosContrato');
 
-      const renderResult = (intItem) => {
-        let listHTML='';
-        intItem.forEach(intItem => {
-          listHTML += `
+            const renderResult = (intItem) => {
+                let listHTML = `
+             <tr>
+              <th scope="col"><center>Número de Contrato</center></th>
+              <th scope="col"><center>Valor Contrato</center></th>
+              <th scope="col"><center>Estado</center></th>
+            </tr>
+    `;
+                intItem.forEach(intItem => {
+                    let stringProrroga = '';
+                    if (intItem.prorroga == 1) stringProrroga = `
+                    <span class="badge bg-success">Prorroga</span>
+                    `;
+                    else stringProrroga = '';
+                    listHTML += `
       <tr>
-         <th><h5>Número contrato: ${intItem.numeroContrato}</h5></th>
-         <th><h5>Valor contrato: ${intItem.valorContrato}</h5></th>
-      </tr>
-      <tr>
-          <td><h5>Fecha de inicio del contrato: ${intItem.fechaIncioContrato}</h5></td>
-          <td><h5>Fecha de finalizacion del contrato: ${intItem.fechaFinalizacionContrato}</h5></td>
-      </tr>
-      <tr>
-          <td colspan="2"><h5><center>Estado de prorroga: ${intItem.prorroga}</center></h5></td>
-      </tr>
-      `
-        })
-        intList.innerHTML = listHTML;
-      }
-    }
-    </script>
+              <td align="center">${intItem.numeroContrato}</td>
+              <td align="center">${intItem.valorContrato}</td>
+              <td align="center">${stringProrroga}</td>
+              </tr>
+              `
+                })
+                intList.innerHTML = listHTML;
+            }
+        }
+  </script>
 
   <script src="http://localhost/FrontEnd/assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="form-validation.js"></script>
