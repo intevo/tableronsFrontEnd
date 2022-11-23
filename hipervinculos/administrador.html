@@ -128,6 +128,24 @@
 
         }
 
+        function cargarJSON() {
+                const API_URL = 'http://localhost:8080/contrato';
+                let intItem = [];
+	            fetch(API_URL)
+	                .then(function(res){
+	   		            return res.json();
+	            })
+	            .then(function(data){
+	   		         let html = '';
+	   		         data.forEach(function(API_URL) {
+	   			        html += `
+	   				        <li>${valorContrato} ${numeroContrato} ${fechaIncioContrato} ${fechaFinalizacionContrato} ${prorroga}</li>
+	   			        `;
+	   		        })
+	   		        document.getElementById('prorroga').innerHTML = html;
+	            })
+            }
+
         //Validación Check
 
         function validaCheckbox() {
