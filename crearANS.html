@@ -256,6 +256,14 @@
                     Ingrese el Valor Descuento
                   </div>
                 </div>
+                <div class="col-sm-6">
+                  <label for="categoria" class="form-label">Facturas</label>
+                  <select id="factura" name="nombreCategoria" class="form-control" required>
+                  </select>
+                  <div class="invalid-feedback">
+                    Ingrese la categoria.
+                  </div>
+                </div>
                 <hr class="my-4">
                 <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
             </form>
@@ -305,7 +313,8 @@
                 <th scope="col"><center>Porcentaje</center></th>
                 <th scope="col"><center>Valor Factura</center></th>
                 <th scope="col"><center>Valor Descuento</center></th>
-                <th scope="col"><center>Valor Total </center></th>
+                <th scope="col"><center>Valor Total</center></th>
+                <th scope="col"><center>Factura</center></th>
               </tr>
               
         `;
@@ -318,6 +327,7 @@
                 <td align="center">${ansItem.valorFactura}</td>
                 <td align="center">${ansItem.valorDescuento}</td>
                 <td align="center">${ansItem.valorTotal}</td>
+                <td align="center">${ansItem.factura}</td>
           </tr>
           `
           })
@@ -335,6 +345,7 @@
             valorFactura: formData.get('valorFactura'),
             valorDescuento: formData.get('valorDescuento'),
             valorTotal: formData.get('valorTotal'),
+            factura: formData.get('factura'),
           }
 
           fetch(API_URL, {
@@ -351,7 +362,7 @@
         }
 
         createInvoice();
-        
+
       }
 
       bodyDoc.onload = getValor();
@@ -370,28 +381,48 @@
             })
         }
 
+
+
         getAllValorTotal();
 
         const total = document.querySelector('#total');
 
         const renderResult1 = (ValorItem) => {
+
           let listHTML = `
               <tr>
-                <th align="center">ID ANS</center></th>
-              </tr>
-              
+                <td colspan="2"><h5><center>Total Factura Mes</center></h5></td>
+              <tr>
         `;
-        ValorItem.forEach(ValorItem => {
-            listHTML += `
+          ValorItem.forEach(ValorItem => {
+
+          })
+
+          arr = ValorItem;
+          var totalAcum = arr.reduce((sum, value) => (sum + value.valorTotal), 0);
+          console.log(totalAcum);
+          listHTML += `
           <tr>
-                <td align="center">${ValorItem.valorTotal}</td>
+                <th><center>Resultado Factura</center></th>
+                <td align="center">${totalAcum}</td>
           </tr>
           `
-          })
           total.innerHTML = listHTML;
         }
+
       }
-      
+
+      fetch('http://localhost:8080/factura')
+        .then(response => response.json())
+        .then(data => {
+          const select = document.getElementById("factura");
+          data.forEach(element => {
+            var option = document.createElement("option");
+            var facturaText = document.createTextNode(element.idFactura);
+            option.appendChild(facturaText);
+            select.appendChild(option);
+          });
+        });
     </script>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -400,7 +431,7 @@
         <li class="list-inline-item"><a href="#">Privacy</a></li>
         <li class="list-inline-item"><a href="#">Terms</a></li>
         <li class="list-inline-item"><a href="#">Support</a></li>
-      </ul> 
+      </ul>
     </footer>
   </div>
 
