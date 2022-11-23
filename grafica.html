@@ -172,20 +172,7 @@
               <div class="outer-wrapper">
                 <div class="table-wrapper">
                   <center>
-                    <table class="tabla">
-                      <thead>
-                        <tr>
-                          <th nowrap>
-                            <center>ITEM</center>
-                          </th>
-                          <th>PRECIO ($)</th>
-                          <th nowrap>PORCENTAJE (%)</th>
-                        </tr>
-                      </thead>
-
-                      <tbody id="tbody">
-
-                      </tbody>
+                    <table class="tabla" id="ansList">
                     </table>
                   </center>
                 </div>
@@ -203,6 +190,53 @@
     </main>
   </div>
   </div>
+  <script>
+    const bodyDoc = document.body;
+      bodyDoc.onload = getAns();
+
+      function getAns() {
+        const API_URL = 'http://localhost:8080/ans';
+        let ansItem = [];
+
+        const getAllAns = () => {
+          fetch(API_URL)
+            .then(res => res.json())
+            .then(json => {
+              ansRes = json;
+              console.log(json);
+              renderResult(ansRes);
+            })
+        }
+
+        getAllAns();
+
+        const ansList = document.querySelector('#ansList');
+
+        const renderResult = (ansItem) => {
+          let listHTML = `
+            <thead>
+              <tr>
+                <th nowrap><center>ANS</center></th>
+                <th nowrap><center>PORCENTAJE (%)</center></th>
+                <th nowrap><center>PRECIO REAL($)</center></th>
+              </tr>
+            </thead>  
+        `;
+          ansItem.forEach(ansItem => {
+            listHTML += `
+            <tbody>
+              <tr>
+                    <td nowrap><center>${ansItem.descripcion}</center></td>
+                    <td nowrap><center>${ansItem.porcentaje}</center></td>
+                    <td nowrap><center>${ansItem.valorTotal}</center></td>
+              </tr>
+            </tbody>
+          `
+          })
+          ansList.innerHTML = listHTML;
+        }
+      }
+  </script>
   <script src="http://localhost/FrontEnd/assets/dist/js/bootstrap.bundle.min.js"></script>
 <script src="form-validation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
@@ -213,7 +247,7 @@
     crossorigin="anonymous"></script>
 <script src="dashboard.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  <script src="js/script.js"></script>
+  
 </body>
 
 </html>
