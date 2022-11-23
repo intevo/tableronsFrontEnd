@@ -114,8 +114,12 @@
             // Verificamos si las constraseñas no coinciden 
             if (pass.value != pass1.value) {
                 alert("Contraseña no Coinciden");
+                const form = document.getElementById("dataRegistro");
+                form.addEventListener('submit', function(event){
+                    event.preventDefault();
+                })
             }
-
+            
             else {
                 const API_URL = 'http://localhost:8080/registro';
 
@@ -142,9 +146,9 @@
                         .then(response => {
                             console.log(response)
                         })
-                        location.reload();
                 }
                 alert("Registro Exitoso");
+                location.reload();
                 createInvoice();
             }
         }
