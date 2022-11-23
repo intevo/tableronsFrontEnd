@@ -81,7 +81,8 @@
 
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar Sesion</a> 
+        <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar
+          Sesion</a>
       </div>
     </div>
   </header>
@@ -154,7 +155,7 @@
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Resumen</h1>
+          <table id="datosContrato" width="100%"></table>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
               <!--<button type="button" class="btn btn-sm btn-outline-secondary">Descargar Gráfica <br> (PDF)</button>-->
@@ -192,28 +193,28 @@
   </div>
   <script>
     const bodyDoc = document.body;
-      bodyDoc.onload = getAns();
+    bodyDoc.onload = getAns();
 
-      function getAns() {
-        const API_URL = 'http://localhost:8080/ans';
-        let ansItem = [];
+    function getAns() {
+      const API_URL = 'http://localhost:8080/ans';
+      let ansItem = [];
 
-        const getAllAns = () => {
-          fetch(API_URL)
-            .then(res => res.json())
-            .then(json => {
-              ansRes = json;
-              console.log(json);
-              renderResult(ansRes);
-            })
-        }
+      const getAllAns = () => {
+        fetch(API_URL)
+          .then(res => res.json())
+          .then(json => {
+            ansRes = json;
+            console.log(json);
+            renderResult(ansRes);
+          })
+      }
 
-        getAllAns();
+      getAllAns();
 
-        const ansList = document.querySelector('#ansList');
+      const ansList = document.querySelector('#ansList');
 
-        const renderResult = (ansItem) => {
-          let listHTML = `
+      const renderResult = (ansItem) => {
+        let listHTML = `
             <thead>
               <tr>
                 <th nowrap><center>ANS</center></th>
@@ -222,8 +223,8 @@
               </tr>
             </thead>  
         `;
-          ansItem.forEach(ansItem => {
-            listHTML += `
+        ansItem.forEach(ansItem => {
+          listHTML += `
             <tbody>
               <tr>
                     <td nowrap><center>${ansItem.descripcion}</center></td>
@@ -232,22 +233,59 @@
               </tr>
             </tbody>
           `
-          })
-          ansList.innerHTML = listHTML;
-        }
+        })
+        ansList.innerHTML = listHTML;
       }
-  </script>
+    }
+
+    //Función impresión datos de contrato
+    
+    bodyDoc.onload = getContrato();
+
+    function getContrato() {
+      const API_URL = 'http://localhost:8080/contrato';
+      let intItem = [];
+
+      const getAllInvoice = () => {
+        fetch(API_URL)
+          .then(res => res.json())
+          .then(json => {
+            intRes = json;
+            console.log(json);
+            renderResult(intRes);
+          })
+      }
+
+      getAllInvoice();
+
+      const intList = document.querySelector('#datosContrato');
+
+      const renderResult = (intItem) => {
+        let listHTML='';
+        intItem.forEach(intItem => {
+          listHTML += `
+      <tr>
+              <th><h3>Número contrato: ${intItem.numeroContrato}</h3></th>
+              <th><h3>Valor contrato: ${intItem.valorContrato}</h3></th>
+      </tr>
+      `
+        })
+        intList.innerHTML = listHTML;
+      }
+    }
+    </script>
+
   <script src="http://localhost/FrontEnd/assets/dist/js/bootstrap.bundle.min.js"></script>
-<script src="form-validation.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+  <script src="form-validation.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
     integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
     crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
     crossorigin="anonymous"></script>
-<script src="dashboard.js"></script>
+  <script src="dashboard.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-  
+
 </body>
 
 </html>
