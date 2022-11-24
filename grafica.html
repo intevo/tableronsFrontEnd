@@ -9,6 +9,7 @@
   <meta name="generator" content="Hugo 0.104.2">
   <title>Menu</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="/headers.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
@@ -153,9 +154,17 @@
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        
+        <div class="container">
+          <header class="d-flex justify-content-center py-4">
+            <table id="datosContrato" width="100%">              
+            </table>
+          </header>
+        </div>
+
         <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <table id="datosContrato" width="100%"></table>
+
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
               <!--<button type="button" class="btn btn-sm btn-outline-secondary">Descargar Gráfica <br> (PDF)</button>-->
@@ -262,11 +271,7 @@
 
             const renderResult = (intItem) => {
                 let listHTML = `
-             <tr>
-              <th scope="col"><center>Número de Contrato</center></th>
-              <th scope="col"><center>Valor Contrato</center></th>
-              <th scope="col"><center>Estado</center></th>
-            </tr>
+                
     `;
                 intItem.forEach(intItem => {
                     let stringProrroga = '';
@@ -274,18 +279,18 @@
                     <span class="badge bg-success">Prorroga</span>
                     `;
                     else stringProrroga = '';
-                    listHTML += `
-      <tr>
-         <th><h5>Número contrato: ${intItem.numeroContrato}</h5></th>
-         <th><h5>Valor contrato: ${intItem.valorContrato}</h5></th>
-      </tr>
-      <tr>
-          <td><h5>Fecha de inicio del contrato: ${intItem.fechaIncioContrato}</h5></td>
-          <td><h5>Fecha de finalizacion del contrato: ${intItem.fechaFinalizacionContrato}</h5></td>
-      </tr>
-      <tr>
-          <td colspan="2"><h5><center>Estado de prorroga: ${intItem.prorroga}</center></h5></td>
-      </tr>
+                    listHTML += `           
+         <tr>
+           <td>
+              <li class"nav-link">Número contrato: ${intItem.numeroContrato}</li>
+            </td>
+            <td>
+              <li class="nav-item">Valor contrato: ${intItem.valorContrato}</li>
+            </td>
+          <td>
+              <li class="nav-item">Estado: ${stringProrroga}</li>
+          </td>
+        </tr>
       `
         })
         intList.innerHTML = listHTML;
