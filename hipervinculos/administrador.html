@@ -158,7 +158,7 @@
 </head>
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-10 shadow">
 
-    <img src="../intevo-logo.png" id="icon" alt="User Icon" />
+    <a href="../grafica.html "><img src="../intevo-logo.png" id="icon" alt="User Icon"></a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
         data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -244,8 +244,7 @@
 
                     <div class="col-sm-6">
                         <label for="registro" class="form-label">Fecha de Incio</label>
-                        <input type="date" class="form-control" id="fechaIncioContrato" name="fechaIncioContrato"
-                            required>
+                        <input type="date" class="form-control" id="fechaIncioContrato" name="fechaIncioContrato" required>
                         <div class="invalid-feedback">
                             Ingrese la fecha de Incio.
                         </div>
@@ -254,8 +253,7 @@
                     <div class="col-6">
                         <label for="entrega" class="form-label">Fecha de Finalización</label>
                         <div class="input-group has-validation">
-                            <input type="date" class="form-control" id="fechaFinalizacionContrato"
-                                name="fechaFinalizacionContrato" required>
+                            <input type="date" class="form-control" id="fechaFinalizacionContrato" name="fechaFinalizacionContrato" required>
                             <div class="invalid-feedback">
                                 Ingrese la fecha de Finalización.
                             </div>
@@ -265,8 +263,7 @@
                     <div class="col-6">
                         <label for="entrega" class="form-label">Ingrese Valor del Contrato</label>
                         <div class="input-group has-validation">
-                            <input type="number" class="form-control" id="valorContrato" name="valorContrato"
-                                placeholder="" required>
+                            <input type="number" class="form-control" id="valorContrato" name="valorContrato" required>
                             <div class="invalid-feedback">
                                 Valor del Contrato
                             </div>
@@ -339,14 +336,14 @@
                     `;
                     else stringProrroga = '';
                     listHTML += `
-      <tr>
+            <tr>
               <td align="center">${intItem.idContrato}</td>
               <td align="center">${intItem.numeroContrato}</td>
               <td align="center">${intItem.fechaIncioContrato}</td>
               <td align="center">${intItem.fechaFinalizacionContrato}</td>
               <td align="center">${intItem.valorContrato}</td>
               <td align="center">${stringProrroga}</td>
-              </tr>
+            </tr>
               `
                 })
                 intList.innerHTML = listHTML;

@@ -104,7 +104,7 @@
         </form>
     </section>
     <script>
-        
+
         function saveData() {
 
             // Ontenemos los valores de los campos de contraseñas 
@@ -112,17 +112,42 @@
             pass1 = document.getElementById('pass1');
 
             // Verificamos si las constraseñas no coinciden 
+
+
+            if (nombres.value.length <= 0) {
+                alert("Debe ingresar un valor en el campo de Nombre");
+                return;
+            }
+            if (telefono.value.length <= 0) {
+                alert("Debe ingresar un valor en el campo de Telefono");
+                return;
+            }
+            if (email.value.length <= 0) {
+                alert("Debe ingresar un valor en el campo de Email");
+                return;
+            }
+            if (proyecto.value.length <= 0) {
+                alert("Debe ingresar un valor en el campo de Proyecto");
+                return;
+            }
+            if (cargo.value.length <= 0) {
+                alert("Debe ingresar un valor en el campo de Cargo");
+                return;
+            }
+            if (pass.value.length <= 0) {
+                alert("Debe ingresar un valor en el campo de Contraseña");
+                return;
+            }
             if (pass.value != pass1.value) {
                 alert("Contraseña no Coinciden");
                 const form = document.getElementById("dataRegistro");
-                form.addEventListener('submit', function(event){
+                form.addEventListener('submit', function (event) {
                     event.preventDefault();
                 })
             }
-            
+
             else {
                 const API_URL = 'http://localhost:8080/registro';
-
                 const createInvoice = () => {
                     const formData = new FormData(document.querySelector('#dataRegistro'));
 

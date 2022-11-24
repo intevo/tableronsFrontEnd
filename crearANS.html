@@ -77,7 +77,7 @@
 </head>
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-10 shadow">
 
-  <img src="intevo-logo.png" id="icon" alt="User Icon" />
+  <a href="grafica.html"><img src="intevo-logo.png" id="icon" alt="User Icon"></a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
     data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -337,6 +337,26 @@
 
       function saveData() {
         const API_URL = 'http://localhost:8080/ans';
+        if (descripcion.value.length <= 0) {
+          alert("Debe poner un valor en el campo de Nombre Ans");
+          return;
+        }
+        if (porcentaje.value.length <= 0) {
+          alert("Debe poner un valor en el campo de Porcentaje");
+          return;
+        }
+        if (valorFactura.value.length <= 0) {
+          alert("Debe poner un valor en el campo de Precio valor Facturado");
+          return;
+        }
+        if (valorDescuento.value.length <= 0) {
+          alert("Debe poner un valor en el campo de Valor Descuento");
+          return;
+        }
+        if (factura.value.length <= 0) {
+          alert("Debe elegir un valor en el campo de Factura");
+          return;
+        }
         const createInvoice = () => {
           const formData = new FormData(document.querySelector('#ansForm'));
           const ans = {
@@ -381,8 +401,6 @@
             })
         }
 
-
-
         getAllValorTotal();
 
         const total = document.querySelector('#total');
@@ -423,6 +441,8 @@
             select.appendChild(option);
           });
         });
+
+    
     </script>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">

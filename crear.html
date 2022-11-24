@@ -75,14 +75,15 @@
 </head>
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-10 shadow">
 
-  <img src="intevo-logo.png" id="icon" alt="User Icon" />
+  <a href="grafica.html"><img src="intevo-logo.png" id="icon" alt="User Icon"></a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
     data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar sesion</a>
+      <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar
+        sesion</a>
     </div>
   </div>
 </header>
@@ -204,12 +205,15 @@
       const createInvoice = () => {
         const formData = new FormData(document.querySelector('#invoiceData'));
 
+        if (idFactura.value.length <= 0) {
+          alert("Debe poner un valor en el campo de factura");
+          return;
+        }
 
         const factura = {
           idFactura: formData.get('idFactura'),
           fechaRegistro: formData.get('fechaRegistro'),
           fechaEntrega: formData.get('fechaEntrega'),
-          valorEntrega: '',
           valorToral: '',
         }
 
@@ -227,31 +231,31 @@
 
       }
 
-      createInvoice();  
+      createInvoice();
 
     }
 
     window.onload = function () {
-                var fecha = new Date();
-                var mes = fecha.getMonth() + 1;
-                var dia = fecha.getDate();
-                var ano = fecha.getFullYear();
-                if (dia < 10)
-                  dia = '0' + dia;
-                if (mes < 10)
-                  mes = '0' + mes
-                document.getElementById('fechaActual').value = ano + "-" + mes + "-" + dia;
+      var fecha = new Date();
+      var mes = fecha.getMonth() + 1;
+      var dia = fecha.getDate();
+      var ano = fecha.getFullYear();
+      if (dia < 10)
+        dia = '0' + dia;
+      if (mes < 10)
+        mes = '0' + mes
+      document.getElementById('fechaActual').value = ano + "-" + mes + "-" + dia;
 
-                var fecha = new Date();
-                var mes = fecha.getMonth() + 1;
-                var dia = fecha.getDate();
-                var ano = fecha.getFullYear();
-                if (dia < 10)
-                  dia = '0' + dia;
-                if (mes < 10)
-                  mes = '0' + mes
-                document.getElementById('fechaEntrega').value = ano + "-" + mes + "-" + dia;
-              }
+      var fecha = new Date();
+      var mes = fecha.getMonth() + 1;
+      var dia = fecha.getDate();
+      var ano = fecha.getFullYear();
+      if (dia < 10)
+        dia = '0' + dia;
+      if (mes < 10)
+        mes = '0' + mes
+      document.getElementById('fechaEntrega').value = ano + "-" + mes + "-" + dia;
+    }
   </script>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
