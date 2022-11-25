@@ -223,6 +223,7 @@ input[type=text]:placeholder {
   -moz-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
+
 .boton_ingresar{
   text-decoration: none;
   padding: 10px;
@@ -259,8 +260,6 @@ input[type=text]:placeholder {
 .underlineHover:hover:after{
   width: 100%;
 }
-
-
 
 /* OTHERS */
 
