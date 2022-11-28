@@ -174,6 +174,7 @@
               <div class="invalid-feedback">
                 Ingrese la fecha de entrega.
               </div>
+
             </div>
           </div>
 
@@ -191,13 +192,79 @@
         </div>
         <hr class="my-4">
 
-        <button class="w-100 btn btn-secondary btn-lg" type="submit" onClick="saveData()">Crear</button>
+        <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()">Crear</button>
+        <!-- type="submit" -->
       </form>
     </div>
   </div>
   </main>
 
   <script>
+
+    function saveData() {
+      const API_URL = 'http://localhost:8080/factura';
+
+      if (idFactura.value.length <= 0) {
+        alert("Debe poner un valor en el campo de factura");
+        return;
+      } else {
+        let intRes = null;
+
+        const getAllInvoice = () => {
+          fetch(API_URL, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then(res => res.json())
+            .then(json => {
+              intRes = json;
+              // console.log(json);
+              renderResult(intRes);
+            })
+        }
+
+        const renderResult = (intRes) => {
+
+          let busqueda = parseInt(document.getElementById('idFactura').value);
+
+          let existe = false;
+          intRes.forEach(element => {
+            if (element.idFactura == busqueda) existe = true, console.log(element.idFactura), console.log(busqueda)
+          });
+
+          if (existe) {
+            alert("ERROR: Id de Factura ya esta registrado");
+          } else {
+            const createInvoice = () => {
+              const formData = new FormData(document.querySelector('#invoiceData'));
+              const factura = {
+                idFactura: formData.get('idFactura'),
+                fechaRegistro: formData.get('fechaRegistro'),
+                fechaEntrega: formData.get('fechaEntrega'),
+                valorToral: 0,
+              }
+
+              fetch(API_URL, {
+                method: 'POST',
+                body: JSON.stringify(factura),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+                .then(res = res.json())
+                .then(response => {
+                  console.log(response)
+                }).catch(error => console.log(error))
+            }
+            alert("Factura Creada Exitosamente");
+            location.reload();
+            createInvoice();
+          }
+        }
+        getAllInvoice();
+      }
+    }
     window.onload = function () {
       var fecha = new Date();
       var mes = fecha.getMonth() + 1;
@@ -219,95 +286,6 @@
         mes = '0' + mes
       document.getElementById('fechaEntrega').value = ano + "-" + mes + "-" + dia;
     }
-
-    function saveData() {
-      const API_URL = 'http://localhost:8080/factura';
-      let intItem = [];
-
-      const getAllInvoice = () => {
-        fetch(API_URL)
-          .then(res => res.json())
-          .then(json => {
-            intRes = json;
-            console.log(json);
-            renderResult(intRes);
-          })
-      }
-
-      getAllInvoice();
-
-      const renderResult = (intItem) => {
-        
-        var idfactura = String(document.getElementById("idFactura").value);
-        var coincidence = false;
-      
-        if (idFactura.value.length <= 0) {
-          alert("Debe poner un valor en el campo de factura");
-          return;
-        } else {
-            if(idfactura != null){ 
-            intItem.forEach(intItem => {
-              console.log(typeof(intItem.idFactura));
-              console.log(typeof(idfactura));
-              console.log(intItem.idFactura); 
-              /*console.log(idFactura == intItem.idFactura);
-              console.log(Object.is(idFactura, intItem.idFactura));*/
-
-              if (idFactura === String(intItem.idFactura)) {
-                coincidence = true;
-                console.log(coincidence);
-              } else {
-                console.log(coincidence);
-              }
-            })
-          }
-
-          /*if (coincidence == true) {
-            alert("ERROR");
-            } else {
-    
-              if (idFactura.value.length <= 0) {
-                alert("Debe poner un valor en el campo de factura");
-                return;
-              }
-    
-              if (busqueda.value.length == idFactura.value.length) {
-                alert("Error Id Utilizado en Factura ya se encuentra registrado");
-                return;
-              } else {
-                const createInvoice = () => {
-                  const formData = new FormData(document.querySelector('#invoiceData'));
-    
-                  if (idFactura.value.length <= 0) {
-                    alert("Debe poner un valor en el campo de factura");
-                    return;
-                  }
-                  const factura = {
-                    idFactura: formData.get('idFactura'),
-                    fechaRegistro: formData.get('fechaRegistro'),
-                    fechaEntrega: formData.get('fechaEntrega'),
-                    valorToral: '',
-                  }
-    
-                  fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(factura),
-                    headers: {
-                      'Content-Type': 'application/json'
-                    }
-                  })
-                    .then(res = res.json())
-                    .then(response => {
-                    })
-    
-                }
-                createInvoice();
-                console.log("Correcto");
-              }*/
-          }
-        }
-      }
-    
   </script>
 
   <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -323,8 +301,6 @@
 <script src="form-validation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
   integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-  integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
 <script src="dashboard.js"></script>
 </body>
 
