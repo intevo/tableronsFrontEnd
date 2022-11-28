@@ -417,14 +417,14 @@
           })
 
           arr = ValorItem;
-          var totalAcum = arr.reduce((sum, value) => (sum + value.valorTotal), 0);
+          let totalAcum = arr.reduce((sum, value) => (sum + value.valorTotal), 0);
           console.log(totalAcum);
           listHTML += `
           <tr>
                 <th><center>Resultado Factura</center></th>
                 <td align="center">${totalAcum}</td>
           </tr>
-          `
+          ` 
           total.innerHTML = listHTML;
         }
 
@@ -441,8 +441,6 @@
             select.appendChild(option);
           });
         });
-
-    
     </script>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
