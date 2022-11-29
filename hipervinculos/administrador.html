@@ -85,25 +85,21 @@
             else if (valorContrato.value.length <= 0) {
                 alert("Debe poner un valor en el campo valor de contrato");
                 return;
-            }
-            const API_URL = 'http://localhost:8080/contrato/insert';
-            const createInvoice = () => {
-                // const formData = new FormData(document.querySelector('#contratoFormulario'));
-
-                // const contrato = {
-                //   numeroContrato: formData.get('numeroContrato'),
-                //   fechaIncioContrato: formData.get('fechaIncioContrato'),
-                //   fechaFinalizacionContrato: formData.get('fechaFinalizacionContrato'),
-                //   valorContrato: formData.get('valorContrato'),
-                //   prorroga: formData.get('prorroga')
-                // }
-
-                const contrato = {
-                    numeroContrato: numeroContrato.value,
-                    fechaIncioContrato: fechaIncioContrato.value,
-                    fechaFinalizacionContrato: fechaFinalizacionContrato.value,
-                    valorContrato: valorContrato.value,
-                    prorroga: prorroga.checked == true ? 1 : 0
+            } else {
+                let intRes = null;
+                
+                const getAllInvoice = () => {
+                    fetch(API_URL, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => res.json())
+                        .then(json => {
+                            intRes = json;
+                            console.log(json);
+                            renderResult(intRes);
+                        })
                 }
 
                 const renderResult = (intRes) => {
@@ -118,7 +114,7 @@
                     if (existe) {
                         alert("ERROR: Id de Contrato ya esta registrado");
                     } else {
-
+                        const API_URL = 'http://localhost:8080/contrato';
                         const createInvoice = () => {
                             
                             const formData = new FormData(document.querySelector('#contratoFormulario'));
@@ -130,6 +126,8 @@
                                 valorContrato: formData.get('valorContrato'),                                 
                                 prorroga: formData.get('prorroga'),                                 
                             }
+
+
 
                             fetch(API_URL, {
                                 method: 'POST',
