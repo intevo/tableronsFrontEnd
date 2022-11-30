@@ -8,7 +8,7 @@ window.onload = function () {
       var valorGrafica = 0; 
       data.forEach((element) => {
         // {idFactura: 44444, fechaRegistro: '2022-09-09', fechaEntrega: '2022-08-09', valorTotal: 987000000}
-        valorTotal = element.valorTotal;
+        valorTotal += element.valorTotal;
         var porcentaje = (valorTotal / PRESUSPUESTOTOTAL) * 100 
         const date = new Date(element.fechaRegistro + "T10:20:30Z");
         const monthNames = [
@@ -55,7 +55,7 @@ window.onload = function () {
       });
 
       const points = data.map((element) => {
-        element.valorTotal;
+        valorGrafica += element.valorTotal;
         const date = new Date(element.fechaRegistro + "T10:20:30Z");
         const obj = {x: date, y: valorGrafica}
         return obj
