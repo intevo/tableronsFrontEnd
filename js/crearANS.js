@@ -71,7 +71,7 @@ function saveData() {
     const createInvoice = () => {
         const formData = new FormData(document.querySelector('#ansForm'));
         const ans = {
-            descripcion: formData.get('descripcion'),
+            descripcion: document.getElementById('descripcion').value,
             porcentaje: formData.get('porcentaje'),
             valorFactura: formData.get('valorFactura'),
             valorDescuento: formData.get('valorDescuento'),
@@ -99,8 +99,6 @@ function saveData() {
 bodyDoc.onload = getValor();
 
 function getValor() {
-
-
     const total = document.querySelector('#tbodyTotales');
     fetch('http://localhost:8080/ans')
     .then(res => res.json())
@@ -126,8 +124,6 @@ function getValor() {
             
 
             let elemento = {
-                // factura: factura.toString(),
-                // acomulado: acomulado.toString()
                 idFactura: factura,
                 fechaRegistro:"2022-11-30",
                 fechaEntrega: "2022-11-30",
@@ -144,9 +140,24 @@ function getValor() {
                 <td>${e.valorTotal}</td>
                 </tr>
             `;
+            
+            fetch('http://localhost:8080/factura/'+e.idFactura, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+            .then(res =>{
+                res.valorTotal = e.valorTotal;
+                functionUpdate(res)
+            })
+
+            
+        })
+
+        const functionUpdate = (object) =>{
             fetch('http://localhost:8080/factura/update', {
                 method: 'POST',
-                body: JSON.stringify(e),
+                body: JSON.stringify(object),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -156,19 +167,24 @@ function getValor() {
                     console.log('Test')
                     console.log(response)
                 }).catch(error => console.log(error))
-            // fetch('http://localhost:8080/factura/'+e.factura, {
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     }
-            // }).then(res = res.json())
-            // .then(res =>{
-            //     console.log(res)
-            // })
-            
-        })
+        }
         total.innerHTML = listHTML;
     }
 }
+
+fetch('http://localhost:8080/categoria')
+    .then(response => response.json())
+    .then(data => {
+        const select = document.getElementById("descripcion");
+        data.forEach(element => {
+            var option = document.createElement("option");
+            var ansText = document.createTextNode(element.nombreCategoria);
+            option.appendChild(ansText);
+            option.value=element.nombreCategoria;
+            select.appendChild(option);
+        });
+    });
+
 
 fetch('http://localhost:8080/factura')
     .then(response => response.json())
@@ -182,54 +198,3 @@ fetch('http://localhost:8080/factura')
             select.appendChild(option);
         });
     });
-
-    
-        var fecha = new Date();
-        var mes = fecha.getMonth() + 1;
-        var dia = fecha.getDate();
-        var ano = fecha.getFullYear();
-        if (dia < 10)
-            dia = '0' + dia;
-        if (mes < 10)
-            mes = '0' + mes
-        document.getElementById('fechaIncioContrato').value = ano + "-" + mes + "-" + dia;
-
-        var fecha = new Date();
-        var mes = fecha.getMonth() + 1;
-        var dia = fecha.getDate();
-        var ano = fecha.getFullYear();
-        if (dia < 10)
-            dia = '0' + dia;
-        if (mes < 10)
-            mes = '0' + mes
-        document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
-
-/*function Guardar() {
-    const API_URL = 'http://localhost:8080/factura';
-    let intRes = null;
-    const getAllInvoice = () => {
-        fetch(API_URL, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-            .then(json => {
-                intRes = json;
-                // console.log(json);
-                renderResult(intRes);
-            })
-    }
-
-    const renderResult = (intRes) => {
-        let busqueda = parseInt(document.getElementById('factura').value);
-        let existe = false;
-        intRes.forEach(element => {
-            if (element.idFactura == busqueda) existe = true, console.log(element.idFactura), console.log(busqueda)
-        });
-        if (existe) {
-            alert("ERROR: Id de Factura ya esta registrado");
-        }
-    }
-    getAllInvoice();
-*/
