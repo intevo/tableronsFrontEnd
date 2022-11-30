@@ -123,8 +123,12 @@ function getValor() {
                 if(element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
             })
             let elemento = {
-                factura: factura,
-                acomulado: acomulado
+                // factura: factura.toString(),
+                // acomulado: acomulado.toString()
+                idFactura: factura,
+                fechaRegistro: null,
+                fechaEntrega: null,
+                valorTotal: acomulado
             }
             printJson.push(elemento);
         })
@@ -132,25 +136,34 @@ function getValor() {
         printJson.forEach(e =>{
             listHTML += `
                 <tr>
-                <td>${e.factura}</td>
-                <td>${e.acomulado}</td>
+                <td>${e.idFactura}</td>
+                <td>${e.valorTotal}</td>
                 </tr>
-            `
+            `;
+            fetch('http://localhost:8080/factura/update', {
+                method: 'POST',
+                body: JSON.stringify(e),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(response => {
+                    console.log('Test')
+                    console.log(response)
+                }).catch(error => console.log(error))
+            // fetch('http://localhost:8080/factura/'+e.factura, {
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // }).then(res = res.json())
+            // .then(res =>{
+            //     console.log(res)
+            // })
+            
         })
         total.innerHTML = listHTML;
     }
-    // valorItems.forEach(valorItem => {
-    // })
-
-    // arr = valorItems;
-    // let totalAcum = arr.reduce((sum, value) => (sum + value.valorTotal), 0);
-    // console.log(totalAcum);
-    // listHTML += `
-    //   <tr>
-    //         <th><center>Resultado Factura</center></th>
-    //         <td align="center">${totalAcum}</td>
-    //   </tr>
-    //   `;
 }
 
 fetch('http://localhost:8080/factura')
@@ -166,8 +179,28 @@ fetch('http://localhost:8080/factura')
         });
     });
 
+    
+        var fecha = new Date();
+        var mes = fecha.getMonth() + 1;
+        var dia = fecha.getDate();
+        var ano = fecha.getFullYear();
+        if (dia < 10)
+            dia = '0' + dia;
+        if (mes < 10)
+            mes = '0' + mes
+        document.getElementById('fechaIncioContrato').value = ano + "-" + mes + "-" + dia;
 
-function Guardar() {
+        var fecha = new Date();
+        var mes = fecha.getMonth() + 1;
+        var dia = fecha.getDate();
+        var ano = fecha.getFullYear();
+        if (dia < 10)
+            dia = '0' + dia;
+        if (mes < 10)
+            mes = '0' + mes
+        document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
+
+/*function Guardar() {
     const API_URL = 'http://localhost:8080/factura';
     let intRes = null;
     const getAllInvoice = () => {
@@ -195,4 +228,4 @@ function Guardar() {
         }
     }
     getAllInvoice();
-}
+*/
