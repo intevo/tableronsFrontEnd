@@ -74,83 +74,62 @@
 
     <script>
         function saveData() {
-            const API_URL = 'http://localhost:8080/contrato';
+           
 
             
 
+            const numeroContrato = document.getElementById("numeroContrato")
+            const valorContrato = document.getElementById("valorContrato")
+            const fechaIncioContrato = document.getElementById("fechaIncioContrato")
+            const fechaFinalizacionContrato = document.getElementById("fechaFinalizacionContrato")
+            const prorroga = document.getElementById("prorroga")
             if (numeroContrato.value.length <= 0) {
                 alert("Debe poner un valor en el campo número de contrato");
                 return;
             }
-            else if (valorContrato.value.length <= 0) {
+            if (valorContrato.value.length <= 0) {
                 alert("Debe poner un valor en el campo valor de contrato");
                 return;
-            } else {
-                let intRes = null;
-                
-                const getAllInvoice = () => {
-                    fetch(API_URL, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).then(res => res.json())
-                        .then(json => {
-                            intRes = json;
-                            console.log(json);
-                            renderResult(intRes);
-                        })
-                }
-
-                const renderResult = (intRes) => {
-
-                    let busqueda = parseInt(document.getElementById('numeroContrato').value);
-
-                    let existe = false;
-                    intRes.forEach(element => {
-                        if (element.numeroContrato == busqueda) existe = true, console.log(element.numeroContrato), console.log(busqueda)
-                    });
-
-                    if (existe) {
-                        alert("ERROR: Id de Contrato ya esta registrado");
-                    } else {
-                        const API_URL = 'http://localhost:8080/contrato';
-                        const createInvoice = () => {
-                            
-                            const formData = new FormData(document.querySelector('#contratoFormulario'));
-                    
-                            const contrato = {
-                                numeroContrato: formData.get('numeroContrato'),
-                                fechaIncioContrato: formData.get('fechaIncioContrato'),          
-                                fechaFinalizacionContrato: formData.get('fechaFinalizacionContrato'),
-                                valorContrato: formData.get('valorContrato'),                                 
-                                prorroga: formData.get('prorroga'),                                 
-                            }
-
-
-
-                            fetch(API_URL, {
-                                method: 'POST',
-                                body: JSON.stringify(contrato),
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-
-                            })
-                                .then(res = res.json())
-                                .then(response => {
-                                console.log(response);
-                                }).catch(err => console.error(err))
-
-                        }
-                        alert("Factura Creada Exitosamente");
-                        location.reload();
-                        createInvoice();
-                    }
-                }
-                getAllInvoice();
             }
+            const API_URL = 'http://localhost:8080/contrato/insert';
+            const createInvoice = () => {
+                // const formData = new FormData(document.querySelector('#contratoFormulario'));
 
+                // const contrato = {
+                //   numeroContrato: formData.get('numeroContrato'),
+                //   fechaIncioContrato: formData.get('fechaIncioContrato'),
+                //   fechaFinalizacionContrato: formData.get('fechaFinalizacionContrato'),
+                //   valorContrato: formData.get('valorContrato'),
+                //   prorroga: formData.get('prorroga')
+                // }
+
+                const contrato = {
+                    numeroContrato: numeroContrato.value,
+                    fechaIncioContrato: fechaIncioContrato.value,
+                    fechaFinalizacionContrato: fechaFinalizacionContrato.value,
+                    valorContrato: valorContrato.value,
+                    prorroga: prorroga.checked == true ? 1 : 0
+                }
+
+                console.log(contrato);
+
+                fetch(API_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(contrato),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+
+                })
+                    .then(res = res.json())
+                    .then(response => {
+                        console.log(response)
+                    }).catch(err => console.error(err))
+
+            }
+                alert("Registro Creado Exitosamente")    
+            location. reload();
+            createInvoice();
         }
 
         function cargarJSON() {
