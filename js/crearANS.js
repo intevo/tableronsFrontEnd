@@ -117,20 +117,24 @@ function getValor() {
         })
 
         facturas.forEach(e =>{
-            let factura = e;
+            let factura = e;            
             let acomulado = 0;
             arrayData.forEach(element => {
+                console.log("Prueba" + element);
                 if(element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
             })
+            
+
             let elemento = {
                 // factura: factura.toString(),
                 // acomulado: acomulado.toString()
                 idFactura: factura,
-                fechaRegistro: null,
-                fechaEntrega: null,
+                fechaRegistro:"2022-11-30",
+                fechaEntrega: "2022-11-30",
                 valorTotal: acomulado
             }
             printJson.push(elemento);
+            debugger;
         })
 
         printJson.forEach(e =>{
