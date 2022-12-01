@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" type="style/css" href="css/signin.css">
+  <script src = " https://unpkg.com/sweetalert/dist/sweetalert.min.js "> </script> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -18,7 +18,7 @@
       font-family: sans-serif;
     }
 
-    body {
+    body {  
       display: flex;
       align-items: center;
       justify-content: center;
@@ -39,7 +39,7 @@
     form .title {
       color: #252525;
       font-size: 35px;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 30px;
     }
 
@@ -104,9 +104,6 @@
     <a href="login/registro.html" class="link" style="text-decoration: none;">Registrase</a>
   </form>
     
-  
-
-
   <script>
     validarLogin = () => {
       let usuario = document.getElementById('login').value;
@@ -114,6 +111,10 @@
       // validar los campos
       // codigo de validacion
       // 
+      if(usuario.trim().length === 0 && pass.trim().length === 0){
+        swal("ERROR", "Campos Vacios", "info")
+      }else{ 
+
       const API_URL = 'http://localhost:8080/registro';
       fetch(API_URL, {
         method: 'GET',
@@ -123,17 +124,32 @@
       }).then(res => res.json())
         .then(json => {
           let data = json;
+          accion = false;
           data.forEach(e => {
-            if (e.email == usuario && e.pass == pass) {
-              window.location.href = 'grafica.html';
+            if(e.email == usuario && e.pass != pass){
+              swal("ERROR", "Datos Incorrectos", "error");
+            }
+            if(e.email != usuario && e.pass == pass){
+              swal("ERROR", "Datos Incorrectos", "error");
+            }
+            if(e.email != usuario && e.pass != pass){
+              swal("ERROR", "Datos Incorrectos", "warning");
+            }
+            if (e.email == usuario && e.pass == pass) {              
+              swal("Acceso Correcto", "", "success").then((value) => {
+                window.location.href = 'grafica.html';
+              });
             }
           });
           // ansRes = json;
           // renderResult(ansRes);
         })
 
+      }
+
     }
 
   </script>
+  
 </body>
 </html>

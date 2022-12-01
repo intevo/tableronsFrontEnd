@@ -16,6 +16,7 @@
   <link href="http://localhost/FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="dashboard.css" rel="stylesheet">
+  <script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js "> </script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -82,8 +83,7 @@
 
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="index.html"><span data-feather="log-out" class="align-text-bottom"></span> Cerrar
-          Sesion</a>
+        <button class=" px-3" type="button" href="index.html" onclick="validarCierre()"style="background: #212529; color:white;"><span data-feather="log-out" class="align-text-bottom"></span>Cerrar Sesion</button>
       </div>
     </div>
   </header>
@@ -154,10 +154,10 @@
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        
+
         <div class="container">
           <header class="d-flex justify-content-center py-4">
-            <table id="datosContrato" width="100%">              
+            <table id="datosContrato" width="100%">
             </table>
           </header>
         </div>
@@ -262,20 +262,20 @@
 
       getAllInvoice();
 
-                  const intList = document.querySelector('#datosContrato');
+      const intList = document.querySelector('#datosContrato');
 
-            const renderResult = (intItem) => {
-                let listHTML = `
+      const renderResult = (intItem) => {
+        let listHTML = `
                 
     `;
-                intItem.forEach(intItem => {
-                    let stringProrroga = '';
-                    if (intItem.prorroga == 1) stringProrroga = `
+        intItem.forEach(intItem => {
+          let stringProrroga = '';
+          if (intItem.prorroga == 1) stringProrroga = `
                     <span class="badge bg-success">Prorroga</span>
                     `;
-                    else stringProrroga ='';
+          else stringProrroga = '';
 
-                    listHTML += `           
+          listHTML += `           
          <tr>
            <td>
               <li class"nav-link">Número contrato: ${intItem.numeroContrato}</li>
@@ -292,7 +292,26 @@
         intList.innerHTML = listHTML;
       }
     }
-    </script>
+
+    function validarCierre() {
+      swal({
+        title: "¿CERRAR SESIÓN?",
+        text: "",
+        icon: "info",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            swal("SESIÓN CERRADA CORRECTAMENTE", "success").then((value) => {
+                window.location.href = 'index.html';
+          });
+        } else {
+            swal("ACCIÓN CANCELADA");
+          }
+        });
+    }
+  </script>
 
   <script src="http://localhost/FrontEnd/assets/dist/js/bootstrap.bundle.min.js"></script>
   <script src="form-validation.js"></script>
