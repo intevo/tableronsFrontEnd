@@ -158,7 +158,6 @@
           </div>
 
           <div class="col-sm-6">
-
             <label for="registro" class="form-label">Fecha de registro</label>
             <input type="date" class="form-control" id="fechaActual" name="fechaRegistro" placeholder="" value=""
               required>
@@ -174,11 +173,35 @@
               <div class="invalid-feedback">
                 Ingrese la fecha de entrega.
               </div>
-
             </div>
           </div>
 
-          <!--<div class="col-6">
+          <div class="col-6">
+            <label for="entrega" class="form-label">Factura total</label>
+            <div class="input-group has-validation">
+              <input type="number" class="form-control" name="facturaTotal" id="facturaTotal" required>
+              <div class="invalid-feedback">
+                Ingrese el valor total de la factura.
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <label for="Nombre" class="form-label">Descripción de servicios</label>
+            <select id="descripcion" name="descripcionSer" class="form-control" required>
+            </select>
+            <div class="invalid-feedback">
+              Ingrese Nombre o Descripción del servicio.
+            </div>
+          </div>
+          <div class="col">
+            <label for="Nombre" class="form-label">Observacion</label>
+            <textarea id="observation" name="Observacion" class="form-control" required style="max-width: 500px; max-height: 32px;"></textarea>
+            <div class="invalid-feedback">
+              Ingrese una observacion.
+            </div>
+          </div>
+
+            <!--<div class="col-6">
             <label for="entrega" class="form-label">Cargar Factura (PDF)</label>
             <div class="input-group has-validation">
               <input type="file" class="form-control" id="cargaDocumento" name="cargaDocumento" required><button
@@ -190,10 +213,10 @@
           </div>-->
 
         </div>
-        <hr class="my-4">
+          <hr class="my-4">
 
-        <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()">Crear</button>
-        <!-- type="submit" -->
+          <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()">Crear</button>
+          <!-- type="submit" -->
       </form>
     </div>
   </div>
@@ -209,7 +232,7 @@
         return;
       } else {
         let intRes = null;
-        
+
         const getAllInvoice = () => {
           fetch(API_URL, {
             method: 'GET',
@@ -242,6 +265,7 @@
                 idFactura: formData.get('idFactura'),
                 fechaRegistro: formData.get('fechaRegistro'),
                 fechaEntrega: formData.get('fechaEntrega'),
+                facturaTotal: formData.get('facturaTotal'),
                 valorToral: 0,
               }
 
