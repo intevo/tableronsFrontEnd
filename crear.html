@@ -174,17 +174,17 @@
           </div>
 
           <div class="col-6">
-            <label for="entrega" class="form-label">Factura total</label>
+            <label for="Factura total" class="form-label">Factura total</label>
             <div class="input-group has-validation">
-              <input type="number" class="form-control" name="facturaTotal" id="facturaTotal" required>
+              <input type="number" min="0" class="form-control" name="facturaTotal" id="facturaTotal" required>
               <div class="invalid-feedback">
                 Ingrese el valor total de la factura.
               </div>
             </div>
           </div>
           <div class="col">
-            <label for="Nombre" class="form-label">Descripción de servicios</label>
-            <select id="descripcion" name="descripcionSer" class="form-control" required>
+            <label for="Descripcion de Servicios" class="form-label">Descripción de servicios</label>
+            <select id="descripcionServicios" name="descripcionServicios" class="form-control" required>
             </select>
             <div class="invalid-feedback">
               Ingrese Nombre o Descripción del servicio.
@@ -192,7 +192,7 @@
           </div>
           <div class="col">
             <label for="Nombre" class="form-label">Observacion</label>
-            <textarea id="observation" name="Observacion" class="form-control" required style="max-width: 500px; max-height: 32px;"></textarea>
+            <textarea id="observacionFactura" name="observacionFactura" class="form-control" required style="max-width: 500px; max-height: 32px;"></textarea>
             <div class="invalid-feedback">
               Ingrese una observacion.
             </div>
@@ -219,96 +219,6 @@
   </div>
   </main>
 
-  <script>
-
-    function saveData() {
-      const API_URL = 'http://localhost:8080/factura';
-
-      if (idFactura.value.length <= 0) {
-        alert("Debe poner un valor en el campo de factura");
-        return;
-      } else {
-        let intRes = null;
-
-        const getAllInvoice = () => {
-          fetch(API_URL, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          }).then(res => res.json())
-            .then(json => {
-              intRes = json;
-              // console.log(json);
-              renderResult(intRes);
-            })
-        }
-
-        const renderResult = (intRes) => {
-
-          let busqueda = parseInt(document.getElementById('idFactura').value);
-
-          let existe = false;
-          intRes.forEach(element => {
-            if (element.idFactura == busqueda) existe = true, console.log(element.idFactura), console.log(busqueda)
-          });
-
-          if (existe) {
-            window.alert("ERROR: Id de Factura ya esta registrado");
-          } else {
-            const createInvoice = () => {
-              const formData = new FormData(document.querySelector('#invoiceData'));
-              const factura = {
-                idFactura: formData.get('idFactura'),
-                fechaRegistro: formData.get('fechaRegistro'),
-                fechaEntrega: formData.get('fechaEntrega'),
-                facturaTotal: formData.get('facturaTotal'),
-                valorToral: 0,
-              }
-
-              fetch(API_URL, {
-                method: 'POST',
-                body: JSON.stringify(factura),
-                headers: {
-                  'Content-Type': 'application/json'
-                }
-              })
-                .then(res = res.json())
-                .then(response => {
-                  console.log(response)
-                }).catch(error => console.log(error))
-            }
-            alert("Factura Creada Exitosamente");
-            location.reload();
-            createInvoice();
-          }
-        }
-        getAllInvoice();
-      }
-    }
-    window.onload = function () {
-      var fecha = new Date();
-      var mes = fecha.getMonth() + 1;
-      var dia = fecha.getDate();
-      var ano = fecha.getFullYear();
-      if (dia < 10)
-        dia = '0' + dia;
-      if (mes < 10)
-        mes = '0' + mes
-      document.getElementById('fechaActual').value = ano + "-" + mes + "-" + dia;
-
-      var fecha = new Date();
-      var mes = fecha.getMonth() + 1;
-      var dia = fecha.getDate();
-      var ano = fecha.getFullYear();
-      if (dia < 10)
-        dia = '0' + dia;
-      if (mes < 10)
-        mes = '0' + mes
-      document.getElementById('fechaEntrega').value = ano + "-" + mes + "-" + dia;
-    }
-  </script>
-
   <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; 2022 Intevo S.A.S</p>
     <ul class="list-inline">
@@ -323,6 +233,7 @@
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
   integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
 <script src="dashboard.js"></script>
+<script src="js/crearFactura.js"></script>
 </body>
 
 </html>

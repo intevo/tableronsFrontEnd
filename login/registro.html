@@ -8,6 +8,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <title>Registro</title>
+    <script src=" https://unpkg.com/sweetalert/dist/sweetalert.min.js "> </script>
     <link rel="stylesheet" type="text/css" href="../css/styleRegistro.css">
     <style>
         .ocultar {
@@ -115,31 +116,31 @@
 
 
             if (nombres.value.length <= 0) {
-                alert("Debe ingresar un valor en el campo de Nombre");
+                swal("ERROR", "Debe ingresar un valor en el campo de Nombre", "info");
                 return;
             }
             if (telefono.value.length <= 0) {
-                alert("Debe ingresar un valor en el campo de Telefono");
+                swal("ERROR", "Debe ingresar un valor en el campo de Telefono", "info");
                 return;
             }
             if (email.value.length <= 0) {
-                alert("Debe ingresar un valor en el campo de Email");
+                swal("ERROR", "Debe ingresar un valor en el campo de Email", "info");
                 return;
             }
             if (proyecto.value.length <= 0) {
-                alert("Debe ingresar un valor en el campo de Proyecto");
+                swal("ERROR", "Debe ingresar un valor en el campo de Proyecto", "info");
                 return;
             }
             if (cargo.value.length <= 0) {
-                alert("Debe ingresar un valor en el campo de Cargo");
+                swal("ERROR", "Debe ingresar un valor en el campo de Cargo", "info");
                 return;
             }
             if (pass.value.length <= 0) {
-                alert("Debe ingresar un valor en el campo de Contraseña");
+                swal("ERROR", "Debe ingresar un valor en el campo de Contraseña", "info");
                 return;
             }
             if (pass.value != pass1.value) {
-                alert("Contraseña no Coinciden");
+                swal("ERROR","Contraseña no Coinciden", "error");
                 const form = document.getElementById("dataRegistro");
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
@@ -172,8 +173,9 @@
                             console.log(response)
                         })
                 }
-                alert("Registro Exitoso");
-                location.reload();
+                swal("Registro Exitoso","","success").then((value) => {
+                    location.reload();
+                })
                 createInvoice();
             }
         }
