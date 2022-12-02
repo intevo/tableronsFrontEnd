@@ -1,4 +1,4 @@
-
+// FETCH PARA TRAER Y MOSTRAR INFORMACÓN 
 const bodyDoc = document.body;
 const ANS = [];
 bodyDoc.onload = getAns();
@@ -26,10 +26,12 @@ function getAns() {
                 <th scope="col"><center>Valor Descuento</center></th>
                 <th scope="col"><center>Valor Total</center></th>
                 <th scope="col"><center>Factura</center></th>
+                <th scope="col"><center>Observaciones</center></th>
               </tr>
               
         `;
         ansItem.forEach(ansItem => {
+            
             listHTML += `
           <tr>
                 <td align="center">${ansItem.idAns}</td>
@@ -39,6 +41,7 @@ function getAns() {
                 <td align="center">${ansItem.valorDescuento}</td>
                 <td align="center">${ansItem.valorTotal}</td>
                 <td align="center">${ansItem.factura}</td>
+                <td align="center">${ansItem.observacionAns}</td>
           </tr>
           `
         })
@@ -46,6 +49,7 @@ function getAns() {
     }
 }
 
+// FETCH ENVIO DE INFORMACIÓN AL JSON API REST
 function saveData() {
     const API_URL = 'http://localhost:8080/ans';
     if (descripcion.value.length <= 0) {
@@ -77,6 +81,7 @@ function saveData() {
             valorDescuento: formData.get('valorDescuento'),
             valorTotal: formData.get('valorTotal'),
             factura: document.getElementById('factura').value,
+            observacionAns: formData.get('observacionAns'),
         }
 
         fetch(API_URL, {
@@ -96,6 +101,8 @@ function saveData() {
 
 }
 
+
+// FETCH ACTULAIZCIÓN CAMPO VALORTOTAL TABLA FACTURA
 bodyDoc.onload = getValor();
 
 function getValor() {
@@ -172,6 +179,7 @@ function getValor() {
     }
 }
 
+// FETCH PARA HACER DATALIST DE DESCRIPCIÓN
 fetch('http://localhost:8080/categoria')
     .then(response => response.json())
     .then(data => {
@@ -185,7 +193,7 @@ fetch('http://localhost:8080/categoria')
         });
     });
 
-
+// FETCH PARA HACER DATALIST DE IDFACTURA
 fetch('http://localhost:8080/factura')
     .then(response => response.json())
     .then(data => {
