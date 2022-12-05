@@ -1,3 +1,4 @@
+
 // FETCH PARA TRAER Y MOSTRAR INFORMACÓN 
 const bodyDoc = document.body;
 const ANS = [];
@@ -31,15 +32,23 @@ function getAns() {
               
         `;
         ansItem.forEach(ansItem => {
-            
+            const numeroValorfactura = ansItem.valorFactura;
+            const numeroPorcentaje = ansItem.porcentaje;
+            const numerovalorDescuento = ansItem.valorDescuento;
+            const numerovalorTotal = ansItem.valorTotal;
+            const formatoMexico = (number) => {
+                const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+                const rep = '$1,';
+                return number.toString().replace(exp,rep);
+              }
             listHTML += `
           <tr>
                 <td align="center">${ansItem.idAns}</td>
                 <td align="center">${ansItem.descripcion}</td>
-                <td align="center">${ansItem.porcentaje}</td>
-                <td align="center">${ansItem.valorFactura}</td>
-                <td align="center">${ansItem.valorDescuento}</td>
-                <td align="center">${ansItem.valorTotal}</td>
+                <td align="center">${formatoMexico(numeroPorcentaje)}</td>
+                <td align="center">${formatoMexico(numeroValorfactura)}</td>
+                <td align="center">${formatoMexico(numerovalorDescuento)}</td>
+                <td align="center">${formatoMexico(numerovalorTotal)}</td>
                 <td align="center">${ansItem.factura}</td>
                 <td align="center">${ansItem.observacionAns}</td>
           </tr>
@@ -102,7 +111,7 @@ function saveData() {
 }
 
 
-// FETCH ACTULAIZCIÓN CAMPO VALORTOTAL TABLA FACTURA
+// FETCH ACTULAIZACIÓN CAMPO VALORTOTAL TABLA FACTURA
 bodyDoc.onload = getValor();
 
 function getValor() {
@@ -137,7 +146,6 @@ function getValor() {
                 valorTotal: acomulado
             }
             printJson.push(elemento);
-            debugger;
         })
 
         printJson.forEach(e =>{
