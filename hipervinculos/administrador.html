@@ -148,6 +148,7 @@
                     })
                     document.getElementById('prorroga').innerHTML = html;
                 })
+
         }
 
         //Validación Check
@@ -330,8 +331,14 @@
               <th scope="col"><center>Valor Contrato</center></th>
               <th scope="col"><center>Estado</center></th>
             </tr>
-    `;
-                intItem.forEach(intItem => {
+            `
+                intItem.forEach(intItem => {        
+                    const numerovalorContrato = intItem.valorContrato;
+                    const formatoMexico = (number) => {
+                        const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+                        const rep = '$1,';
+                        return number.toString().replace(exp,rep);
+                    }
                     let stringProrroga = '';
                     if (intItem.prorroga == 1) stringProrroga = `
                     <span class="badge bg-success">Prorroga</span>
@@ -343,10 +350,11 @@
               <td align="center">${intItem.numeroContrato}</td>
               <td align="center">${intItem.fechaIncioContrato}</td>
               <td align="center">${intItem.fechaFinalizacionContrato}</td>
-              <td align="center">${intItem.valorContrato}</td>
+              <td align="center">${formatoMexico(numerovalorContrato)}</td>
               <td align="center">${stringProrroga}</td>
             </tr>
               `
+
                 })
                 intList.innerHTML = listHTML;
             }
