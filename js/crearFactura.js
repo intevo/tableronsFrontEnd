@@ -36,12 +36,12 @@ function saveData() {
           const createInvoice = () => {
             const formData = new FormData(document.querySelector('#invoiceData'));
             const factura = {
-              idFactura: formData.get('idFactura'),
-              fechaRegistro: formData.get('fechaRegistro'),
-              fechaEntrega: formData.get('fechaEntrega'),
-              facturaTotal: formData.get('facturaTotal'),
+              idFactura: formData.get('idFactura').trim(),
+              fechaRegistro: formData.get('fechaRegistro').trim(),
+              fechaEntrega: formData.get('fechaEntrega').trim(),
+              facturaTotal: formData.get('facturaTotal').trim(),
               descripcionServicios: document.getElementById('descripcionServicios').value,
-              observacionFactura: formData.get('observacionFactura'),
+              observacionFactura: formData.get('observacionFactura').trim(),
               valorToral: 0,
             }
 

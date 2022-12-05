@@ -66,7 +66,7 @@
                 <h2 class="titulo">INFORMACION<br>DE REGISTRO</h2>
             </section>
             <section class="info_items">
-                <img src="../logo.png" width="250px" height="100px" style="border-radius: 10%;">
+                <img src="../img/logo.png" width="250px" height="100px" style="border-radius: 10%;">
             </section>
             <section class="volver-form">
                 <button type="button" class="btnClose"><a href="../index.html"
@@ -104,84 +104,7 @@
                 </div>
         </form>
     </section>
-    <script>
-
-        function saveData() {
-
-            // Ontenemos los valores de los campos de contraseñas 
-            pass = document.getElementById('pass');
-            pass1 = document.getElementById('pass1');
-
-            // Verificamos si las constraseñas no coinciden 
-
-
-            if (nombres.value.length <= 0) {
-                swal("ERROR", "Debe ingresar un valor en el campo de Nombre", "info");
-                return;
-            }
-            if (telefono.value.length <= 0) {
-                swal("ERROR", "Debe ingresar un valor en el campo de Telefono", "info");
-                return;
-            }
-            if (email.value.length <= 0) {
-                swal("ERROR", "Debe ingresar un valor en el campo de Email", "info");
-                return;
-            }
-            if (proyecto.value.length <= 0) {
-                swal("ERROR", "Debe ingresar un valor en el campo de Proyecto", "info");
-                return;
-            }
-            if (cargo.value.length <= 0) {
-                swal("ERROR", "Debe ingresar un valor en el campo de Cargo", "info");
-                return;
-            }
-            if (pass.value.length <= 0) {
-                swal("ERROR", "Debe ingresar un valor en el campo de Contraseña", "info");
-                return;
-            }
-            if (pass.value != pass1.value) {
-                swal("ERROR","Contraseña no Coinciden", "error");
-                const form = document.getElementById("dataRegistro");
-                form.addEventListener('submit', function (event) {
-                    event.preventDefault();
-                })
-            }
-
-            else {
-                const API_URL = 'http://localhost:8080/registro';
-                const createInvoice = () => {
-                    const formData = new FormData(document.querySelector('#dataRegistro'));
-
-                    const registro = {
-                        nombres: formData.get('nombres'),
-                        telefono: formData.get('telefono'),
-                        email: formData.get('email'),
-                        proyecto: formData.get('proyecto'),
-                        cargo: formData.get('cargo'),
-                        pass: formData.get('pass'),
-                    }
-
-                    fetch(API_URL, {
-                        method: 'POST',
-                        body: JSON.stringify(registro),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                        .then(res = res.json())
-                        .then(response => {
-                            console.log(response)
-                        })
-                }
-                /*swal("Registro Exitoso","","success").then((value) => {
-                    location.reload();
-                })*/
-                alert("Registro Exitoso");
-                createInvoice();
-            }
-        }
-    </script>
-
+    <script src="../js/registro.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

@@ -76,12 +76,12 @@ function saveData() {
         const formData = new FormData(document.querySelector('#ansForm'));
         const ans = {
             descripcion: document.getElementById('descripcion').value,
-            porcentaje: formData.get('porcentaje'),
-            valorFactura: formData.get('valorFactura'),
-            valorDescuento: formData.get('valorDescuento'),
-            valorTotal: formData.get('valorTotal'),
+            porcentaje: formData.get('porcentaje').trim(),
+            valorFactura: formData.get('valorFactura').trim(),
+            valorDescuento: formData.get('valorDescuento').trim(),
+            valorTotal: formData.get('valorTotal').trim(),
             factura: document.getElementById('factura').value,
-            observacionAns: formData.get('observacionAns'),
+            observacionAns: formData.get('observacionAns').trim(),
         }
 
         fetch(API_URL, {
