@@ -32,6 +32,12 @@ function getFactura() {
         </tr>
 `;
     intItem.forEach(intItem => {
+      const numerovalorTotal = intItem.valorTotal;
+      const formatoMexico = (number) => {
+        const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+        const rep = '$1,';
+        return number.toString().replace(exp,rep);
+    }
       listHTML += `
   <tr>
           <td align="center">${intItem.idFactura}</td>
@@ -40,7 +46,7 @@ function getFactura() {
           <td align="center">${intItem.facturaTotal}</td>
           <td align="center">${intItem.descripcionServicios}</td>
           <td align="center">${intItem.observacionFactura}</td>
-          <td align="center">${intItem.valorTotal}</td>
+          <td align="center">${formatoMexico(numerovalorTotal)}</td>
   </tr>
   `
     })
