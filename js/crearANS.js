@@ -155,6 +155,7 @@ function getValor() {
         })
 
         facturas.forEach(e =>{
+             
             let factura = e;            
             let acomulado = 0;
             arrayData.forEach(element => {
@@ -173,10 +174,16 @@ function getValor() {
         })
 
         printJson.forEach(e =>{
+            const numerovacomulado = e.valorTotal;
+             const valorTotal = (number) => {
+             const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+            const rep = '$1,';
+            return number.toString().replace(exp,rep);
+            }
             listHTML += `
                 <tr>
                 <td>${e.idFactura}</td>
-                <td>${e.valorTotal}</td>
+                <td>${valorTotal(numerovacomulado)}</td>
                 </tr>
             `;
             fetch('http://localhost:8080/factura/'+e.idFactura, {
