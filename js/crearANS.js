@@ -28,6 +28,8 @@ function getAns() {
                 <th scope="col"><center>Valor Total</center></th>
                 <th scope="col"><center>Factura</center></th>
                 <th scope="col"><center>Observaciones</center></th>
+                <th scope="col"><center>Nota Credito</center></th>
+                <th scope="col"><center>Valor Nota Credito</center></th>
               </tr>
               
         `;
@@ -41,6 +43,12 @@ function getAns() {
                 const rep = '$1,';
                 return number.toString().replace(exp,rep);
               }
+              let stringestadoNotacredito = '';
+                    if (ansItem.notaCredito == 1) stringestadoNotacredito = `
+                    <span class="badge bg-success">Activo</span>
+                    `;
+                    else stringestadoNotacredito = `
+                    <span class="badge bg-danger">Inactivo</span>`;
             listHTML += `
           <tr>
                 <td align="center">${ansItem.idAns}</td>
@@ -51,6 +59,8 @@ function getAns() {
                 <td align="center">${formatoMexico(numerovalorTotal)}</td>
                 <td align="center">${ansItem.factura}</td>
                 <td align="center">${ansItem.observacionAns}</td>
+                <td align="center">${stringestadoNotacredito}</td>
+                <td align="center">${ansItem.valorNotacredito}</td>
           </tr>
           `
         })
@@ -69,6 +79,10 @@ function saveData() {
         alert("Debe poner un valor en el campo de Porcentaje");
         return;
     }
+    if(porcentaje.value < 0 || porcentaje.value > 100){
+        alert("Error, Porcentaje no valido");
+        return;
+    }
     if (valorFactura.value.length <= 0) {
         alert("Debe poner un valor en el campo de Precio valor Facturado");
         return;
@@ -83,14 +97,19 @@ function saveData() {
     }
     const createInvoice = () => {
         const formData = new FormData(document.querySelector('#ansForm'));
+        const notaCredito = document.getElementById("notaCredito");
+
         const ans = {
             descripcion: document.getElementById('descripcion').value,
-            porcentaje: formData.get('porcentaje').trim(),
-            valorFactura: formData.get('valorFactura').trim(),
-            valorDescuento: formData.get('valorDescuento').trim(),
-            valorTotal: formData.get('valorTotal').trim(),
+            porcentaje: formData.get('porcentaje'),
+            valorFactura: formData.get('valorFactura'),
+            valorDescuento: formData.get('valorDescuento'),
+            valorTotal: formData.get('valorTotal'),
             factura: document.getElementById('factura').value,
             observacionAns: formData.get('observacionAns').trim(),
+            notaCredito: notaCredito.checked == true ? 1 : 0,
+            valorTotal: formData.get('valorTotal'),
+            valorNotacredito: formData.get('valorNotacredito'),
         }
 
         fetch(API_URL, {
@@ -110,6 +129,11 @@ function saveData() {
 
 }
 
+function validaCheckboxnotaCredito() {
+    const checkboxnotaCredito = document.getElementById('notaCredito');
+    if (checkboxnotaCredito.checked == true)
+        alert('Esta a punto de generar una Nota Credito');
+}
 
 // FETCH ACTULAIZACIÓN CAMPO VALORTOTAL TABLA FACTURA
 bodyDoc.onload = getValor();
@@ -155,7 +179,6 @@ function getValor() {
                 <td>${e.valorTotal}</td>
                 </tr>
             `;
-            
             fetch('http://localhost:8080/factura/'+e.idFactura, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -165,8 +188,6 @@ function getValor() {
                 res.valorTotal = e.valorTotal;
                 functionUpdate(res)
             })
-
-            
         })
 
         const functionUpdate = (object) =>{

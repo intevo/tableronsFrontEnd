@@ -15,15 +15,6 @@ function saveData() {
     }
     const API_URL = 'http://localhost:8080/contrato/insert';
     const createInvoice = () => {
-        // const formData = new FormData(document.querySelector('#contratoFormulario'));
-
-        // const contrato = {
-        //   numeroContrato: formData.get('numeroContrato'),
-        //   fechaIncioContrato: formData.get('fechaIncioContrato'),
-        //   fechaFinalizacionContrato: formData.get('fechaFinalizacionContrato'),
-        //   valorContrato: formData.get('valorContrato'),
-        //   prorroga: formData.get('prorroga')
-        // }
 
         const contrato = {
             numeroContrato: numeroContrato.value,
