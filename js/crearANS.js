@@ -63,8 +63,8 @@ function getAns() {
                 <td align="center">${ansItem.observacionAns}</td>
                 <td align="center">${stringestadoNotacredito}</td>
                 <td align="center">${formatoMexico(numerovalorNotacredito)}</td>
-                <td><button type="button" class="btn btn-info">Editar</button></td>
-                <td><button type="button" class="btn btn-danger">Eliminar</button></td>
+                <td><button type="button" class="btn btn-info"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
+                <td><button type="button" class="btn btn-danger"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
           </tr>
           `
         })
