@@ -21,7 +21,7 @@ body {
 
 .form_wrap {
     width: 1050px;
-    height: 700px;
+    height: 750px;
     margin: 50px auto;
     display: flex;
 
@@ -65,11 +65,11 @@ body {
     position: relative;
     z-index: 2;
     color: #fff;
-    margin-top: 45px;
+    margin-top: 70px;
 }
 
 .info_title {
-    margin-bottom: 60px;
+    margin-bottom: 65px;
 }
 
 .info_title span {
@@ -143,7 +143,7 @@ form.form_contact textarea {
 
     font-family: 'Open sans';
     color: #5A5A5A;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 400;
 }
 
@@ -158,7 +158,7 @@ form.form_contact input[type="button"] {
 
     color: #fff;
     font-family: "Poppins", sans-serif;
-    font-size: 16px;
+    font-size: 26px;
     font-weight: 600;
     cursor: pointer;
 }
