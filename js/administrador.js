@@ -161,3 +161,53 @@ const bodyDoc = document.body;
         if (mes < 10)
             mes = '0' + mes
         document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
+
+// Funcion inactivacion de teclado
+
+function solonumeros(e){
+
+    key=e.keyCode || e.which;
+    teclado=String.fromCharCode(key);
+    numeros="0123456789";
+    especiales="8-37-38-46-13";
+    teclado_especial=false;
+
+
+    for (var i in especiales){
+        if (key==especiales[i]){
+            teclado_especial=true;
+        }
+    }
+
+    if (numeros.indexOf(teclado)==-1 && !teclado_especial){
+        return false;
+        }
+    }
+
+// Funcion de decimales cuando se digitan
+
+var separador = document.getElementById('valorContrato');
+
+separador.addEventListener('keyup', (e) => {
+    var entrada = e.target.value.split('.').join('');
+    entrada = entrada.split('').reverse();
+    
+    var salida = [];
+    var aux = '';
+    
+    var paginador = Math.ceil(entrada.length / 3);
+    
+    for(let i = 0; i < paginador; i++) {
+        for(let j = 0; j < 3; j++) {
+            "123 4"
+            if(entrada[j + (i*3)] != undefined) {
+                aux += entrada[j + (i*3)];
+            }
+        }
+        salida.push(aux);
+        aux = '';
+       
+        e.target.value = salida.join('.').split("").reverse().join('');
+    }
+    
+}, false);
