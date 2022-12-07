@@ -3,7 +3,7 @@ function saveData() {
     // Ontenemos los valores de los campos de contraseñas 
     pass = document.getElementById('pass');
     pass1 = document.getElementById('pass1');
-
+    var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
     // Verificamos si las constraseñas no coinciden 
 
 
@@ -11,34 +11,39 @@ function saveData() {
         swal("ERROR", "Debe ingresar un valor en el campo de Nombre", "info");
         return;
     }
-    if (telefono.value.length <= 0) {
+    else if (telefono.value.length <= 0) {
         swal("ERROR", "Debe ingresar un valor en el campo de Telefono", "info");
         return;
     }
-    if (email.value.length <= 0) {
+
+    else if (!validEmail.test(email.value)) {
+        swal("ERROR", "Correo No Valido", "info");
+        return;
+    }
+
+    else if (email.value.length <= 0) {
         swal("ERROR", "Debe ingresar un valor en el campo de Email", "info");
         return;
     }
-    if (proyecto.value.length <= 0) {
+    else if (proyecto.value.length <= 0) {
         swal("ERROR", "Debe ingresar un valor en el campo de Proyecto", "info");
         return;
     }
-    if (cargo.value.length <= 0) {
+    else if (cargo.value.length <= 0) {
         swal("ERROR", "Debe ingresar un valor en el campo de Cargo", "info");
         return;
     }
-    if (pass.value.length <= 0) {
+    else if (pass.value.length <= 0) {
         swal("ERROR", "Debe ingresar un valor en el campo de Contraseña", "info");
         return;
     }
-    if (pass.value != pass1.value) {
-        swal("ERROR","Contraseña no Coinciden", "error");
+    else if (pass.value != pass1.value) {
+        swal("ERROR", "Contraseña no Coinciden", "error");
         const form = document.getElementById("dataRegistro");
         form.addEventListener('submit', function (event) {
             event.preventDefault();
         })
     }
-
     else {
         const API_URL = 'http://localhost:8080/registro';
         const createInvoice = () => {
@@ -46,7 +51,7 @@ function saveData() {
 
             const registro = {
                 nombres: formData.get('nombres').trim(),
-                telefono: formData.get('telefono').trim(),
+                telefono: formData.get('telefono'),
                 email: formData.get('email').trim(),
                 proyecto: formData.get('proyecto').trim(),
                 cargo: formData.get('cargo').trim(),
@@ -65,10 +70,9 @@ function saveData() {
                     console.log(response)
                 })
         }
-        /*swal("Registro Exitoso","","success").then((value) => {
-            location.reload();
-        })*/
         alert("Registro Exitoso");
         createInvoice();
     }
 }
+
+

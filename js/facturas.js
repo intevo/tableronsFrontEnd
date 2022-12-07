@@ -33,6 +33,7 @@ function getFactura() {
 `;
     intItem.forEach(intItem => {
       const numerovalorTotal = intItem.valorTotal;
+      const numerofacturaTotal = intItem.facturaTotal;
       const formatoMexico = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
         const rep = '$1,';
@@ -43,7 +44,7 @@ function getFactura() {
           <td align="center">${intItem.idFactura}</td>
           <td align="center">${intItem.fechaEntrega}</td>
           <td align="center">${intItem.fechaRegistro}</td>
-          <td align="center">${intItem.facturaTotal}</td>
+          <td align="center">${formatoMexico(numerofacturaTotal)}</td>
           <td align="center">${intItem.descripcionServicios}</td>
           <td align="center">${intItem.observacionFactura}</td>
           <td align="center">${formatoMexico(numerovalorTotal)}</td>
