@@ -21,7 +21,7 @@ function getAns() {
         let listHTML = `
               <tr>
                 <th align="center">ID ANS</center></th>
-                <th align="center">ANS</center></th>
+                <th scope="col"><center>ANS</center></center></th>
                 <th scope="col"><center>Porcentaje</center></th>
                 <th scope="col"><center>Valor Factura</center></th>
                 <th scope="col"><center>Valor Descuento</center></th>
@@ -30,6 +30,7 @@ function getAns() {
                 <th scope="col"><center>Observaciones</center></th>
                 <th scope="col"><center>Nota Credito</center></th>
                 <th scope="col"><center>Valor Nota Credito</center></th>
+                <th scope="col" colspan="2"><center>Opciones</center></th>
               </tr>
               
         `;
@@ -38,6 +39,7 @@ function getAns() {
             const numeroPorcentaje = ansItem.porcentaje;
             const numerovalorDescuento = ansItem.valorDescuento;
             const numerovalorTotal = ansItem.valorTotal;
+            const numerovalorNotacredito = ansItem.valorNotacredito;
             const formatoMexico = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
                 const rep = '$1,';
@@ -60,7 +62,9 @@ function getAns() {
                 <td align="center">${ansItem.factura}</td>
                 <td align="center">${ansItem.observacionAns}</td>
                 <td align="center">${stringestadoNotacredito}</td>
-                <td align="center">${ansItem.valorNotacredito}</td>
+                <td align="center">${formatoMexico(numerovalorNotacredito)}</td>
+                <td><button type="button" class="btn btn-info">Editar</button></td>
+                <td><button type="button" class="btn btn-danger">Eliminar</button></td>
           </tr>
           `
         })

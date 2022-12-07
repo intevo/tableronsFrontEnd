@@ -37,9 +37,9 @@ function saveData() {
             const formData = new FormData(document.querySelector('#invoiceData'));
             const factura = {
               idFactura: formData.get('idFactura').trim(),
-              fechaRegistro: formData.get('fechaRegistro').trim(),
-              fechaEntrega: formData.get('fechaEntrega').trim(),
-              facturaTotal: formData.get('facturaTotal').trim(),
+              fechaRegistro: formData.get('fechaRegistro'),
+              fechaEntrega: formData.get('fechaEntrega'),
+              facturaTotal: formData.get('facturaTotal'),
               descripcionServicios: document.getElementById('descripcionServicios').value,
               observacionFactura: formData.get('observacionFactura').trim(),
               valorToral: 0,
@@ -87,7 +87,7 @@ function saveData() {
     document.getElementById('fechaEntrega').value = ano + "-" + mes + "-" + dia;
   }
 
-  fetch('http://localhost:8080/categoria')
+  fetch('http://localhost:8080/otros')
     .then(response => response.json())
     .then(data => {
         const select = document.getElementById("descripcionServicios");
