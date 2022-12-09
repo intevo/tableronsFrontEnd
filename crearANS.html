@@ -161,7 +161,7 @@
               <div class="col">
                 <label for="cantidad" class="form-label">Porcentaje (%)</label>
                 <div class="input-group has-validation">
-                  <input type="number" min="0" max="100" class="form-control" name="porcentaje" id="porcentaje" required>
+                  <input type="text" min="0" maxlength="5" class="form-control" name="porcentaje" id="porcentaje" required>
                   <div class="invalid-feedback">
                     Ingrese la Porcentaje.
                   </div>
@@ -171,14 +171,14 @@
             <div class="row">
               <div class="col">
                 <label for="precuni" class="form-label">Precio valor Facturado (Mensual)</label>
-                <input type="number" class="form-control" min="0" name="valorFactura" id="valorFactura" required>
+                <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeypress="return solonumeros(event)"required>
                 <div class="invalid-feedback">
                   Ingrese el valor Facturado.
                 </div>
               </div>
               <div class="col">
                 <label for="pretotal" class="form-label">Valor Descuento</label>
-                <input type="number" class="form-control" min="0" name="valorDescuento" id="valorDescuento">
+                <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" onkeypress="return solonumeros(event)" required>
                 <div class="invalid-feedback">
                   Ingrese el Valor Descuento
                 </div>
@@ -214,7 +214,7 @@
               </div>
               <div class="col-sm-3">
                 <label for="valorNotacredito" class="form-label">Valor Nota Crédito</label>
-                <input id="valorNotacredito" name="valorNotacredito" value="0" placeholder="0" type="number" min="0" class="form-control" style="width: 370px; height: 40px;">
+                <input id="valorNotacredito" name="valorNotacredito" placeholder="0" value="0" type="text" class="form-control" style="width: 370px; height: 40px;" onkeypress="return solonumeros(event)">
                 <div class="invalid-feedback">
                   Ingrese una observacion.
                 </div>
