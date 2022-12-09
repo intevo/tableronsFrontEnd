@@ -161,7 +161,7 @@
               <div class="col">
                 <label for="cantidad" class="form-label">Porcentaje (%)</label>
                 <div class="input-group has-validation">
-                  <input type="text" min="0" maxlength="5" class="form-control" name="porcentaje" id="porcentaje" required>
+                  <input type="text" min="0" maxlength="5" class="form-control" name="porcentaje" id="porcentaje" onkeypress="return solonumeros(event)" required>
                   <div class="invalid-feedback">
                     Ingrese la Porcentaje.
                   </div>
