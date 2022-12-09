@@ -43,13 +43,13 @@ function getAns() {
             const formatoMexico = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
                 const rep = '$1,';
-                return number.toString().replace(exp,rep);
-              }
-              let stringestadoNotacredito = '';
-                    if (ansItem.notaCredito == 1) stringestadoNotacredito = `
+                return number.toString().replace(exp, rep);
+            }
+            let stringestadoNotacredito = '';
+            if (ansItem.notaCredito == 1) stringestadoNotacredito = `
                     <span class="badge bg-success">Activo</span>
                     `;
-                    else stringestadoNotacredito = `
+            else stringestadoNotacredito = `
                     <span class="badge bg-danger">Inactivo</span>`;
             listHTML += `
           <tr>
@@ -83,7 +83,7 @@ function saveData() {
         alert("Debe poner un valor en el campo de Porcentaje");
         return;
     }
-    if(porcentaje.value < 0 || porcentaje.value > 100){
+    if (porcentaje.value < 0 || porcentaje.value > 100) {
         alert("Error, Porcentaje no valido");
         return;
     }
@@ -125,7 +125,7 @@ function saveData() {
         })
             .then(res = res.json())
             .then(response => {
-                console.log(response)   
+                console.log(response)
             }).catch(error => console.log(error))
     }
 
@@ -145,44 +145,44 @@ bodyDoc.onload = getValor();
 function getValor() {
     const total = document.querySelector('#tbodyTotales');
     fetch('http://localhost:8080/ans')
-    .then(res => res.json())
-    .then(json => {
-        renderResult(json)
-    })
+        .then(res => res.json())
+        .then(json => {
+            renderResult(json)
+        })
 
-    const renderResult = (arrayData) =>{
+    const renderResult = (arrayData) => {
         let facturas = [];
         let listHTML = "";
         let printJson = [];
-        arrayData.forEach(e =>{
-            if(!facturas.includes(e.factura)) facturas.push(e.factura)
+        arrayData.forEach(e => {
+            if (!facturas.includes(e.factura)) facturas.push(e.factura)
         })
 
-        facturas.forEach(e =>{
-             
-            let factura = e;            
+        facturas.forEach(e => {
+
+            let factura = e;
             let acomulado = 0;
             arrayData.forEach(element => {
                 console.log("Prueba" + element);
-                if(element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
+                if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
             })
-            
+
 
             let elemento = {
                 idFactura: factura,
-                fechaRegistro:"2022-11-30",
+                fechaRegistro: "2022-11-30",
                 fechaEntrega: "2022-11-30",
                 valorTotal: acomulado
             }
             printJson.push(elemento);
         })
 
-        printJson.forEach(e =>{
+        printJson.forEach(e => {
             const numerovacomulado = e.valorTotal;
-             const valorTotal = (number) => {
-             const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-            const rep = '$1,';
-            return number.toString().replace(exp,rep);
+            const valorTotal = (number) => {
+                const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+                const rep = '$1,';
+                return number.toString().replace(exp, rep);
             }
             listHTML += `
                 <tr>
@@ -190,18 +190,18 @@ function getValor() {
                 <td>${valorTotal(numerovacomulado)}</td>
                 </tr>
             `;
-            fetch('http://localhost:8080/factura/'+e.idFactura, {
+            fetch('http://localhost:8080/factura/' + e.idFactura, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(res => res.json())
-            .then(res =>{
-                res.valorTotal = e.valorTotal;
-                functionUpdate(res)
-            })
+                .then(res => {
+                    res.valorTotal = e.valorTotal;
+                    functionUpdate(res)
+                })
         })
 
-        const functionUpdate = (object) =>{
+        const functionUpdate = (object) => {
             fetch('http://localhost:8080/factura/update', {
                 method: 'POST',
                 body: JSON.stringify(object),
@@ -228,7 +228,7 @@ fetch('http://localhost:8080/categoria')
             var option = document.createElement("option");
             var ansText = document.createTextNode(element.nombreCategoria);
             option.appendChild(ansText);
-            option.value=element.nombreCategoria;
+            option.value = element.nombreCategoria;
             select.appendChild(option);
         });
     });
@@ -242,31 +242,31 @@ fetch('http://localhost:8080/factura')
             var option = document.createElement("option");
             var facturaText = document.createTextNode(element.idFactura);
             option.appendChild(facturaText);
-            option.value=element.idFactura;
+            option.value = element.idFactura;
             select.appendChild(option);
         });
     });
 
 // 
-function solonumeros(e){
+function solonumeros(e) {
 
-        key=e.keyCode || e.which;
-        teclado=String.fromCharCode(key);
-        numeros="0123456789";
-        especiales="8-37-38-46-13";
-        teclado_especial=false;
+    key = e.keyCode || e.which;
+    teclado = String.fromCharCode(key);
+    numeros = "0123456789";
+    especiales = "8-37-38-46-13";
+    teclado_especial = false;
 
- 
-        for (var i in especiales){
-            if (key==especiales[i]){
-                teclado_especial=true;
-            }
+
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            teclado_especial = true;
         }
+    }
 
-        if (numeros.indexOf(teclado)==-1 && !teclado_especial){
-            return false;
-            }
-          }
+    if (numeros.indexOf(teclado) == -1 && !teclado_especial) {
+        return false;
+    }
+}
 
 // DECIMALES PARA VALOR NOTA CREDITO
 
@@ -275,52 +275,44 @@ var separador = document.getElementById('valorNotacredito');
 separador.addEventListener('keyup', (e) => {
     var entrada = e.target.value.split('.').join('');
     entrada = entrada.split('').reverse();
-    
+
     var salida = [];
     var aux = '';
-    
+
     var paginador = Math.ceil(entrada.length / 3);
-    
-    for(let i = 0; i < paginador; i++) {
-        for(let j = 0; j < 3; j++) {
+
+    for (let i = 0; i < paginador; i++) {
+        for (let j = 0; j < 3; j++) {
             "123 4"
-            if(entrada[j + (i*3)] != undefined) {
-                aux += entrada[j + (i*3)];
+            if (entrada[j + (i * 3)] != undefined) {
+                aux += entrada[j + (i * 3)];
             }
         }
         salida.push(aux);
         aux = '';
-       
+
         e.target.value = salida.join('.').split("").reverse().join('');
     }
-    
+
 }, false);
 
 // DECIMALES PARA PORCENTAJE
+function comaPorcentaje(e) {
 
-var separador = document.getElementById('porcentaje');
+    key = e.keyCode || e.which;
+    teclado = String.fromCharCode(key);
+    numeros = "0123456789.";
+    especiales = "8-37-38-46-13";
+    teclado_especial = false;
 
-separador.addEventListener('keyup', (e) => {
-    var entrada = e.target.value.split('.').join('');
-    entrada = entrada.split('').reverse();
-    
-    var salida = [];
-    var aux = '';
-    
-    var paginador = Math.ceil(entrada.length / 3);
-    
-    for(let i = 0; i < paginador; i++) {
-        for(let j = 0; j < 3; j++) {
-            "123 4"
-            if(entrada[j + (i*3)] != undefined) {
-                aux += entrada[j + (i*3)];
-            }
+
+    for (var i in especiales) {
+        if (key == especiales[i]) {
+            teclado_especial = true;
         }
-        salida.push(aux);
-        aux = '';
-       
-        e.target.value = salida.join('.').split("").reverse().join('');
     }
-    
-}, false);
 
+    if (numeros.indexOf(teclado) == -1 && !teclado_especial) {
+        return false;
+    }
+}
