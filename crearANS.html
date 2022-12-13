@@ -16,7 +16,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
-  <link href="http://localhost/FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!--<link href="http://localhost/FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -69,13 +70,14 @@
       -webkit-overflow-scrolling: touch;
     }
   </style>
-
+  
   <link href="dashboard.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="form-validation.css" rel="stylesheet">
 </head>
 
 <body>
+
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-10 shadow">
     <a href="grafica.html"><img src="img/intevo-logo.png" id="icon" alt="User Icon"></a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
@@ -214,7 +216,7 @@
               </div>
               <div class="col-sm-3">
                 <label for="valorNotacredito" class="form-label">Valor Nota Crédito</label>
-                <input id="valorNotacredito" name="valorNotacredito" placeholder="0" value="0" type="text" class="form-control" style="width: 370px; height: 40px;" onkeypress="return solonumeros(event)" onkeyup="decimalConvert(event)">
+                <input id="valorNotacredito" name="valorNotacredito" placeholder="0" value="0" type="text" class="form-control" style="width: 370px; height: 40px;" onkeypress="return solonumeros(event)">
                 <div class="invalid-feedback">
                   Ingrese una observacion.
                 </div>
@@ -223,7 +225,7 @@
           </div>
 
             <hr class="my-4">
-            <button type="button" class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
+            <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
           </form>
 
           <hr class="my-4">
@@ -267,7 +269,7 @@
       integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
       crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
-    <script src="js/crearAns.js"></script>
+    <script src="js/crearANS.js"></script>
 </body>
 
 </html>

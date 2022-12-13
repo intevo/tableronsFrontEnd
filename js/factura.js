@@ -36,7 +36,7 @@ function getFactura() {
       const numerofacturaTotal = intItem.facturaTotal;
       const formatoMexico = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-        const rep = '$1,';
+        const rep = '$1.';
         return number.toString().replace(exp,rep);
     }
       listHTML += `

@@ -1,4 +1,3 @@
-
 // FETCH PARA TRAER Y MOSTRAR INFORMACÓN 
 const bodyDoc = document.body;
 const ANS = [];
@@ -40,9 +39,9 @@ function getAns() {
             const numerovalorDescuento = ansItem.valorDescuento;
             const numerovalorTotal = ansItem.valorTotal;
             const numerovalorNotacredito = ansItem.valorNotacredito;
-            const formatoMexico = (number) => {
+            const formato = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-                const rep = '$1,';
+                const rep = '$1.';
                 return number.toString().replace(exp, rep);
             }
             let stringestadoNotacredito = '';
@@ -51,22 +50,21 @@ function getAns() {
                     `;
             else stringestadoNotacredito = `
                     <span class="badge bg-danger">Inactivo</span>`;
-            listHTML += `
-          <tr>
+            listHTML +=
+                `<tr ansId = ${ansItem.idAns}>
                 <td align="center">${ansItem.idAns}</td>
                 <td align="center">${ansItem.descripcion}</td>
-                <td align="center">${formatoMexico(numeroPorcentaje)}</td>
-                <td align="center">${formatoMexico(numeroValorfactura)}</td>
-                <td align="center">${formatoMexico(numerovalorDescuento)}</td>
-                <td align="center">${formatoMexico(numerovalorTotal)}</td>
+                <td align="center">${formato(numeroPorcentaje)}</td>
+                <td align="center">${formato(numeroValorfactura)}</td>
+                <td align="center">${formato(numerovalorDescuento)}</td>
+                <td align="center">${formato(numerovalorTotal)}</td>
                 <td align="center">${ansItem.factura}</td>
                 <td align="center">${ansItem.observacionAns}</td>
                 <td align="center">${stringestadoNotacredito}</td>
-                <td align="center">${formatoMexico(numerovalorNotacredito)}</td>
-                <td><button type="button" class="btn btn-info"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
-                <td><button type="button" class="btn btn-danger"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
-          </tr>
-          `
+                <td align="center">${formato(numerovalorNotacredito)}</td>
+                <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
+                <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
+            </tr>`
         })
         ansList.innerHTML = listHTML;
     }
@@ -124,7 +122,7 @@ function saveData() {
             observacionAns: formData.get('observacionAns').trim(),
             notaCredito: notaCredito.checked == true ? 1 : 0,
             valorTotal: formData.get('valorTotal'),
-            valorNotacredito: valorNotacredito
+            valorNotacredito: formData.get('valorNotacredito'),
         }
 
         fetch(API_URL, {
@@ -150,6 +148,119 @@ function validaCheckboxnotaCredito() {
     if (checkboxnotaCredito.checked == true)
         alert('Esta a punto de generar una Nota Credito');
 }
+
+//RELLENAR DATOS EN EL FORMULARIO
+const rellenarAns = () => {
+    $(document).on('click', '#btn-edit', function () {
+        let btnEdit = $(this)[0].parentElement.parentElement;
+        let id = $(btnEdit).attr('ansId');
+
+        $('#crear').hide();
+        $('#editar').show();
+
+        $.ajax({
+            url: 'http://localhost:8080/ans/' + id,
+            type: 'GET',
+            dataType: 'json',
+            success: (res) => {
+                $('#descripcion').val(res.descripcion);
+                $('#porcentaje').val(res.porcentaje);
+                $('#valorFactura').val(res.valorFactura);
+                $('#valorDescuento').val(res.valorDescuento);
+                $('#observacionAns').val(res.observacionAns);
+                $('#valorTotal').val(res.valorTotal);
+                $('#factura').val(res.factura);
+                let check = document.getElementById('notaCredito')
+                res.notaCredito == 1 ? check.checked = true : check.checked = false
+                $('#valorNotacredito').val(res.valorNotacredito);
+                document.getElementById('idAns').value = res.idAns;
+            }
+        })
+    })
+}
+
+//BOTON EDITAR
+const editAns = () => {
+
+    $('#editar').on('click', function ($event) {
+        $event.preventDefault();
+        let id = $('#idAns').val();
+        console.log("Pasando por aqui " + id)
+        $('#agregar').css('display', 'none');
+        $('#editar').css('display', 'block');
+
+        let inputCheck = document.getElementById('notaCredito')
+        let check = inputCheck.checked == true ? 1 : 0;
+
+        const ans = {
+            idAns: id,
+            descripcion: $('#descripcion').val(),
+            porcentaje: parseFloat($('#porcentaje').val()),
+            valorFactura: parseInt($('#valorFactura').val()),
+            valorDescuento: parseInt($('#valorDescuento').val()),
+            valorTotal: parseInt($('#valorTotal').val()),
+            factura: parseInt($('#factura').val()),
+            observacionAns: $('#observacionAns').val(),
+            notaCredito: check,
+            valorNotacredito: $('#valorNotacredito').val()
+        }
+
+        $.ajax({
+            url: 'http://localhost:8080/ans/' + id,
+            contentType: 'application/json',
+            type: 'PUT',
+            data: JSON.stringify(ans),
+            dataType: 'json',
+            success: (res) => {
+                alert("Ans Editado");
+                $('#editar').css('display', 'none');
+                $('#agregar').css('display', 'block');
+
+                reset();
+                getAns();
+            }
+
+        })
+    })
+
+}
+
+const reset = () => {
+    $('#descripcion').val('');
+    $('#porcentaje').val('');
+    $('#valorFactura').val('');
+    $('#valorDescuento').val('');
+    $('#valorTotal').val('');
+    $('#observacionAns').val('');
+    $('#valorNotacredito').val('');
+}
+
+//BOTON ELIMINAR
+const deleteAns = () => {
+    $(document).on('click', '#btn-delete', function () {
+
+        if (confirm('¿Seguro de Eliminar')) {
+            let btnDelete = $(this)[0].parentElement.parentElement;
+            let id = $(btnDelete).attr('ansId');
+            console.log(id);
+            $.ajax({
+                url: 'http://localhost:8080/ans/' + id,
+                type: 'DELETE',
+                dataType: 'json',
+                success: (res) => {
+                    $('#messages').html('Ans Eliminado').css('display', 'block');
+                }
+
+            })
+            alert("Ans Eliminado");
+            location.reload();
+        }
+    })
+}
+
+rellenarAns();
+editAns();
+deleteAns();
 
 // FETCH ACTULAIZACIÓN CAMPO VALORTOTAL TABLA FACTURA
 bodyDoc.onload = getValor();
@@ -193,7 +304,7 @@ function getValor() {
             const numerovacomulado = e.valorTotal;
             const valorTotal = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-                const rep = '$1,';
+                const rep = '$1.';
                 return number.toString().replace(exp, rep);
             }
             listHTML += `
@@ -324,5 +435,3 @@ function comaPorcentaje(e) {
         return false;
     }
 }
-
-
