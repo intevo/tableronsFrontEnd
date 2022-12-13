@@ -16,7 +16,7 @@ function getAns() {
     }
     getAllAns();
     const ansList = document.querySelector('#ansList');
-    const renderResult = (ansItem) => {
+    const renderResult = (ansItems) => {
         let listHTML = `
               <tr>
                 <th align="center">ID ANS</center></th>
@@ -33,7 +33,7 @@ function getAns() {
               </tr>
               
         `;
-        ansItem.forEach(ansItem => {
+        ansItems.forEach(ansItem => {
             const numeroValorfactura = ansItem.valorFactura;
             const numeroPorcentaje = ansItem.porcentaje;
             const numerovalorDescuento = ansItem.valorDescuento;
@@ -105,24 +105,27 @@ function saveData() {
         const formData = new FormData(document.querySelector('#ansForm'));
         const notaCredito = document.getElementById("notaCredito");
 
-        let primero = document.getElementById('valorFactura');
-        let valorFactura = primero.value.replace('.', '');
-        let segundo = document.getElementById('valorDescuento');
-        let valorDescuento = segundo.value.replace('.', '');
-        let tercero = document.getElementById('valorNotacredito');
-        let valorNotacredito = tercero.value.replace('.', '');
+        const primero = document.getElementById('valorFactura');
+        let valorFactura = primero.value.replaceAll('.', '');
+        let valorFacturaFinal = parseInt(valorFactura);
+        const segundo = document.getElementById('valorDescuento');
+        let valorDescuento = segundo.value.replaceAll('.', '');
+        let valorDescuentoFinal = parseInt(valorDescuento);
+        const tercero = document.getElementById('valorNotacredito');
+        let valorNotacredito = tercero.value.replaceAll('.', '');
+        let valorNotacreditoFinal = parseInt(valorNotacredito);
 
         const ans = {
             descripcion: document.getElementById('descripcion').value,
             porcentaje: formData.get('porcentaje'),
-            valorFactura: valorFactura,
-            valorDescuento: valorDescuento,
+            valorFactura: valorFacturaFinal,
+            valorDescuento: valorDescuentoFinal,
+            valorNotacredito: valorNotacreditoFinal,
             valorTotal: formData.get('valorTotal'),
             factura: document.getElementById('factura').value,
             observacionAns: formData.get('observacionAns').trim(),
             notaCredito: notaCredito.checked == true ? 1 : 0,
             valorTotal: formData.get('valorTotal'),
-            valorNotacredito: formData.get('valorNotacredito'),
         }
 
         fetch(API_URL, {

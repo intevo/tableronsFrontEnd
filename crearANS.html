@@ -163,7 +163,7 @@
               <div class="col">
                 <label for="cantidad" class="form-label">Porcentaje (%)</label>
                 <div class="input-group has-validation">
-                  <input type="text" min="0" maxlength="5" class="form-control" name="porcentaje" id="porcentaje" required>
+                  <input type="text" min="0" maxlength="5" class="form-control" name="porcentaje" id="porcentaje" onkeypress="return solonumeros(event)" required>
                   <div class="invalid-feedback">
                     Ingrese la Porcentaje.
                   </div>
@@ -260,7 +260,7 @@
     </footer>
   </div>
 
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <!--<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>-->
     <script src="form-validation.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
       integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"

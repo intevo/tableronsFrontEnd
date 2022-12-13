@@ -1,11 +1,11 @@
 //OBTENER
 function saveData() {
 
-    const numeroContrato = document.getElementById("numeroContrato")
-    const valorContrato = document.getElementById("valorContrato")
-    const fechaIncioContrato = document.getElementById("fechaIncioContrato")
-    const fechaFinalizacionContrato = document.getElementById("fechaFinalizacionContrato")
-    const prorroga = document.getElementById("prorroga")
+    const valorContrato = document.getElementById('valorContrato');
+    const numeroContrato = document.getElementById("numeroContrato");
+    const fechaIncioContrato = document.getElementById("fechaIncioContrato");
+    const fechaFinalizacionContrato = document.getElementById("fechaFinalizacionContrato");
+    const prorroga = document.getElementById("prorroga");
     if (numeroContrato.value.length <= 0) {
         alert("Debe poner un valor en el campo número de contrato");
         return;
@@ -14,14 +14,16 @@ function saveData() {
         alert("Debe poner un valor en el campo valor de contrato");
         return;
     }
+        let valorContrato2 = valorContrato.value.replaceAll('.', '');
+        let valorContratoFin = parseInt(valorContrato2)
     const API_URL = 'http://localhost:8080/contrato/insert';
     const createInvoice = () => {
-
+        
         const contrato = {
             numeroContrato: numeroContrato.value,
             fechaIncioContrato: fechaIncioContrato.value,
             fechaFinalizacionContrato: fechaFinalizacionContrato.value,
-            valorContrato: valorContrato.value,
+            valorContrato: valorContratoFin,
             prorroga: prorroga.checked == true ? 1 : 0
         }
 
@@ -112,14 +114,14 @@ function getContrato() {
             const numerovalorContrato = intItem.valorContrato;
             const formato = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-                const rep = '$1,';
+                const rep = '$1.';
                 return number.toString().replace(exp, rep);
             }
             let stringProrroga = '';
             if (intItem.prorroga == 1) stringProrroga = `
                     <span class="badge bg-success">Prorroga</span>
                     `;
-            else stringProrroga = '';
+            else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
             listHTML += `
             <tr contratoId = ${intItem.idContrato}>
               <td align="center">${intItem.idContrato}</td>
