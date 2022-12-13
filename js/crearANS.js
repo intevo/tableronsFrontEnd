@@ -292,7 +292,7 @@ function getValor() {
                 console.log("Prueba" + element);
                 if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
             })
-
+            
 
             let elemento = {
                 numFactura: factura,
