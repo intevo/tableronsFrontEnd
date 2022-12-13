@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
-    <link href="http://localhost/FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -180,6 +180,7 @@
                         <label for="entrega" class="form-label">Ingrese Valor del Contrato</label>
                         <div class="input-group has-validation">
                             <input type="text" class="form-control" id="valorContrato" name="valorContrato" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control" id="idContrato" style="display: none;">
                             <div class="invalid-feedback">
                                 Valor del Contrato
                             </div>
@@ -200,8 +201,8 @@
                     </div>
                 </div>
                 <hr class="my-4">
-                <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()">Enviar</button>
-
+                <button class="w-100 btn btn-secondary btn-lg" id="crear" type="button" onClick="saveData()">Crear</button>
+                <button class="w-100 btn btn-secondary btn-lg" id="editar" type="button" style="display:none;">Editar</button>
             </form>
         </div>
     </div>
