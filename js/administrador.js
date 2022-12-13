@@ -212,26 +212,28 @@ separador.addEventListener('keyup', (e) => {
 //RELLENAR DATOS EN EL FORMULARIO
 const rellenarContrato = () => {
     $(document).on('click', '#btn-edit', function () {
-        let btnEdit = $(this)[0].parentElement.parentElement;
-        let id = $(btnEdit).attr('contratoId');
-        console.log(id);
-        $('#crear').hide();
-        $('#editar').show();
+        if (confirm('¿Seguro de Editar?')) {
+            let btnEdit = $(this)[0].parentElement.parentElement;
+            let id = $(btnEdit).attr('contratoId');
+            console.log(id);
+            $('#crear').hide();
+            $('#editar').show();
 
-        $.ajax({
-            url: 'http://localhost:8080/contrato/' + id,
-            type: 'GET',
-            dataType: 'json',
-            success: (res) => {
-                $('#numeroContrato').val(res.numeroContrato);
-                $('#fechaIncioContrato').val(res.fechaIncioContrato);
-                $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
-                $('#valorContrato').val(res.valorContrato);
-                let check = document.getElementById('prorroga')
-                res.notaCredito == 1 ? check.checked = true : check.checked = false
-                document.getElementById('idContrato').value = res.idContrato;
-            }
-        })
+            $.ajax({
+                url: 'http://localhost:8080/contrato/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: (res) => {
+                    $('#numeroContrato').val(res.numeroContrato);
+                    $('#fechaIncioContrato').val(res.fechaIncioContrato);
+                    $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
+                    $('#valorContrato').val(res.valorContrato);
+                    let check = document.getElementById('prorroga')
+                    res.notaCredito == 1 ? check.checked = true : check.checked = false
+                    document.getElementById('idContrato').value = res.idContrato;
+                }
+            })
+        }
     })
 }
 
