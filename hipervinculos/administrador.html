@@ -179,7 +179,8 @@
                     <div class="col-6">
                         <label for="entrega" class="form-label">Ingrese Valor del Contrato</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control" id="valorContrato" name="valorContrato" onkeypress="return solonumeros(event)" required>
+                            <input type="text" class="form-control" id="valorContrato" name="valorContrato" onkeypress="return solonumeros(event)" 
+                             onkeyup="decimalConvert(event)" required>
                             <div class="invalid-feedback">
                                 Valor del Contrato
                             </div>
@@ -233,7 +234,7 @@
     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
     crossorigin="anonymous"></script>
 <script src="./dashboard.js"></script>
-<script src="../js/administrador.js"></script>
+<script src="../js/Administrador.js"></script>
 </body>
 
 </html>

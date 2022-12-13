@@ -99,21 +99,32 @@ function saveData() {
         alert("Debe elegir un valor en el campo de Factura");
         return;
     }
+
+
+//---------//
+
     const createInvoice = () => {
         const formData = new FormData(document.querySelector('#ansForm'));
         const notaCredito = document.getElementById("notaCredito");
 
+        let primero = document.getElementById('valorFactura');
+        let valorFactura = primero.value.replace('.', '');
+        let segundo = document.getElementById('valorDescuento');
+        let valorDescuento = segundo.value.replace('.', '');
+        let tercero = document.getElementById('valorNotacredito');
+        let valorNotacredito = tercero.value.replace('.', '');
+
         const ans = {
             descripcion: document.getElementById('descripcion').value,
             porcentaje: formData.get('porcentaje'),
-            valorFactura: formData.get('valorFactura'),
-            valorDescuento: formData.get('valorDescuento'),
+            valorFactura: valorFactura,
+            valorDescuento: valorDescuento,
             valorTotal: formData.get('valorTotal'),
             factura: document.getElementById('factura').value,
             observacionAns: formData.get('observacionAns').trim(),
             notaCredito: notaCredito.checked == true ? 1 : 0,
             valorTotal: formData.get('valorTotal'),
-            valorNotacredito: formData.get('valorNotacredito'),
+            valorNotacredito: valorNotacredito
         }
 
         fetch(API_URL, {
@@ -123,12 +134,13 @@ function saveData() {
                 'Content-Type': 'application/json'
             }
         })
-            .then(res = res.json())
+            .then(res => res.json())
             .then(response => {
                 console.log(response)
             }).catch(error => console.log(error))
     }
-
+    alert('ans creado')
+    location.reload();
     createInvoice();
 
 }
@@ -270,9 +282,7 @@ function solonumeros(e) {
 
 // DECIMALES PARA VALOR NOTA CREDITO
 
-var separador = document.getElementById('valorNotacredito');
-
-separador.addEventListener('keyup', (e) => {
+const decimalConvert = (e) => {
     var entrada = e.target.value.split('.').join('');
     entrada = entrada.split('').reverse();
 
@@ -283,7 +293,6 @@ separador.addEventListener('keyup', (e) => {
 
     for (let i = 0; i < paginador; i++) {
         for (let j = 0; j < 3; j++) {
-            "123 4"
             if (entrada[j + (i * 3)] != undefined) {
                 aux += entrada[j + (i * 3)];
             }
@@ -293,8 +302,7 @@ separador.addEventListener('keyup', (e) => {
 
         e.target.value = salida.join('.').split("").reverse().join('');
     }
-
-}, false);
+}
 
 // DECIMALES PARA PORCENTAJE
 function comaPorcentaje(e) {
@@ -316,3 +324,5 @@ function comaPorcentaje(e) {
         return false;
     }
 }
+
+

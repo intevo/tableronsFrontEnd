@@ -171,14 +171,14 @@
             <div class="row">
               <div class="col">
                 <label for="precuni" class="form-label">Precio valor Facturado (Mensual)</label>
-                <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeypress="return solonumeros(event)"required>
+                <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeypress="return solonumeros(event)" onkeyup="decimalConvert(event)" required>
                 <div class="invalid-feedback">
                   Ingrese el valor Facturado.
                 </div>
               </div>
               <div class="col">
                 <label for="pretotal" class="form-label">Valor Descuento</label>
-                <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" onkeypress="return solonumeros(event)" required>
+                <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" onkeypress="return solonumeros(event)" onkeyup="decimalConvert(event)" required>
                 <div class="invalid-feedback">
                   Ingrese el Valor Descuento
                 </div>
@@ -214,7 +214,7 @@
               </div>
               <div class="col-sm-3">
                 <label for="valorNotacredito" class="form-label">Valor Nota Crédito</label>
-                <input id="valorNotacredito" name="valorNotacredito" placeholder="0" value="0" type="text" class="form-control" style="width: 370px; height: 40px;" onkeypress="return solonumeros(event)">
+                <input id="valorNotacredito" name="valorNotacredito" placeholder="0" value="0" type="text" class="form-control" style="width: 370px; height: 40px;" onkeypress="return solonumeros(event)" onkeyup="decimalConvert(event)">
                 <div class="invalid-feedback">
                   Ingrese una observacion.
                 </div>
@@ -223,7 +223,7 @@
           </div>
 
             <hr class="my-4">
-            <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
+            <button type="button" class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
           </form>
 
           <hr class="my-4">
@@ -267,7 +267,7 @@
       integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
       crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
-    <script src="js/crearANS.js"></script>
+    <script src="js/crearAns.js"></script>
 </body>
 
 </html>
