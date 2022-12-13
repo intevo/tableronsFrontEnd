@@ -295,7 +295,7 @@ function getValor() {
 
 
             let elemento = {
-                idFactura: factura,
+                numFactura: factura,
                 fechaRegistro: "2022-11-30",
                 fechaEntrega: "2022-11-30",
                 valorTotal: acomulado
@@ -312,11 +312,11 @@ function getValor() {
             }
             listHTML += `
                 <tr>
-                <td>${e.idFactura}</td>
+                <td>${e.numFactura}</td>
                 <td>${valorTotal(numerovacomulado)}</td>
                 </tr>
             `;
-            fetch('http://localhost:8080/factura/' + e.idFactura, {
+            fetch('http://localhost:8080/factura/' + e.numFactura, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -366,7 +366,7 @@ fetch('http://localhost:8080/factura')
         const select = document.getElementById("factura");
         data.forEach(element => {
             var option = document.createElement("option");
-            var facturaText = document.createTextNode(element.idFactura);
+            var facturaText = document.createTextNode(element.numFactura);
             option.appendChild(facturaText);
             option.value = element.idFactura;
             select.appendChild(option);

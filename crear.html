@@ -12,6 +12,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
+  <!--<link href="http://localhost/FrontEnd/assets/dist/css/bootstrap.min.css" rel="stylesheet">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -147,8 +149,8 @@
       <form id="invoiceData" class="needs-validation" novalidate>
         <div class="row g-3">
           <div class="col-sm-6">
-            <label for="Idfact" class="form-label">Id Factura</label>
-            <input type="number" class="form-control" name="idFactura" id="idFactura" required>
+            <label for="numFactura" class="form-label">Número Factura</label>
+            <input type="number" class="form-control" name="numFactura" id="numFactura" required>
             <div class="invalid-feedback">
               Ingrese el id de la factura.
             </div>
@@ -176,7 +178,8 @@
           <div class="col-6">
             <label for="Factura total" class="form-label">Factura total</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" name="facturaTotal" id="facturaTotal" onkeypress="return solonumeros(event)" required>
+              <input type="text" class="form-control" name="facturaTotal" id="facturaTotal"
+                onkeypress="return solonumeros(event)" required>
               <div class="invalid-feedback">
                 Ingrese el valor total de la factura.
               </div>
@@ -192,13 +195,14 @@
           </div>
           <div class="col">
             <label for="Nombre" class="form-label">Observacion</label>
-            <textarea id="observacionFactura" name="observacionFactura" class="form-control" required style="max-width: 500px; max-height: 32px;"></textarea>
+            <textarea id="observacionFactura" name="observacionFactura" class="form-control" required
+              style="max-width: 500px; max-height: 32px;"></textarea>
             <div class="invalid-feedback">
               Ingrese una observacion.
             </div>
           </div>
 
-            <!--<div class="col-6">
+          <!--<div class="col-6">
             <label for="entrega" class="form-label">Cargar Factura (PDF)</label>
             <div class="input-group has-validation">
               <input type="file" class="form-control" id="cargaDocumento" name="cargaDocumento" required><button
@@ -210,15 +214,18 @@
           </div>-->
 
         </div>
-          <hr class="my-4">
+        <hr class="my-4">
 
-          <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()">Crear</button>
-          <!-- type="submit" -->
+        <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()">Crear</button>
+        <!-- type="submit" -->
       </form>
+      <hr class="my-4">
+      <table id="invoiceList" class="table table-striped table-sm">
     </div>
   </div>
   </main>
 
+  </table>
   <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; 2022 Intevo S.A.S</p>
     <ul class="list-inline">
@@ -233,7 +240,7 @@
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
   integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
 <script src="dashboard.js"></script>
-<script src="js/crearFacturas.js"></script>
+<script src="js/crearFactura.js"></script>
 </body>
 
 </html>
