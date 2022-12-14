@@ -246,8 +246,8 @@ const rellenarContrato = () => {
                     $('#numeroContrato').val(res.numeroContrato);
                     $('#fechaIncioContrato').val(res.fechaIncioContrato);
                     $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
-                    getFormatMoney(document.getElementById('valorContrato'));
                     $('#valorContrato').val(res.valorContrato);
+                    getFormatMoney(document.getElementById('valorContrato'));
                     let check = document.getElementById('prorroga')
                     res.prorroga == 1 ? check.checked = true : check.checked = false
                     document.getElementById('idContrato').value = res.idContrato;
