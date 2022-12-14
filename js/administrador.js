@@ -272,12 +272,15 @@ const editContrato = () => {
         let inputCheck = document.getElementById('prorroga')
         let check = inputCheck.checked == true ? 1 : 0;
 
+        const cambio = document.getElementById('valorContrato');
+        let valorContrato = cambio.value.replaceAll('.', '');
+        let valorNotacreditoFinal = parseInt(valorContrato);
         const ans = {
             idContrato: id,
             numeroContrato: $('#numeroContrato').val(),
             fechaIncioContrato: $('#fechaIncioContrato').val(),
             fechaFinalizacionContrato: $('#fechaFinalizacionContrato').val(),
-            valorContrato: $('#valorContrato').val(),
+            valorContrato: valorNotacreditoFinal,
             prorroga: check,
 
         }
