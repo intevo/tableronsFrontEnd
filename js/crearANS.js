@@ -39,6 +39,7 @@ function getAns() {
             const numerovalorDescuento = ansItem.valorDescuento;
             const numerovalorTotal = ansItem.valorTotal;
             const numerovalorNotacredito = ansItem.valorNotacredito;
+           
             const formato = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
                 const rep = '$1.';
@@ -50,6 +51,11 @@ function getAns() {
                     `;
             else stringestadoNotacredito = `
                     <span class="badge bg-danger">Inactivo</span>`;
+
+            // const decendente = (numberD) => {
+            //     return numberD.sort((a, b)=> b - a)
+            // }
+                    
             listHTML +=
                 `<tr ansId = ${ansItem.idAns}>
                 <td align="center">${ansItem.idAns}</td>
@@ -70,7 +76,7 @@ function getAns() {
     }
 }
 
-// FETCH ENVIO DE INFORMACIÓN AL JSON API REST
+// FETCH ENVIO DE INFORMACIÓN AL JSON API REST //
 function saveData() {
     const API_URL = 'http://localhost:8080/ans';
     if (descripcion.value.length <= 0) {
@@ -188,7 +194,7 @@ const rellenarAns = () => {
 const editAns = () => {
 
     $('#editar').on('click', function ($event) {
-        $event.preventDefault();
+        
         let id = $('#idAns').val();
         console.log("Pasando por aqui " + id)
         $('#crear').css('display', 'none');
@@ -224,7 +230,7 @@ const editAns = () => {
                 reset();
                 getAns();
             }
-
+            
         })
     })
 
@@ -258,7 +264,7 @@ const deleteAns = () => {
 
             })
             alert("Ans Eliminado");
-            location.reload();
+            getAns();
         }
     })
 }
