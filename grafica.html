@@ -229,7 +229,7 @@
         `;
         ansItem.forEach(ansItem => {
           const numerovalorTotal = ansItem.valorTotal;
-          const formatoMexico = (number) => {
+          const formato = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
                 const rep = '$1.';
                 return number.toString().replace(exp,rep);
@@ -239,7 +239,7 @@
               <tr>
                     <td nowrap><center>${ansItem.descripcion}</center></td>
                     <td nowrap><center>${ansItem.porcentaje}</center></td>
-                    <td nowrap><center>${formatoMexico(numerovalorTotal)}</center></td>
+                    <td nowrap><center>${formato(numerovalorTotal)}</center></td>
               </tr>
             </tbody>
           `
@@ -279,7 +279,7 @@
           if (intItem.prorroga == 1) stringProrroga = `
                     <span class="badge bg-success">Prorroga</span>
                     `;
-          else stringProrroga = '';
+          else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
 
           listHTML += `           
          <tr>
@@ -287,7 +287,7 @@
               <li class"nav-link">Número contrato: ${intItem.numeroContrato}</li>
             </td>
             <td>
-              <li class="nav-item">Valor contrato: ${intItem.valorContrato}</li>
+              <li class="nav-item">Valor contrato: ${formato(intItem.valorContrato)}</li>
             </td>
           <td>
               <li class="nav-item">Estado: ${stringProrroga}</li>
@@ -298,6 +298,11 @@
         intList.innerHTML = listHTML;
       }
     }
+    const formato = (number) => {
+                const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+                const rep = '$1.';
+                return number.toString().replace(exp, rep);
+            }
 
     function validarCierre() {
       swal({
