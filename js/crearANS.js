@@ -76,6 +76,7 @@ function getAns() {
     }
 }
 
+//------------------------------------------------------------------------------------//
 // FETCH ENVIO DE INFORMACIÓN AL JSON API REST //
 function saveData() {
     const API_URL = 'http://localhost:8080/ans';
@@ -104,8 +105,8 @@ function saveData() {
         return;
     }
 
-
-    //---------//
+//------------------------------------------------------------------------------------//
+//VARIABLE PARA TRANSFORMAR VALORES A DECIMALES
 
     const createInvoice = () => {
         const formData = new FormData(document.querySelector('#ansForm'));
@@ -158,7 +159,9 @@ function validaCheckboxnotaCredito() {
         alert('Esta a punto de generar una Nota Credito');
 }
 
+//------------------------------------------------------------------------------------//
 //RELLENAR DATOS EN EL FORMULARIO
+
 const rellenarAns = () => {
     $(document).on('click', '#btn-edit', function () {
         if (confirm('¿Seguro de Editar?')) {
@@ -190,7 +193,9 @@ const rellenarAns = () => {
     })
 }
 
+//------------------------------------------------------------------------------------//
 //BOTON EDITAR
+
 const editAns = () => {
 
     $('#editar').on('click', function ($event) {
@@ -246,7 +251,9 @@ const reset = () => {
     $('#valorNotacredito').val('');
 }
 
+//------------------------------------------------------------------------------------//
 //BOTON ELIMINAR
+
 const deleteAns = () => {
     $(document).on('click', '#btn-delete', function () {
 
@@ -273,7 +280,9 @@ rellenarAns();
 editAns();
 deleteAns();
 
+//------------------------------------------------------------------------------------//
 // FETCH ACTULAIZACIÓN CAMPO VALORTOTAL TABLA FACTURA
+
 bodyDoc.onload = getValor();
 
 function getValor() {
@@ -353,7 +362,9 @@ function getValor() {
     }
 }
 
+//------------------------------------------------------------------------------------//
 // FETCH PARA HACER DATALIST DE DESCRIPCIÓN
+
 fetch('http://localhost:8080/categoria')
     .then(response => response.json())
     .then(data => {
@@ -367,7 +378,9 @@ fetch('http://localhost:8080/categoria')
         });
     });
 
+//------------------------------------------------------------------------------------//
 // FETCH PARA HACER DATALIST DE IDFACTURA
+
 fetch('http://localhost:8080/factura')
     .then(response => response.json())
     .then(data => {
@@ -402,6 +415,7 @@ function solonumeros(e) {
     }
 }
 
+//------------------------------------------------------------------------------------//
 // DECIMALES PARA VALOR NOTA CREDITO
 
 const decimalConvert = (e) => {
@@ -426,7 +440,9 @@ const decimalConvert = (e) => {
     }
 }
 
+//------------------------------------------------------------------------------------//
 // DECIMALES PARA PORCENTAJE
+
 function comaPorcentaje(e) {
 
     key = e.keyCode || e.which;
