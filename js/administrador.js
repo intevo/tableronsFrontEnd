@@ -187,17 +187,15 @@ function solonumeros(e) {
 
 //------------------------------------------------------------------------------------//
 // FUNCIÓN DECIMALES/MILES
-var separador = document.getElementById('valorContrato');
+// var separador = document.getElementById('valorContrato');
 
-separador.addEventListener('keyup', (e) => {
+// separador.addEventListener('keyup', (e) => {
+formatMoney = (e) =>{
     var entrada = e.target.value.split('.').join('');
     entrada = entrada.split('').reverse();
-
     var salida = [];
     var aux = '';
-
     var paginador = Math.ceil(entrada.length / 3);
-
     for (let i = 0; i < paginador; i++) {
         for (let j = 0; j < 3; j++) {
             "123 4"
@@ -210,8 +208,29 @@ separador.addEventListener('keyup', (e) => {
 
         e.target.value = salida.join('.').split("").reverse().join('');
     }
+}
 
-}, false);
+getFormatMoney = (target) =>{
+    var entrada = target.value.split('.').join('');
+    entrada = entrada.split('').reverse();
+    var salida = [];
+    var aux = '';
+    var paginador = Math.ceil(entrada.length / 3);
+    for (let i = 0; i < paginador; i++) {
+        for (let j = 0; j < 3; j++) {
+            "123 4"
+            if (entrada[j + (i * 3)] != undefined) {
+                aux += entrada[j + (i * 3)];
+            }
+        }
+        salida.push(aux);
+        aux = '';
+
+        target.value = salida.join('.').split("").reverse().join('');
+    }
+}
+
+// }, false);
 
 //------------------------------------------------------------------------------------//
 //RELLENAR DATOS EN EL FORMULARIO
@@ -233,6 +252,7 @@ const rellenarContrato = () => {
                     $('#fechaIncioContrato').val(res.fechaIncioContrato);
                     $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
                     $('#valorContrato').val(res.valorContrato);
+                    getFormatMoney(document.getElementById('valorContrato'));
                     let check = document.getElementById('prorroga')
                     res.prorroga == 1 ? check.checked = true : check.checked = false
                     document.getElementById('idContrato').value = res.idContrato;

@@ -10,11 +10,11 @@ function getFactura() {
       .then(res => res.json())
       .then(json => {
         intRes = json;
-        console.log(json);
+        // console.log(json);
         renderResult(intRes);
       })
   }
- 
+
   getAllInvoice();
 
   const intList = document.querySelector('#invoiceList');
@@ -29,18 +29,16 @@ function getFactura() {
           <th scope="col"><center>Descripcion de Servicios</center></th>
           <th scope="col"><center>Observaciones</center></th>
           <th scope="col"><center>Valor Total</center></th>
-        </tr>
-`;
+        </tr>`;
+    let acumulador = 0;
     intItem.forEach(intItem => {
+      console.log(intItem)
       const numerovalorTotal = intItem.valorTotal;
       const numerofacturaTotal = intItem.facturaTotal;
-      const formato = (number) => {
-        const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-        const rep = '$1.';
-        return number.toString().replace(exp,rep);
-    }
+      acumulador = acumulador + parseInt(intItem.valorTotal)
+      
       listHTML += `
-  <tr>      
+        <tr>      
           <td align="center">${intItem.idFactura}</td>
           <td align="center">${intItem.fechaEntrega}</td>
           <td align="center">${intItem.fechaRegistro}</td>
@@ -48,9 +46,15 @@ function getFactura() {
           <td align="center">${intItem.descripcionServicios}</td>
           <td align="center">${intItem.observacionFactura}</td>
           <td align="center">${formato(numerovalorTotal)}</td>
-  </tr>
-  `
+        </tr>`;
     })
+    document.getElementById("valorFacturado").innerHTML = "FACTURADO: " + formato(acumulador);
     intList.innerHTML = listHTML;
   }
+}
+
+const formato = (number) => {
+  const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+  const rep = '$1.';
+  return number.toString().replace(exp, rep);
 }
