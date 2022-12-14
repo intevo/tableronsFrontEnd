@@ -99,7 +99,7 @@ function saveData() {
     }
 
 
-//---------//
+    //---------//
 
     const createInvoice = () => {
         const formData = new FormData(document.querySelector('#ansForm'));
@@ -155,30 +155,32 @@ function validaCheckboxnotaCredito() {
 //RELLENAR DATOS EN EL FORMULARIO
 const rellenarAns = () => {
     $(document).on('click', '#btn-edit', function () {
-        let btnEdit = $(this)[0].parentElement.parentElement;
-        let id = $(btnEdit).attr('ansId');
+        if (confirm('¿Seguro de Editar?')) {
+            let btnEdit = $(this)[0].parentElement.parentElement;
+            let id = $(btnEdit).attr('ansId');
 
-        $('#crear').hide();
-        $('#editar').show();
+            $('#crear').hide();
+            $('#editar').show();
 
-        $.ajax({
-            url: 'http://localhost:8080/ans/' + id,
-            type: 'GET',
-            dataType: 'json',
-            success: (res) => {
-                $('#descripcion').val(res.descripcion);
-                $('#porcentaje').val(res.porcentaje);
-                $('#valorFactura').val(res.valorFactura);
-                $('#valorDescuento').val(res.valorDescuento);
-                $('#observacionAns').val(res.observacionAns);
-                $('#valorTotal').val(res.valorTotal);
-                $('#factura').val(res.factura);
-                let check = document.getElementById('notaCredito')
-                res.notaCredito == 1 ? check.checked = true : check.checked = false
-                $('#valorNotacredito').val(res.valorNotacredito);
-                document.getElementById('idAns').value = res.idAns;
-            }
-        })
+            $.ajax({
+                url: 'http://localhost:8080/ans/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: (res) => {
+                    $('#descripcion').val(res.descripcion);
+                    $('#porcentaje').val(res.porcentaje);
+                    $('#valorFactura').val(res.valorFactura);
+                    $('#valorDescuento').val(res.valorDescuento);
+                    $('#observacionAns').val(res.observacionAns);
+                    $('#valorTotal').val(res.valorTotal);
+                    $('#factura').val(res.factura);
+                    let check = document.getElementById('notaCredito')
+                    res.notaCredito == 1 ? check.checked = true : check.checked = false
+                    $('#valorNotacredito').val(res.valorNotacredito);
+                    document.getElementById('idAns').value = res.idAns;
+                }
+            })
+        }
     })
 }
 
@@ -292,7 +294,7 @@ function getValor() {
                 console.log("Prueba" + element);
                 if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
             })
-            
+
 
             let elemento = {
                 idFactura: factura,

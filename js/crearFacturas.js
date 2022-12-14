@@ -166,7 +166,7 @@ function getFactura() {
 `;
     intItem.forEach(intItem => {
       const numerovalorTotal = intItem.valorTotal;
-      const numerofacturaTotal = intItem.facturaTotal;
+      //const numerofacturaTotal = intItem.facturaTotal;
       const formato = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
         const rep = '$1.';
@@ -177,7 +177,7 @@ function getFactura() {
           <td align="center">${intItem.idFactura}</td>
           <td align="center">${intItem.fechaEntrega}</td>
           <td align="center">${intItem.fechaRegistro}</td>
-          <td align="center">${formato(numerofacturaTotal)}</td>
+          <td align="center">${intItem.facturaTotal}</td>
           <td align="center">${intItem.descripcionServicios}</td>
           <td align="center">${intItem.observacionFactura}</td>
           <td align="center">${formato(numerovalorTotal)}</td>
@@ -196,7 +196,7 @@ function getFactura() {
     dia = '0' + dia;
   if (mes < 10)
     mes = '0' + mes
-  document.getElementById('fechaActual').value = ano + "-" + mes + "-" + dia;
+  document.getElementById('fechaRegistro').value = ano + "-" + mes + "-" + dia;
 
   var fecha = new Date();
   var mes = fecha.getMonth() + 1;
@@ -213,8 +213,9 @@ function getFactura() {
 
 const rellenarfactura = () => {
   $(document).on('click', '#btn-edit', function () {
+    if (confirm('¿Seguro de Editar?')) {
       let btnEdit = $(this)[0].parentElement.parentElement;
-      let id = $(btnEdit).attr('idFactura');
+      let id = $(btnEdit).attr('facturaId');
 
       $('#crear').hide();
       $('#editar').show();
@@ -227,16 +228,16 @@ const rellenarfactura = () => {
               $('#idFactura').val(res.idFactura);
               $('#fechaEntrega').val(res.fechaEntrega);
               $('#fechaRegistro').val(res.fechaRegistro);
-              $('#numerofacturaTotal').val(res.numerofacturaTotal);
+              $('#facturaTotal').val(res.facturaTotal);
               $('#descripcionServicios').val(res.descripcionServicios);
               $('#observacionFactura').val(res.observacionFactura);
-              $('#numerovalorTotal').val(res.numerovalorTotal);
               // let check = document.getElementById('notaCredito')
               // res.notaCredito == 1 ? check.checked = true : check.checked = false
               // $('#valorNotacredito').val(res.valorNotacredito);
-              document.getElementById('numFactura').value = res.numFactura;
+              //document.getElementById('numFactura').value = res.numFactura;
           }
       })
+    }
   })
 }
 
@@ -248,9 +249,9 @@ const editFactura = () => {
 
   $('#editar').on('click', function ($event) {
       $event.preventDefault();
-      let id = $('#numFactura').val();
+      let id = $('#idFactura').val();
       console.log("Pasando por aqui " + id)
-      $('#agregar').css('display', 'none');
+      $('#crear').css('display', 'none');
       $('#editar').css('display', 'block');
 
 
@@ -260,11 +261,9 @@ const editFactura = () => {
         idFactura: $('#idFactura').val(),
         fechaEntrega: $('#fechaEntrega').val(),
         fechaRegistro: $('#fechaRegistro').val(),
-        numerofacturaTotal: $('#numerofacturaTotal').val(),
+        facturaTotal: $('#facturaTotal').val(),
         descripcionServicios: $('#descripcionServicios').val(),
-        observacionFactura: $('#observacionFactura').val(),
-        numerovalorTotal: $('#numerovalorTotal').val(),
-      
+        observacionFactura: $('#observacionFactura').val(),      
       }
 
       $.ajax({
@@ -276,7 +275,7 @@ const editFactura = () => {
           success: (res) => {
               alert("Factura Editada");
               $('#editar').css('display', 'none');
-              $('#agregar').css('display', 'block');
+              $('#crear').css('display', 'block');
 
               reset();
               getFactura();
@@ -288,13 +287,12 @@ const editFactura = () => {
 }
 
 const reset = () => {
-  $('#numFactura').val('');
-  $('#porcentaje').val('');
-  $('#valorFactura').val('');
-  $('#valorDescuento').val('');
-  $('#valorTotal').val('');
-  $('#observacionAns').val('');
-  $('#valorNotacredito').val('');
+  $('#idFactura').val('');
+  $('#fechaRegistro').val('');
+  $('#fechaEntrega').val('');
+  $('#facturaTotal').val('');
+  $('#descripcionServicios').val('');
+  $('#observacionFactura').val('');
 }
 
 // BOTON ELIMINAR
@@ -321,4 +319,6 @@ const deletefactura = () => {
   })
 }
 
+editFactura();
+rellenarfactura();
 deletefactura();
