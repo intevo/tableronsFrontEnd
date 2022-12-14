@@ -1,3 +1,4 @@
+// FUNCION DE DATOS Y VALIDACIONES
 function saveData() {
   const API_URL = 'http://localhost:8080/factura';
 
@@ -66,6 +67,9 @@ function saveData() {
   }
 }
 
+//------------------------------------------------------------------------------------//
+// LISTA DE DESCRIPCION DE SERVICIOS
+
 fetch('http://localhost:8080/otros')
   .then(response => response.json())
   .then(data => {
@@ -79,7 +83,8 @@ fetch('http://localhost:8080/otros')
     });
   });
 
-//
+//------------------------------------------------------------------------------------//
+// FUNCION QUE NOS PERMITE BLOQUEAR TECLAS ALFABETICAS
 
 function solonumeros(e) {
 
@@ -101,7 +106,8 @@ function solonumeros(e) {
   }
 }
 
-//
+//------------------------------------------------------------------------------------//
+//SEPARADOR DE MILES 
 
 var separador = document.getElementById('facturaTotal');
 
@@ -129,6 +135,7 @@ separador.addEventListener('keyup', (e) => {
 
 }, false);
 
+//------------------------------------------------------------------------------------//
 //IMPRIMIR DATOS
 const bodyDoc = document.body;
 bodyDoc.onload = getFactura();
@@ -209,6 +216,7 @@ function getFactura() {
   document.getElementById('fechaEntrega').value = ano + "-" + mes + "-" + dia;
 }
 
+//------------------------------------------------------------------------------------//
 // RELLENAR DATOS DE FORMULARIO FACTURA
 
 const rellenarfactura = () => {
@@ -241,8 +249,7 @@ const rellenarfactura = () => {
   })
 }
 
-
-
+//------------------------------------------------------------------------------------//
 // BOTON EDITAR
 
 const editFactura = () => {
@@ -295,6 +302,7 @@ const reset = () => {
   $('#observacionFactura').val('');
 }
 
+//------------------------------------------------------------------------------------//
 // BOTON ELIMINAR
 
 const deletefactura = () => {

@@ -47,7 +47,7 @@ function saveData() {
     location.reload();
     createInvoice();
 }
-
+//------------------------------------------------------------------------------------//
 //LISTAR
 function cargarJSON() {
     const API_URL = 'http://localhost:8080/contrato';
@@ -67,7 +67,7 @@ function cargarJSON() {
         })
 
 }
-
+//------------------------------------------------------------------------------------//
 //VALIDACIÓN CHECK
 
 function validaCheckbox() {
@@ -75,7 +75,7 @@ function validaCheckbox() {
     if (checkboxProroga.checked == true)
         alert('Esta a punto de generar una prorroga en este contrato');
 }
-
+//------------------------------------------------------------------------------------//
 //IMPRIMIR
 const bodyDoc = document.body;
 bodyDoc.onload = getContrato();
@@ -140,6 +140,7 @@ function getContrato() {
     }
 }
 
+//------------------------------------------------------------------------------------//
 // CONVERTIDOR FORMATO FECHAS
 
 var fecha = new Date();
@@ -162,7 +163,7 @@ if (mes < 10)
     mes = '0' + mes
 document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
 
-
+//------------------------------------------------------------------------------------//
 // FUNCIÓN INACTIVACIÓN DEL TECALDO
 function solonumeros(e) {
 
@@ -184,6 +185,7 @@ function solonumeros(e) {
     }
 }
 
+//------------------------------------------------------------------------------------//
 // FUNCIÓN DECIMALES/MILES
 // var separador = document.getElementById('valorContrato');
 
@@ -230,6 +232,7 @@ getFormatMoney = (target) =>{
 
 // }, false);
 
+//------------------------------------------------------------------------------------//
 //RELLENAR DATOS EN EL FORMULARIO
 const rellenarContrato = () => {
     $(document).on('click', '#btn-edit', function () {
@@ -259,6 +262,7 @@ const rellenarContrato = () => {
     })
 }
 
+//------------------------------------------------------------------------------------//
 //BOTON EDITAR
 const editContrato = () => {
 
@@ -331,6 +335,7 @@ const reset = () => {
     $('#valorContrato').val('');
 }
 
+//------------------------------------------------------------------------------------//
 //BOTON ELIMINAR
 const deleteContrato = () => {
     $(document).on('click', '#btn-delete', function () {
@@ -372,3 +377,5 @@ const deleteContrato = () => {
 rellenarContrato();
 editContrato();
 deleteContrato();
+
+//------------------------------------------------------------------------------------//
