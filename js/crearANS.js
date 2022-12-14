@@ -160,8 +160,49 @@ function validaCheckboxnotaCredito() {
 }
 
 //------------------------------------------------------------------------------------//
-//RELLENAR DATOS EN EL FORMULARIO
+// DECIMALES PARA VALOR NOTA CREDITO
+formatMoney = (e) =>{
+    var entrada = e.target.value.split('.').join('');
+    entrada = entrada.split('').reverse();
+    var salida = [];
+    var aux = '';
+    var paginador = Math.ceil(entrada.length / 3);
+    for (let i = 0; i < paginador; i++) {
+        for (let j = 0; j < 3; j++) {
+            "123 4"
+            if (entrada[j + (i * 3)] != undefined) {
+                aux += entrada[j + (i * 3)];
+            }
+        }
+        salida.push(aux);
+        aux = '';
 
+        e.target.value = salida.join('.').split("").reverse().join('');
+    }
+}
+//------------------------------------------------------------------------------------//
+//ELIMINAR PUNTOS PARA RELLENAR
+getFormatMoney = (target) =>{
+    var entrada = target.value.split('.').join('');
+    entrada = entrada.split('').reverse();
+    var salida = [];
+    var aux = '';
+    var paginador = Math.ceil(entrada.length / 3);
+    for (let i = 0; i < paginador; i++) {
+        for (let j = 0; j < 3; j++) {
+            "123 4"
+            if (entrada[j + (i * 3)] != undefined) {
+                aux += entrada[j + (i * 3)];
+            }
+        }
+        salida.push(aux);
+        aux = '';
+
+        target.value = salida.join('.').split("").reverse().join('');
+    }
+}
+//------------------------------------------------------------------------------------//
+//RELLENAR DATOS EN EL FORMULARIO
 const rellenarAns = () => {
     $(document).on('click', '#btn-edit', function () {
         if (confirm('¿Seguro de Editar?')) {
@@ -179,20 +220,22 @@ const rellenarAns = () => {
                     $('#descripcion').val(res.descripcion);
                     $('#porcentaje').val(res.porcentaje);
                     $('#valorFactura').val(res.valorFactura);
+                    getFormatMoney(document.getElementById('valorFactura'));
                     $('#valorDescuento').val(res.valorDescuento);
+                    getFormatMoney(document.getElementById('valorDescuento'));
                     $('#observacionAns').val(res.observacionAns);
                     $('#valorTotal').val(res.valorTotal);
                     $('#factura').val(res.factura);
                     let check = document.getElementById('notaCredito')
                     res.notaCredito == 1 ? check.checked = true : check.checked = false
                     $('#valorNotacredito').val(res.valorNotacredito);
+                    getFormatMoney(document.getElementById('valorNotacredito'));
                     document.getElementById('idAns').value = res.idAns;
                 }
             })
         }
     })
 }
-
 //------------------------------------------------------------------------------------//
 //BOTON EDITAR
 
@@ -208,17 +251,27 @@ const editAns = () => {
         let inputCheck = document.getElementById('notaCredito')
         let check = inputCheck.checked == true ? 1 : 0;
 
+        const primero = document.getElementById('valorFactura');
+        let valorFactura = primero.value.replaceAll('.', '');
+        let valorFacturaFinal = parseInt(valorFactura);
+        const segundo = document.getElementById('valorDescuento');
+        let valorDescuento = segundo.value.replaceAll('.', '');
+        let valorDescuentoFinal = parseInt(valorDescuento);
+        const tercero = document.getElementById('valorNotacredito');
+        let valorNotacredito = tercero.value.replaceAll('.', '');
+        let valorNotacreditoFinal = parseInt(valorNotacredito);
+
         const ans = {
             idAns: id,
             descripcion: $('#descripcion').val(),
             porcentaje: parseFloat($('#porcentaje').val()),
-            valorFactura: parseInt($('#valorFactura').val()),
-            valorDescuento: parseInt($('#valorDescuento').val()),
+            valorFactura: valorFacturaFinal,
+            valorDescuento: valorDescuentoFinal,
             valorTotal: parseInt($('#valorTotal').val()),
             factura: parseInt($('#factura').val()),
             observacionAns: $('#observacionAns').val(),
             notaCredito: check,
-            valorNotacredito: $('#valorNotacredito').val()
+            valorNotacredito: valorNotacreditoFinal
         }
 
         $.ajax({
@@ -394,7 +447,7 @@ fetch('http://localhost:8080/factura')
         });
     });
 
-// 
+//BLOQUEO PARA LETRAS
 function solonumeros(e) {
 
     key = e.keyCode || e.which;
@@ -412,31 +465,6 @@ function solonumeros(e) {
 
     if (numeros.indexOf(teclado) == -1 && !teclado_especial) {
         return false;
-    }
-}
-
-//------------------------------------------------------------------------------------//
-// DECIMALES PARA VALOR NOTA CREDITO
-
-const decimalConvert = (e) => {
-    var entrada = e.target.value.split('.').join('');
-    entrada = entrada.split('').reverse();
-
-    var salida = [];
-    var aux = '';
-
-    var paginador = Math.ceil(entrada.length / 3);
-
-    for (let i = 0; i < paginador; i++) {
-        for (let j = 0; j < 3; j++) {
-            if (entrada[j + (i * 3)] != undefined) {
-                aux += entrada[j + (i * 3)];
-            }
-        }
-        salida.push(aux);
-        aux = '';
-
-        e.target.value = salida.join('.').split("").reverse().join('');
     }
 }
 
@@ -462,3 +490,4 @@ function comaPorcentaje(e) {
         return false;
     }
 }
+//------------------------------------------------------------------------------------//

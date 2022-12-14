@@ -186,10 +186,7 @@ function solonumeros(e) {
 }
 
 //------------------------------------------------------------------------------------//
-// FUNCIÓN DECIMALES/MILES
-// var separador = document.getElementById('valorContrato');
-
-// separador.addEventListener('keyup', (e) => {
+// DECIMALES PARA VALOR NOTA CREDITO
 formatMoney = (e) =>{
     var entrada = e.target.value.split('.').join('');
     entrada = entrada.split('').reverse();
@@ -209,7 +206,8 @@ formatMoney = (e) =>{
         e.target.value = salida.join('.').split("").reverse().join('');
     }
 }
-
+//------------------------------------------------------------------------------------//
+//ELIMINAR PUNTOS PARA RELLENAR
 getFormatMoney = (target) =>{
     var entrada = target.value.split('.').join('');
     entrada = entrada.split('').reverse();
@@ -229,9 +227,6 @@ getFormatMoney = (target) =>{
         target.value = salida.join('.').split("").reverse().join('');
     }
 }
-
-// }, false);
-
 //------------------------------------------------------------------------------------//
 //RELLENAR DATOS EN EL FORMULARIO
 const rellenarContrato = () => {
@@ -251,8 +246,8 @@ const rellenarContrato = () => {
                     $('#numeroContrato').val(res.numeroContrato);
                     $('#fechaIncioContrato').val(res.fechaIncioContrato);
                     $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
-                    $('#valorContrato').val(res.valorContrato);
                     getFormatMoney(document.getElementById('valorContrato'));
+                    $('#valorContrato').val(res.valorContrato);
                     let check = document.getElementById('prorroga')
                     res.prorroga == 1 ? check.checked = true : check.checked = false
                     document.getElementById('idContrato').value = res.idContrato;
@@ -261,7 +256,6 @@ const rellenarContrato = () => {
         }
     })
 }
-
 //------------------------------------------------------------------------------------//
 //BOTON EDITAR
 const editContrato = () => {
