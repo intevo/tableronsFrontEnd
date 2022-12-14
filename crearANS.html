@@ -181,6 +181,7 @@
               <div class="col">
                 <label for="pretotal" class="form-label">Valor Descuento</label>
                 <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" onkeypress="return solonumeros(event)" onkeyup="decimalConvert(event)" required>
+                <input type="text" class="form-control" name="idAns" id="idAns" style="display: none;">
                 <div class="invalid-feedback">
                   Ingrese el Valor Descuento
                 </div>
@@ -225,7 +226,8 @@
           </div>
 
             <hr class="my-4">
-            <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()">Crear</button>
+            <button class="w-100 btn btn-secondary btn-lg" onClick="saveData()" id="crear">Crear</button>
+            <button class="w-100 btn btn-secondary btn-lg" id="editar" style="display: none;">Editar</button>
           </form>
 
           <hr class="my-4">
@@ -269,7 +271,7 @@
       integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
       crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
-    <script src="js/crearANS.js"></script>
+    <script src="js/crearAns.js"></script>
 </body>
 
 </html>

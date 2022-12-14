@@ -231,7 +231,7 @@ const rellenarContrato = () => {
                     $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
                     $('#valorContrato').val(res.valorContrato);
                     let check = document.getElementById('prorroga')
-                    res.notaCredito == 1 ? check.checked = true : check.checked = false
+                    res.prorroga == 1 ? check.checked = true : check.checked = false
                     document.getElementById('idContrato').value = res.idContrato;
                 }
             })
@@ -246,7 +246,7 @@ const editContrato = () => {
         $event.preventDefault();
         let id = $('#idContrato').val();
         console.log("Pasando por aqui " + id)
-        $('#agregar').css('display', 'none');
+        $('#crear').css('display', 'none');
         $('#editar').css('display', 'block');
 
         let inputCheck = document.getElementById('prorroga')

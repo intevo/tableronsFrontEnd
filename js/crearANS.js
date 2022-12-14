@@ -189,7 +189,7 @@ const editAns = () => {
         $event.preventDefault();
         let id = $('#idAns').val();
         console.log("Pasando por aqui " + id)
-        $('#agregar').css('display', 'none');
+        $('#crear').css('display', 'none');
         $('#editar').css('display', 'block');
 
         let inputCheck = document.getElementById('notaCredito')
@@ -217,7 +217,7 @@ const editAns = () => {
             success: (res) => {
                 alert("Ans Editado");
                 $('#editar').css('display', 'none');
-                $('#agregar').css('display', 'block');
+                $('#crear').css('display', 'block');
 
                 reset();
                 getAns();
@@ -295,7 +295,7 @@ function getValor() {
             
 
             let elemento = {
-                numFactura: factura,
+                idFactura: factura,
                 fechaRegistro: "2022-11-30",
                 fechaEntrega: "2022-11-30",
                 valorTotal: acomulado
@@ -312,11 +312,11 @@ function getValor() {
             }
             listHTML += `
                 <tr>
-                <td>${e.numFactura}</td>
+                <td>${e.idFactura}</td>
                 <td>${valorTotal(numerovacomulado)}</td>
                 </tr>
             `;
-            fetch('http://localhost:8080/factura/' + e.numFactura, {
+            fetch('http://localhost:8080/factura/' + e.idFactura, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -366,7 +366,7 @@ fetch('http://localhost:8080/factura')
         const select = document.getElementById("factura");
         data.forEach(element => {
             var option = document.createElement("option");
-            var facturaText = document.createTextNode(element.numFactura);
+            var facturaText = document.createTextNode(element.idFactura);
             option.appendChild(facturaText);
             option.value = element.idFactura;
             select.appendChild(option);

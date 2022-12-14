@@ -1,7 +1,7 @@
 function saveData() {
   const API_URL = 'http://localhost:8080/factura';
 
-  if (numFactura.value.length <= 0) {
+  if (idFactura.value.length <= 0) {
     alert("Debe poner un valor en el campo de factura");
     return;
   } else {
@@ -23,11 +23,11 @@ function saveData() {
 
     const renderResult = (intRes) => {
 
-      let busqueda = parseInt(document.getElementById('numFactura').value);
+      let busqueda = parseInt(document.getElementById('idFactura').value);
 
       let existe = false;
       intRes.forEach(element => {
-        if (element.numFactura == busqueda) existe = true, console.log(element.numFactura), console.log(busqueda)
+        if (element.idFactura == busqueda) existe = true, console.log(element.idFactura), console.log(busqueda)
       });
 
       if (existe) {
@@ -36,7 +36,7 @@ function saveData() {
         const createInvoice = () => {
           const formData = new FormData(document.querySelector('#invoiceData'));
           const factura = {
-            numFactura: formData.get('numFactura').trim(),
+            idFactura: formData.get('idFactura').trim(),
             fechaRegistro: formData.get('fechaRegistro'),
             fechaEntrega: formData.get('fechaEntrega'),
             facturaTotal: formData.get('facturaTotal'),
@@ -154,8 +154,7 @@ function getFactura() {
   const renderResult = (intItem) => {
     let listHTML = `
          <tr>
-          <th scope="col"><center>ID</center></th>
-          <th scope="col"><center>Número Factura</center></th>
+          <th scope="col"><center>ID Factura</center></th>
           <th scope="col"><center>Fecha Entrega</center></th>
           <th scope="col"><center>Fecha Registro</center></th>
           <th scope="col"><center>Factura Total</center></th>
@@ -171,12 +170,11 @@ function getFactura() {
       const formato = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
         const rep = '$1.';
-        return number.toString().replace(exp, rep);
+        return number.toString().replace(exp,rep);
       }
       listHTML += `
-  <tr facturaId = ${intItem.idFac}>
-          <td align="center">${intItem.idFac}</td>
-          <td align="center">${intItem.numFactura}</td>
+  <tr facturaId = ${intItem.idFactura}>
+          <td align="center">${intItem.idFactura}</td>
           <td align="center">${intItem.fechaEntrega}</td>
           <td align="center">${intItem.fechaRegistro}</td>
           <td align="center">${formato(numerofacturaTotal)}</td>
@@ -216,7 +214,7 @@ function getFactura() {
 const rellenarfactura = () => {
   $(document).on('click', '#btn-edit', function () {
       let btnEdit = $(this)[0].parentElement.parentElement;
-      let id = $(btnEdit).attr('numFactura');
+      let id = $(btnEdit).attr('idFactura');
 
       $('#crear').hide();
       $('#editar').show();
@@ -226,7 +224,7 @@ const rellenarfactura = () => {
           type: 'GET',
           dataType: 'json',
           success: (res) => {
-              $('#numFactura').val(res.numFactura);
+              $('#idFactura').val(res.idFactura);
               $('#fechaEntrega').val(res.fechaEntrega);
               $('#fechaRegistro').val(res.fechaRegistro);
               $('#numerofacturaTotal').val(res.numerofacturaTotal);
@@ -258,8 +256,8 @@ const editFactura = () => {
 
       const factura = {
 
-        idFac: id,
-        numFactura: $('#numFactura').val(),
+        idFactura: id,
+        idFactura: $('#idFactura').val(),
         fechaEntrega: $('#fechaEntrega').val(),
         fechaRegistro: $('#fechaRegistro').val(),
         numerofacturaTotal: $('#numerofacturaTotal').val(),

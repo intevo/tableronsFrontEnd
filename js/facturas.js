@@ -22,8 +22,7 @@ function getFactura() {
   const renderResult = (intItem) => {
     let listHTML = `
          <tr>
-         <th scope="col"><center>ID</center></th>  
-          <th scope="col"><center>Número Factura</center></th>
+         <th scope="col"><center>ID Factura</center></th>
           <th scope="col"><center>Fecha Entrega</center></th>
           <th scope="col"><center>Fecha Registro</center></th>
           <th scope="col"><center>Factura Total</center></th>
@@ -41,9 +40,8 @@ function getFactura() {
         return number.toString().replace(exp,rep);
     }
       listHTML += `
-  <tr>
-          <td align="center">${intItem.idFac}</td>
-          <td align="center">${intItem.numFactura}</td>
+  <tr>      
+          <td align="center">${intItem.idFactura}</td>
           <td align="center">${intItem.fechaEntrega}</td>
           <td align="center">${intItem.fechaRegistro}</td>
           <td align="center">${formato(numerofacturaTotal)}</td>
