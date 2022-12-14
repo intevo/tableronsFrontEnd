@@ -248,7 +248,7 @@ const rellenarfactura = () => {
 const editFactura = () => {
 
   $('#editar').on('click', function ($event) {
-      $event.preventDefault();
+    
       let id = $('#idFactura').val();
       console.log("Pasando por aqui " + id)
       $('#crear').css('display', 'none');

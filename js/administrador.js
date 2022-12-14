@@ -243,7 +243,7 @@ const rellenarContrato = () => {
 const editContrato = () => {
 
     $('#editar').on('click', function ($event) {
-        $event.preventDefault();
+        
         let id = $('#idContrato').val();
         console.log("Pasando por aqui " + id)
         $('#crear').css('display', 'none');
