@@ -158,7 +158,7 @@
 
           <div class="col-sm-6">
             <label for="registro" class="form-label">Fecha de registro</label>
-            <input type="date" class="form-control" id="fechaActual" name="fechaRegistro" placeholder="" value=""
+            <input type="date" class="form-control" id="fechaRegistro" name="fechaRegistro" placeholder="" value=""
               required>
             <div class="invalid-feedback">
               Ingrese la fecha de registro.
@@ -216,7 +216,8 @@
         </div>
         <hr class="my-4">
 
-        <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()">Crear</button>
+        <button class="w-100 btn btn-secondary btn-lg" type="button" onClick="saveData()" id="crear">Crear</button>
+        <button class="w-100 btn btn-secondary btn-lg" type="button" id="editar" name="editar" style="display: none;">editar</button>
         <!-- type="submit" -->
       </form>
       <hr class="my-4">
