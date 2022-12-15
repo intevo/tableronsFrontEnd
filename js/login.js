@@ -26,7 +26,7 @@ validarLogin = () => {
             swal("ERROR", "Datos Incorrectos", "error");
           }
           if(e.email != usuario && e.pass != pass){
-            swal("ERROR", "Datos Incorrectos", "warning");
+            swal("ERROR", "Usuario no Registrado", "warning");
           }
           if (e.email == usuario && e.pass == pass) {              
             swal("Acceso Correcto", "", "success").then((value) => {

@@ -44,7 +44,7 @@ function saveData() {
             event.preventDefault();
         })
     }
-    else {
+  
         const API_URL = 'http://localhost:8080/registro';
         const createInvoice = () => {
             const formData = new FormData(document.querySelector('#dataRegistro'));
@@ -69,10 +69,13 @@ function saveData() {
                 .then(response => {
                     console.log(response)
                 })
-        }
-        alert("Registro Exitoso");
-        createInvoice();
+            
     }
+    alert("Registro Exitoso");
+    createInvoice();
+    location.reload();
 }
+
+        
 
 

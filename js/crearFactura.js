@@ -5,7 +5,14 @@ function saveData() {
   if (idFactura.value.length <= 0) {
     alert("Debe poner un valor en el campo de factura");
     return;
-  } else {
+  } if (facturaTotal.value.length <= 0) {
+    alert("Debe poner un valor en el campo de Factura Total");
+    return;
+  } if (observacionFactura.value.length <= 0) {
+    alert("Debe poner un valor en el campo de Observaciones");
+    return;
+  }
+  else {
     let intRes = null;
 
     const getAllInvoice = () => {
@@ -177,7 +184,7 @@ function getFactura() {
       const formato = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
         const rep = '$1.';
-        return number.toString().replace(exp,rep);
+        return number.toString().replace(exp, rep);
       }
       listHTML += `
   <tr facturaId = ${intItem.idFactura}>
@@ -229,21 +236,21 @@ const rellenarfactura = () => {
       $('#editar').show();
 
       $.ajax({
-          url: 'http://localhost:8080/factura/' + id,
-          type: 'GET',
-          dataType: 'json',
-          success: (res) => {
-              $('#idFactura').val(res.idFactura);
-              $('#fechaEntrega').val(res.fechaEntrega);
-              $('#fechaRegistro').val(res.fechaRegistro);
-              $('#facturaTotal').val(res.facturaTotal);
-              $('#descripcionServicios').val(res.descripcionServicios);
-              $('#observacionFactura').val(res.observacionFactura);
-              // let check = document.getElementById('notaCredito')
-              // res.notaCredito == 1 ? check.checked = true : check.checked = false
-              // $('#valorNotacredito').val(res.valorNotacredito);
-              //document.getElementById('numFactura').value = res.numFactura;
-          }
+        url: 'http://localhost:8080/factura/' + id,
+        type: 'GET',
+        dataType: 'json',
+        success: (res) => {
+          $('#idFactura').val(res.idFactura);
+          $('#fechaEntrega').val(res.fechaEntrega);
+          $('#fechaRegistro').val(res.fechaRegistro);
+          $('#facturaTotal').val(res.facturaTotal);
+          $('#descripcionServicios').val(res.descripcionServicios);
+          $('#observacionFactura').val(res.observacionFactura);
+          // let check = document.getElementById('notaCredito')
+          // res.notaCredito == 1 ? check.checked = true : check.checked = false
+          // $('#valorNotacredito').val(res.valorNotacredito);
+          //document.getElementById('numFactura').value = res.numFactura;
+        }
       })
     }
   })
@@ -255,40 +262,40 @@ const rellenarfactura = () => {
 const editFactura = () => {
 
   $('#editar').on('click', function ($event) {
-    
-      let id = $('#idFactura').val();
-      console.log("Pasando por aqui " + id)
-      $('#crear').css('display', 'none');
-      $('#editar').css('display', 'block');
+
+    let id = $('#idFactura').val();
+    console.log("Pasando por aqui " + id)
+    $('#crear').css('display', 'none');
+    $('#editar').css('display', 'block');
 
 
-      const factura = {
+    const factura = {
 
-        idFactura: id,
-        idFactura: $('#idFactura').val(),
-        fechaEntrega: $('#fechaEntrega').val(),
-        fechaRegistro: $('#fechaRegistro').val(),
-        facturaTotal: $('#facturaTotal').val(),
-        descripcionServicios: $('#descripcionServicios').val(),
-        observacionFactura: $('#observacionFactura').val(),      
+      idFactura: id,
+      idFactura: $('#idFactura').val(),
+      fechaEntrega: $('#fechaEntrega').val(),
+      fechaRegistro: $('#fechaRegistro').val(),
+      facturaTotal: $('#facturaTotal').val(),
+      descripcionServicios: $('#descripcionServicios').val(),
+      observacionFactura: $('#observacionFactura').val(),
+    }
+
+    $.ajax({
+      url: 'http://localhost:8080/factura/' + id,
+      contentType: 'application/json',
+      type: 'PUT',
+      data: JSON.stringify(factura),
+      dataType: 'json',
+      success: (res) => {
+        alert("Factura Editada");
+        $('#editar').css('display', 'none');
+        $('#crear').css('display', 'block');
+
+        reset();
+        getFactura();
       }
 
-      $.ajax({
-          url: 'http://localhost:8080/factura/' + id,
-          contentType: 'application/json',
-          type: 'PUT',
-          data: JSON.stringify(factura),
-          dataType: 'json',
-          success: (res) => {
-              alert("Factura Editada");
-              $('#editar').css('display', 'none');
-              $('#crear').css('display', 'block');
-
-              reset();
-              getFactura();
-          }
-
-      })
+    })
   })
 
 }
@@ -308,22 +315,22 @@ const reset = () => {
 const deletefactura = () => {
   $(document).on('click', '#btn-delete', function () {
 
-      if (confirm('¿Seguro de Eliminar')) {
-          let btnDelete = $(this)[0].parentElement.parentElement;
-          let id = $(btnDelete).attr('facturaId');
-          console.log(id);
-          $.ajax({
-              url: 'http://localhost:8080/factura/' + id,
-              type: 'DELETE',
-              dataType: 'json',
-              success: (res) => {
-                  $('#messages').html('Factura Eliminada').css('display', 'block');
-              }
+    if (confirm('¿Seguro de Eliminar')) {
+      let btnDelete = $(this)[0].parentElement.parentElement;
+      let id = $(btnDelete).attr('facturaId');
+      console.log(id);
+      $.ajax({
+        url: 'http://localhost:8080/factura/' + id,
+        type: 'DELETE',
+        dataType: 'json',
+        success: (res) => {
+          $('#messages').html('Factura Eliminada').css('display', 'block');
+        }
 
-          })
-          alert("Factura Eliminada");
-          location.reload();
-      }
+      })
+      alert("Factura Eliminada");
+      location.reload();
+    }
   })
 }
 
