@@ -13,16 +13,17 @@
     overflow-y: scroll;
     overflow-x: scroll;
     height: fit-content;
-    max-height: 46.4vh;
+    max-height: 54.4vh;
     margin-top: 22px;
     margin: 5px;
     padding-bottom: 20px;
+    max-width: 500px;
 }
 
 
 .tabla {
     max-width: 66.4vh;
-    min-width: max-content;
+    min-width: 500px;
     border-collapse: separate;
     border-spacing: 0px;
 
