@@ -35,9 +35,12 @@ function getFactura() {
     intItem.forEach(intItem => {
       console.log(intItem)
       const numerovalorTotal = intItem.valorTotal;
-      const numerofacturaTotal = intItem.facturaTotal;
+      let numerofacturaTotal = intItem.facturaTotal;
       acumulador = acumulador + parseInt(intItem.valorTotal)
-      facturado = facturado + parseInt(intItem.valorFactura)
+      let valorFactura = numerofacturaTotal.replaceAll('.', '');    
+      facturado = facturado + parseInt(valorFactura)
+    
+
       listHTML += `
         <tr>      
           <td align="center">${intItem.idFactura}</td>
