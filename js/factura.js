@@ -10,7 +10,6 @@ function getFactura() {
       .then(res => res.json())
       .then(json => {
         intRes = json;
-        // console.log(json);
         renderResult(intRes);
       })
   }

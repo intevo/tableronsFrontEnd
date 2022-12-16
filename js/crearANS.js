@@ -147,8 +147,6 @@ function saveData() {
                 alert('Ans Creado');
             }).catch(error => console.log(error))
     }
-    
-    // location.reload();
    
 function validaCheckboxnotaCredito() {
     const checkboxnotaCredito = document.getElementById('notaCredito');
