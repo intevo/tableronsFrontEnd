@@ -151,10 +151,10 @@ function saveData() {
             .then(res => res.json())
             .then(response => {
                 console.log(response)
+                alert('Ans creado')
+                location.reload();
             }).catch(error => console.log(error))
     }
-    // alert('Ans creado')
-    // location.reload();
    
 function validaCheckboxnotaCredito() {
     const checkboxnotaCredito = document.getElementById('notaCredito');
