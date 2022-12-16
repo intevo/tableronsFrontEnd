@@ -92,16 +92,22 @@ function saveData() {
         alert("Error, Porcentaje no valido");
         return;
     }
-    if (valorFactura.value.length <= 0) {
+    const prueba = document.getElementById('valorFactura');
+    if (prueba.value.length <= 0) {
         alert("Debe poner un valor en el campo de Precio valor Facturado");
         return;
     }
-    if (valorDescuento.value.length <= 0) {
+    const prueba2 = document.getElementById('valorDescuento');
+    if (prueba2.value.length <= 0) {
         alert("Debe poner un valor en el campo de Valor Descuento");
         return;
     }
     if (factura.value.length <= 0) {
         alert("Debe elegir un valor en el campo de Factura");
+        return;
+    }
+    if(observacionAns.value.length <= 0){
+        alert("Debe elegir un comentario en observaciones");
         return;
     }
 
@@ -144,18 +150,18 @@ function saveData() {
         })
             .then(res => res.json())
             .then(response => {
-                console.log(response)
+                console.log(response);
+                alert('Ans creado')
+                location.reload();
             }).catch(error => console.log(error))
     }
-    // alert('Ans creado')
-    // location.reload();
+    
    
 function validaCheckboxnotaCredito() {
     const checkboxnotaCredito = document.getElementById('notaCredito');
     if (checkboxnotaCredito.checked == true)
         alert('Esta a punto de generar una Nota Credito');
 }
-
 //------------------------------------------------------------------------------------//
 // DECIMALES PARA VALOR NOTA CREDITO
 formatMoney = (e) =>{

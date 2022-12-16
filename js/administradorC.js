@@ -332,12 +332,12 @@ const reset = () => {
 const deleteContrato = () => {
     $(document).on('click', '#btn-delete', function () {
 
-        if (confirm('¿Seguro de Eliminar')) {
+        if (confirm('¿Seguro de Eliminar?')) {
             let btnDelete = $(this)[0].parentElement.parentElement;
             let id = $(btnDelete).attr('contratoId');
             console.log(id);
             $.ajax({
-                url: 'http://localhost:8080/contrato/' + id,
+                url: 'http://localhost:8080/contrato/delete/' + id,
                 type: 'DELETE',
                 dataType: 'json',
             })
