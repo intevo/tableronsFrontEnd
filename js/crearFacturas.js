@@ -315,13 +315,13 @@ const reset = () => {
 const deletefactura = () => {
   $(document).on('click', '#btn-delete', function () {
 
-    if (confirm('¿Seguro de Eliminar')) {
+    if (confirm('¿Seguro de Eliminar? / Se borraran los Ans utilizado en esta factura')) {
       let btnDelete = $(this)[0].parentElement.parentElement;
       let id = $(btnDelete).attr('facturaId');
       console.log(id);
       $.ajax({
-        url: 'http://localhost:8080/factura/' + id,
-        type: 'DELETE',
+        url: 'http://localhost:8080/factura/delete/' + id,
+        type: 'GET',
         dataType: 'json',
         success: (res) => {
           $('#messages').html('Factura Eliminada').css('display', 'block');

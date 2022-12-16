@@ -31,12 +31,13 @@ function getFactura() {
           <th scope="col"><center>Valor Total</center></th>
         </tr>`;
     let acumulador = 0;
+    let facturado = 0;
     intItem.forEach(intItem => {
       console.log(intItem)
       const numerovalorTotal = intItem.valorTotal;
       const numerofacturaTotal = intItem.facturaTotal;
       acumulador = acumulador + parseInt(intItem.valorTotal)
-      
+      facturado = facturado + parseInt(intItem.valorFactura)
       listHTML += `
         <tr>      
           <td align="center">${intItem.idFactura}</td>
@@ -48,7 +49,9 @@ function getFactura() {
           <td align="center">${formato(numerovalorTotal)}</td>
         </tr>`;
     })
-    document.getElementById("valorFacturado").innerHTML = "FACTURADO: " + formato(acumulador);
+    document.getElementById("valorFacturado").innerHTML = "FACTURADO: " + formato(facturado);
+    intList.innerHTML = listHTML;
+    document.getElementById("valorAcumulado").innerHTML = "ACUMULADO: " + formato(acumulador);
     intList.innerHTML = listHTML;
   }
 }
