@@ -163,9 +163,9 @@
         </div>
 
         <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-1 border-bottom">
 
-          <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-toolbar mb-mb-md-">
             <div class="btn-group me-2">
               <!--<button type="button" class="btn btn-sm btn-outline-secondary">Descargar Gráfica <br> (PDF)</button>-->
             </div>
@@ -196,6 +196,9 @@
   </div>
   </div>
   <script>
+
+//------------------------------------------------------------------------------------//
+//
     const bodyDoc = document.body;
     bodyDoc.onload = getAns();
 
@@ -248,7 +251,8 @@
       }
     }
 
-    //Función impresión datos de contrato
+//------------------------------------------------------------------------------------//
+//FUNCION IMPRESION DATOS DE CONTRATO
 
     bodyDoc.onload = getContrato();
 
@@ -284,13 +288,13 @@
           listHTML += `           
          <tr>
            <td>
-              <li class"nav-link">Número contrato: ${intItem.numeroContrato}</li>
+              <li class"nav-link"><i><b>Número contrato:</b></i> ${intItem.numeroContrato}</li>
             </td>
             <td>
-              <li class="nav-item">Valor contrato: ${formato(intItem.valorContrato)}</li>
+              <li class="nav-item"><i><b>Valor contrato:</b></i> ${formato(intItem.valorContrato)}</li>
             </td>
           <td>
-              <li class="nav-item">Estado: ${stringProrroga}</li>
+              <li class="nav-item"><i><b>Estado: </b></i>${stringProrroga}</li>
           </td>
         </tr>
       `
@@ -298,11 +302,14 @@
         intList.innerHTML = listHTML;
       }
     }
+
     const formato = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
                 const rep = '$1.';
                 return number.toString().replace(exp, rep);
             }
+//------------------------------------------------------------------------------------//
+//VALIDACION DE CERRAR SESION 
 
     function validarCierre() {
       swal({
