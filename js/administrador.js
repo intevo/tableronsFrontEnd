@@ -2,11 +2,11 @@
 function saveData() {
 
     const valorContrato = document.getElementById('valorContrato');
-    const numeroContrato = document.getElementById("numeroContrato");
+    const idContrato = document.getElementById("idContrato");
     const fechaIncioContrato = document.getElementById("fechaIncioContrato");
     const fechaFinalizacionContrato = document.getElementById("fechaFinalizacionContrato");
     const prorroga = document.getElementById("prorroga");
-    if (numeroContrato.value.length <= 0) {
+    if (idContrato.value.length <= 0) {
         alert("Debe poner un valor en el campo número de contrato");
         return;
     }
@@ -20,7 +20,7 @@ function saveData() {
     const createInvoice = () => {
         
         const contrato = {
-            numeroContrato: numeroContrato.value,
+            idContrato: idContrato.value,
             fechaIncioContrato: fechaIncioContrato.value,
             fechaFinalizacionContrato: fechaFinalizacionContrato.value,
             valorContrato: valorContratoFin,
@@ -101,7 +101,6 @@ function getContrato() {
     const renderResult = (intItem) => {
         let listHTML = `
              <tr>
-              <th scope="col"><center>ID Contrato</center></th>
               <th scope="col"><center>Número de Contrato</center></th>
               <th scope="col"><center>fecha de Incio Contrato</center></th>
               <th scope="col"><center>fecha de Finalizacion Contrato</center></th>
@@ -125,7 +124,6 @@ function getContrato() {
             listHTML += `
             <tr contratoId = ${intItem.idContrato}>
               <td align="center">${intItem.idContrato}</td>
-              <td align="center">${intItem.numeroContrato}</td>
               <td align="center">${intItem.fechaIncioContrato}</td>
               <td align="center">${intItem.fechaFinalizacionContrato}</td>
               <td align="center">${formato(numerovalorContrato)}</td>
