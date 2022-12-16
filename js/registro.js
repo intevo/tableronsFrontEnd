@@ -40,39 +40,43 @@ function saveData() {
     else if (pass.value != pass1.value) {
         swal("ERROR", "Contraseña no Coinciden", "error");
         const form = document.getElementById("dataRegistro");
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-        })
-    }
-    else {
+        
+        return
+    } else {
+
         const API_URL = 'http://localhost:8080/registro';
-        const createInvoice = () => {
-            const formData = new FormData(document.querySelector('#dataRegistro'));
 
-            const registro = {
-                nombres: formData.get('nombres').trim(),
-                telefono: formData.get('telefono'),
-                email: formData.get('email').trim(),
-                proyecto: formData.get('proyecto').trim(),
-                cargo: formData.get('cargo').trim(),
-                pass: formData.get('pass').trim(),
-            }
+        const formData = new FormData(document.querySelector('#dataRegistro'));
 
-            fetch(API_URL, {
-                method: 'POST',
-                body: JSON.stringify(registro),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(res = res.json())
-                .then(response => {
-                    console.log(response)
-                })
+        const registro = {
+            nombres: formData.get('nombres').trim(),
+            telefono: formData.get('telefono'),
+            email: formData.get('email').trim(),
+            proyecto: formData.get('proyecto').trim(),
+            cargo: formData.get('cargo').trim(),
+            pass: formData.get('pass').trim(),
         }
-        alert("Registro Exitoso");
-        createInvoice();
+
+        fetch(API_URL, {
+            method: 'POST',
+            body: JSON.stringify(registro),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(response => {
+                swal("Registro Exitoso", "", "success").then((value) => {
+                    window.location.href = '../index.html';
+                  });
+                console.log(response)
+            })
+
     }
 }
+
+
+
+
 
 

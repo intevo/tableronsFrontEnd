@@ -108,7 +108,7 @@ function saveData() {
 //------------------------------------------------------------------------------------//
 //VARIABLE PARA TRANSFORMAR VALORES A DECIMALES
 
-    const createInvoice = () => {
+ 
         const formData = new FormData(document.querySelector('#ansForm'));
         const notaCredito = document.getElementById("notaCredito");
 
@@ -147,12 +147,9 @@ function saveData() {
                 console.log(response)
             }).catch(error => console.log(error))
     }
-    alert('ans creado')
+    alert('Ans creado')
     location.reload();
-    createInvoice();
-
-}
-
+   
 function validaCheckboxnotaCredito() {
     const checkboxnotaCredito = document.getElementById('notaCredito');
     if (checkboxnotaCredito.checked == true)
