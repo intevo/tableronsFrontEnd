@@ -194,19 +194,19 @@ function saveData() {
         }
         listHTML += `
         <tbody id="geeks">
-    <tr facturaId = ${intItem.idFactura}>
-            <td align="center">${intItem.idFactura}</td>
-            <td align="center">${intItem.fechaEntrega}</td>
-            <td align="center">${intItem.fechaRegistro}</td>
-            <td align="center">${intItem.facturaTotal}</td>
-            <td align="center">${intItem.descripcionServicios}</td>
-            <td align="center">${intItem.contrato}</td>
-            <td align="center">${intItem.observacionFactura}</td>
-            <td align="center">${formato(numerovalorTotal)}</td>
-            <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
-            <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
-    </tr>
-    `
+          <tr facturaId = ${intItem.idFactura}>
+                  <td align="center">${intItem.idFactura}</td>
+                  <td align="center">${intItem.fechaEntrega}</td>
+                  <td align="center">${intItem.fechaRegistro}</td>
+                  <td align="center">${intItem.facturaTotal}</td>
+                  <td align="center">${intItem.descripcionServicios}</td>
+                  <td align="center">${intItem.contrato}</td>
+                  <td align="center">${intItem.observacionFactura}</td>
+                  <td align="center">${formato(numerovalorTotal)}</td>
+                  <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
+                  <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
+          </tr>
+        </tbody>`
       })
       intList.innerHTML = listHTML;
     }
@@ -373,3 +373,4 @@ function saveData() {
         });
      });
   });
+   //------------------------------------------------------------------------------------//

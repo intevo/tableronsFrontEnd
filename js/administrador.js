@@ -121,8 +121,8 @@ function getContrato() {
                     <span class="badge bg-success">Prorroga</span>
                     `;
             else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
-            listHTML += `
-            <tbody id="geeks">
+            listHTML += 
+            `<tbody id="geeks">
                 <tr contratoId = ${intItem.idContrato}>
                     <td align="center">${intItem.idContrato}</td>
                     <td align="center">${intItem.fechaIncioContrato}</td>
@@ -132,8 +132,7 @@ function getContrato() {
                     <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
                     <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
                 </tr>
-            </tbody>
-              `
+            </tbody>`
         })
         intList.innerHTML = listHTML;
     }
@@ -334,7 +333,7 @@ const reset = () => {
 const deleteContrato = () => {
     $(document).on('click', '#btn-delete', function () {
 
-        if (confirm('¿Seguro de Eliminar?')) {
+        if (confirm('¿Seguro de Eliminar / Se Eliminaran las anexas?')) {
             let btnDelete = $(this)[0].parentElement.parentElement;
             let id = $(btnDelete).attr('contratoId');
             console.log(id);
