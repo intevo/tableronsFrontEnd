@@ -57,20 +57,22 @@ function getAns() {
             // }
                     
             listHTML +=
-                `<tr ansId = ${ansItem.idAns}>
-                <td align="center">${ansItem.idAns}</td>
-                <td align="center">${ansItem.descripcion}</td>
-                <td align="center">${formato(numeroPorcentaje)}</td>
-                <td align="center">${formato(numeroValorfactura)}</td>
-                <td align="center">${formato(numerovalorDescuento)}</td>
-                <td align="center">${formato(numerovalorTotal)}</td>
-                <td align="center">${ansItem.factura}</td>
-                <td align="center">${ansItem.observacionAns}</td>
-                <td align="center">${stringestadoNotacredito}</td>
-                <td align="center">${formato(numerovalorNotacredito)}</td>
-                <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
-                <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
-            </tr>`
+                `<tbody id="geeks">
+                    <tr ansId = ${ansItem.idAns}>
+                        <td align="center">${ansItem.idAns}</td>
+                        <td align="center">${ansItem.descripcion}</td>
+                        <td align="center">${formato(numeroPorcentaje)}</td>
+                        <td align="center">${formato(numeroValorfactura)}</td>
+                        <td align="center">${formato(numerovalorDescuento)}</td>
+                        <td align="center">${formato(numerovalorTotal)}</td>
+                        <td align="center">${ansItem.factura}</td>
+                        <td align="center">${ansItem.observacionAns}</td>
+                        <td align="center">${stringestadoNotacredito}</td>
+                        <td align="center">${formato(numerovalorNotacredito)}</td>
+                        <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
+                        <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
+                    </tr>
+                </tboby>`
         })
         ansList.innerHTML = listHTML;
     }
@@ -492,4 +494,15 @@ function comaPorcentaje(e) {
         return false;
     }
 }
+//------------------------------------------------------------------------------------//
+// RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.    
+  $(document).ready(function() {
+    $("#gfgf").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#geeks tr").filter(function() {
+          $(this).toggle($(this).text()
+          .toLowerCase().indexOf(value) > -1)
+        });
+     });
+  });
 //------------------------------------------------------------------------------------//
