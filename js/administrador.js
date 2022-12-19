@@ -369,5 +369,4 @@ const deleteContrato = () => {
 rellenarContrato();
 editContrato();
 deleteContrato();
-
 //------------------------------------------------------------------------------------//
