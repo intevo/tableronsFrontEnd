@@ -26,6 +26,7 @@ function getFactura() {
           <th scope="col"><center>Fecha Registro</center></th>
           <th scope="col"><center>Factura Total</center></th>
           <th scope="col"><center>Descripcion de Servicios</center></th>
+          <th scope="col"><center>Contrato</center></th>
           <th scope="col"><center>Observaciones</center></th>
           <th scope="col"><center>Valor Total</center></th>
         </tr>`;
@@ -47,6 +48,7 @@ function getFactura() {
           <td align="center">${intItem.fechaRegistro}</td>
           <td align="center">${formato(numerofacturaTotal)}</td>
           <td align="center">${intItem.descripcionServicios}</td>
+          <td align="center">${intItem.contrato}</td>
           <td align="center">${intItem.observacionFactura}</td>
           <td align="center">${formato(numerovalorTotal)}</td>
         </tr>`;
