@@ -340,7 +340,7 @@ const deleteContrato = () => {
             console.log(id);
             $.ajax({
                 url: 'http://localhost:8080/contrato/delete/' + id,
-                type: 'DELETE',
+                type: 'GET',
                 dataType: 'json',
             })
             alert("Contrato Eliminado");
