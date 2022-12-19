@@ -193,6 +193,7 @@ function saveData() {
           return number.toString().replace(exp, rep);
         }
         listHTML += `
+        <tbody id="geeks">
     <tr facturaId = ${intItem.idFactura}>
             <td align="center">${intItem.idFactura}</td>
             <td align="center">${intItem.fechaEntrega}</td>
@@ -360,4 +361,15 @@ function saveData() {
               select.appendChild(option);
           });
       });
-    //------------------------------------------------------------------------------------//
+  //------------------------------------------------------------------------------------//
+  // RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.    
+  
+  $(document).ready(function() {
+    $("#gfgs").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#geeks tr").filter(function() {
+          $(this).toggle($(this).text()
+          .toLowerCase().indexOf(value) > -1)
+        });
+     });
+  });

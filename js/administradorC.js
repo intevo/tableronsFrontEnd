@@ -100,13 +100,13 @@ function getContrato() {
 
     const renderResult = (intItem) => {
         let listHTML = `
-             <tr>
-              <th scope="col"><center>Número de Contrato</center></th>
-              <th scope="col"><center>fecha de Incio Contrato</center></th>
-              <th scope="col"><center>fecha de Finalizacion Contrato</center></th>
-              <th scope="col"><center>Valor Contrato</center></th>
-              <th scope="col"><center>Estado</center></th>
-              <th scope="col" colspan="2"><center>Opciones</center></th>
+            <tr>
+                <th scope="col"><center>Número de Contrato</center></th>
+                <th scope="col"><center>fecha de Incio Contrato</center></th>
+                <th scope="col"><center>fecha de Finalizacion Contrato</center></th>
+                <th scope="col"><center>Valor Contrato</center></th>
+                <th scope="col"><center>Estado</center></th>
+                <th scope="col" colspan="2"><center>Opciones</center></th>
             </tr>
             `
         intItem.forEach(intItem => {
@@ -122,17 +122,18 @@ function getContrato() {
                     `;
             else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
             listHTML += `
-            <tr contratoId = ${intItem.idContrato}>
-              <td align="center">${intItem.idContrato}</td>
-              <td align="center">${intItem.fechaIncioContrato}</td>
-              <td align="center">${intItem.fechaFinalizacionContrato}</td>
-              <td align="center">${formato(numerovalorContrato)}</td>
-              <td align="center">${stringProrroga}</td>
-              <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
-              <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
-            </tr>
+            <tbody id="geeks">
+                <tr contratoId = ${intItem.idContrato}>
+                    <td align="center">${intItem.idContrato}</td>
+                    <td align="center">${intItem.fechaIncioContrato}</td>
+                    <td align="center">${intItem.fechaFinalizacionContrato}</td>
+                    <td align="center">${formato(numerovalorContrato)}</td>
+                    <td align="center">${stringProrroga}</td>
+                    <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
+                    <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
+                </tr>
+            </tbody>
               `
-
         })
         intList.innerHTML = listHTML;
     }
@@ -235,13 +236,14 @@ const rellenarContrato = () => {
             console.log(id);
             $('#crear').hide();
             $('#editar').show();
+            $('IdContrato').prop('disabled', true);
 
             $.ajax({
                 url: 'http://localhost:8080/contrato/' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: (res) => {
-                    $('#numeroContrato').val(res.numeroContrato);
+                    $('#IdContrato').val(res.IdContrato);
                     $('#fechaIncioContrato').val(res.fechaIncioContrato);
                     $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
                     $('#valorContrato').val(res.valorContrato);
@@ -273,7 +275,7 @@ const editContrato = () => {
         let valorNotacreditoFinal = parseInt(valorContrato);
         const ans = {
             idContrato: id,
-            numeroContrato: $('#numeroContrato').val(),
+            idContrato: $('#idContrato').val(),
             fechaIncioContrato: $('#fechaIncioContrato').val(),
             fechaFinalizacionContrato: $('#fechaFinalizacionContrato').val(),
             valorContrato: valorNotacreditoFinal,
@@ -370,4 +372,16 @@ rellenarContrato();
 editContrato();
 deleteContrato();
 
+//------------------------------------------------------------------------------------//
+// RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.
+
+$(document).ready(function() {
+    $("#gfg").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#geeks tr").filter(function() {
+            $(this).toggle($(this).text()
+            .toLowerCase().indexOf(value) > -1)
+        });
+     });
+});
 //------------------------------------------------------------------------------------//
