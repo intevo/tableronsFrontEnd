@@ -421,7 +421,6 @@ function getValor() {
 
 //------------------------------------------------------------------------------------//
 // FETCH PARA HACER DATALIST DE DESCRIPCIÓN
-
 fetch('http://localhost:8080/categoria')
     .then(response => response.json())
     .then(data => {
@@ -434,7 +433,6 @@ fetch('http://localhost:8080/categoria')
             select.appendChild(option);
         });
     });
-
 //------------------------------------------------------------------------------------//
 // FETCH PARA HACER DATALIST DE IDFACTURA
 
@@ -456,7 +454,7 @@ function solonumeros(e) {
 
     key = e.keyCode || e.which;
     teclado = String.fromCharCode(key);
-    numeros = "0123456789";
+    numeros = "0123456789.";
     especiales = "8-37-38-46-13";
     teclado_especial = false;
 
