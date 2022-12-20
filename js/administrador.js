@@ -43,7 +43,7 @@ function saveData() {
             }).catch(err => console.error(err))
 
     }
-    alert("Registro Creado Exitosamente")
+    alert("Registro Creado Exitosamente");
     location.reload();
     createInvoice();
 }
