@@ -14,38 +14,48 @@ function saveData() {
         alert("Debe poner un valor en el campo valor de contrato");
         return;
     }
+    let busqueda = parseInt(document.getElementById('idContrato').value);
+    let existe = false;
+    intRes.forEach(element => {
+        if (element.idContrato == busqueda) existe = true, console.log(element.idContrato), console.log(busqueda)
+    });
+
+    if (existe) {
+        window.alert("ERROR: Id de Contrato ya esta registrado");
+    } else {
         let valorContrato2 = valorContrato.value.replaceAll('.', '');
         let valorContratoFin = parseInt(valorContrato2)
-    const API_URL = 'http://localhost:8080/contrato/insert';
-    const createInvoice = () => {
-        
-        const contrato = {
-            idContrato: idContrato.value,
-            fechaIncioContrato: fechaIncioContrato.value,
-            fechaFinalizacionContrato: fechaFinalizacionContrato.value,
-            valorContrato: valorContratoFin,
-            prorroga: prorroga.checked == true ? 1 : 0
-        }
+        const API_URL = 'http://localhost:8080/contrato/insert';
+        const createInvoice = () => {
 
-        console.log(contrato);
-
-        fetch(API_URL, {
-            method: 'POST',
-            body: JSON.stringify(contrato),
-            headers: {
-                'Content-Type': 'application/json'
+            const contrato = {
+                idContrato: idContrato.value,
+                fechaIncioContrato: fechaIncioContrato.value,
+                fechaFinalizacionContrato: fechaFinalizacionContrato.value,
+                valorContrato: valorContratoFin,
+                prorroga: prorroga.checked == true ? 1 : 0
             }
 
-        })
-            .then(res = res.json())
-            .then(response => {
-                console.log(response)
-            }).catch(err => console.error(err))
+            console.log(contrato);
 
+            fetch(API_URL, {
+                method: 'POST',
+                body: JSON.stringify(contrato),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+
+            })
+                .then(res = res.json())
+                .then(response => {
+                    console.log(response)
+                }).catch(err => console.error(err))
+
+        }
+        alert("Registro Creado Exitosamente")
+        location.reload();
+        createInvoice();
     }
-    alert("Registro Creado Exitosamente");
-    location.reload();
-    createInvoice();
 }
 //------------------------------------------------------------------------------------//
 //LISTAR
@@ -121,8 +131,8 @@ function getContrato() {
                     <span class="badge bg-success">Prorroga</span>
                     `;
             else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
-            listHTML += 
-            `<tbody id="geeks">
+            listHTML +=
+                `<tbody id="geeks">
                 <tr contratoId = ${intItem.idContrato}>
                     <td align="center">${intItem.idContrato}</td>
                     <td align="center">${intItem.fechaIncioContrato}</td>
@@ -185,7 +195,7 @@ function solonumeros(e) {
 
 //------------------------------------------------------------------------------------//
 // DECIMALES PARA VALOR NOTA CREDITO
-formatMoney = (e) =>{
+formatMoney = (e) => {
     var entrada = e.target.value.split('.').join('');
     entrada = entrada.split('').reverse();
     var salida = [];
@@ -206,7 +216,7 @@ formatMoney = (e) =>{
 }
 //------------------------------------------------------------------------------------//
 //ELIMINAR PUNTOS PARA RELLENAR
-getFormatMoney = (target) =>{
+getFormatMoney = (target) => {
     var entrada = target.value.split('.').join('');
     entrada = entrada.split('').reverse();
     var salida = [];
@@ -260,7 +270,7 @@ const rellenarContrato = () => {
 const editContrato = () => {
 
     $('#editar').on('click', function ($event) {
-        
+
         let id = $('#idContrato').val();
         console.log("Pasando por aqui " + id)
         $('#crear').css('display', 'none');
@@ -333,7 +343,7 @@ const reset = () => {
 const deleteContrato = () => {
     $(document).on('click', '#btn-delete', function () {
 
-        if (confirm('¿Seguro de Eliminar / Se Eliminaran las Facturas anexas?')) {
+        if (confirm('¿Seguro de Eliminar / Se Eliminaran las anexas?')) {
             let btnDelete = $(this)[0].parentElement.parentElement;
             let id = $(btnDelete).attr('contratoId');
             console.log(id);
@@ -371,15 +381,4 @@ rellenarContrato();
 editContrato();
 deleteContrato();
 
-//------------------------------------------------------------------------------------//
-// RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.    
-$(document).ready(function() {
-    $("#gfg").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#geeks tr").filter(function() {
-          $(this).toggle($(this).text()
-          .toLowerCase().indexOf(value) > -1)
-        });
-     });
-  });
 //------------------------------------------------------------------------------------//
