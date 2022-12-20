@@ -333,7 +333,7 @@ const reset = () => {
 const deleteContrato = () => {
     $(document).on('click', '#btn-delete', function () {
 
-        if (confirm('¿Seguro de Eliminar / Se Eliminaran las anexas?')) {
+        if (confirm('¿Seguro de Eliminar / Se Eliminaran las Facturas anexas?')) {
             let btnDelete = $(this)[0].parentElement.parentElement;
             let id = $(btnDelete).attr('contratoId');
             console.log(id);
@@ -372,3 +372,14 @@ editContrato();
 deleteContrato();
 
 //------------------------------------------------------------------------------------//
+// RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.    
+$(document).ready(function() {
+    $("#gfg").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#geeks tr").filter(function() {
+          $(this).toggle($(this).text()
+          .toLowerCase().indexOf(value) > -1)
+        });
+     });
+  });
+   //------------------------------------------------------------------------------------//
