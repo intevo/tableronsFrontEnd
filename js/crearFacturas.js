@@ -363,7 +363,6 @@ fetch('http://localhost:8080/contrato')
     });
 //------------------------------------------------------------------------------------//
 // RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.    
-
 $(document).ready(function() {
   $("#gfgs").on("keyup", function() {
       var value = $(this).val().toLowerCase();
