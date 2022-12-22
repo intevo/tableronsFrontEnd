@@ -157,7 +157,7 @@
 
         <div class="container">
           <header class="d-flex justify-content-center py-4">
-            <table id="datosContrato" width="100%">
+            <table id="datosContrato" class="table table-success table-striped" width="100%">
             </table>
           </header>
         </div>
@@ -276,7 +276,11 @@
 
       const renderResult = (intItem) => {
         let listHTML = `
-                
+        <thead>
+                <tr>
+                  <th>Número Contrato</th><th>Valor Contrato</th><th>Estado</th>
+                </tr>
+              </thead>
     `;
         intItem.forEach(intItem => {
           let stringProrroga = '';
@@ -286,17 +290,13 @@
           else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
 
           listHTML += `           
-         <tr>
-           <td>
-              <li class"nav-link"><i><b>Número contrato:</b></i> ${intItem.idContrato}</li>
-            </td>
-            <td>
-              <li class="nav-item"><i><b>Valor contrato:</b></i> ${formato(intItem.valorContrato)}</li>
-            </td>
-          <td>
-              <li class="nav-item"><i><b>Estado: </b></i>${stringProrroga}</li>
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>${intItem.idContrato}</td>
+            <td> ${formato(intItem.valorContrato)}</td>
+            <td>${stringProrroga}</td>
+          </tr>
+        <tbody>
       `
         })
         intList.innerHTML = listHTML;

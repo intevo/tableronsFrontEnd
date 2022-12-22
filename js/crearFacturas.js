@@ -242,6 +242,7 @@ const rellenarfactura = () => {
 
       $('#crear').hide();
       $('#editar').show();
+      document.getElementById('idFactura').disabled=true;
 
       $.ajax({
         url: 'http://localhost:8080/factura/' + id,
@@ -300,6 +301,7 @@ const editFactura = () => {
         alert("Factura Editada");
         $('#editar').css('display', 'none');
         $('#crear').css('display', 'block');
+        document.getElementById('idFactura').disabled=false;
 
         reset();
         getFactura();
