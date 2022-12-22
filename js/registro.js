@@ -73,6 +73,7 @@ function saveData() {
             })
 
     }
+    twoLowercase(conv);
 }
 
 
