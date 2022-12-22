@@ -245,7 +245,7 @@ const rellenarContrato = () => {
             console.log(id);
             $('#crear').hide();
             $('#editar').show();
-            $('IdContrato').prop('disabled', true);
+            document.getElementById('idContrato').disabled=true;
 
             $.ajax({
                 url: 'http://localhost:8080/contrato/' + id,
@@ -302,7 +302,8 @@ const editContrato = () => {
                 alert("Contrato Editado");
                 $('#editar').css('display', 'none');
                 $('#crear').css('display', 'block');
-
+                document.getElementById('idContrato').disabled=false;
+                
                 reset();
                 getContrato();
                 var fecha = new Date();
