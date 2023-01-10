@@ -154,10 +154,10 @@
       </nav>
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
-        <div class="container">
+        
+        <div class="scrollTable  container">
           <header class="d-flex justify-content-center py-4">
-            <table id="datosContrato" class="table table-success table-striped" width="100%">
+            <table id="datosContrato" class="table table-striped table-striped" class="scrollTable" width="100%">
             </table>
           </header>
         </div>
@@ -185,7 +185,7 @@
             </td>
             <td width="30%">
               <!--<div id="chartContainer" class="grafico"></div>-->
-              <iframe src="http://localhost/tableronsFrontEnd/graph.html" style="width: 500px; height: 380px;"></iframe>
+              <iframe src="http://localhost/tableronsFrontEnd/graph.html" style="width: 490px; height: 380px;"></iframe>
             </td>
           </tr>
         </table>
@@ -277,10 +277,12 @@
       const renderResult = (intItem) => {
         let listHTML = `
         <thead>
-                <tr>
-                  <th>Número Contrato</th><th>Valor Contrato</th><th>Estado</th>
-                </tr>
-              </thead>
+              <tr> 
+                <th  style="background-color: rgb(105,50,183) !important; color:white">Número Contrato</th> 
+                <th  style="background-color: rgb(105,50,183) !important; color:white">Valor Contrato</th>
+                <th  style="background-color: rgb(105,50,183) !important; color:white">Estado</th>
+              </tr>
+        </thead>
     `;
         intItem.forEach(intItem => {
           let stringProrroga = '';
@@ -290,7 +292,7 @@
           else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
 
           listHTML += `           
-        <tbody>
+        <tbody >
           <tr>
             <td>${intItem.idContrato}</td>
             <td> ${formato(intItem.valorContrato)}</td>

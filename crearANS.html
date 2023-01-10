@@ -12,7 +12,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
   <meta http-equiv="Pragma" content="no-cache">
 
-  <title>Crear Ans</title>
+  <title >Crear Ans</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/checkout/">
@@ -92,7 +92,7 @@
 
 
   <div class="container-fluid">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu"style="z-index: 1 !important;" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -140,9 +140,9 @@
         <div class="mx-auto col-lg-8">
           <!-- Contenedor con margen para evitar sobrepuesta de elementos de sidebar con formulario -->
 
-          <div
+          <div 
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Crear ANS</h1>
+            <h1 class="h2" style="color:rgb(105,50,183)">Crear ANS</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group me-2">
                 <!--<button type="button" class="btn btn-sm btn-outline-secondary">Compartir</button>-->
@@ -231,17 +231,35 @@
           </form>
 
           <hr class="my-4">
-          <div class="input-group">
-            <div class="form-outline">
-              <input id="gfgf" type="text" class="form-control" placeholder="Item">
-            </div>
-            <h4>&nbsp;Buscar por numero de contrato&nbsp;<span data-feather="search"></span></h4>
-          </div>
-          <hr class="my-4">
-          <h5 style="width: 100%; text-align: center;">Resultados</h5>
-          <br>
-          <table id="ansList" class="table table-striped table-sm">
-          </table>
+         <!--Start modal table-->
+          <link rel="stylesheet" href="css/modal.css">
+           <!-- Trigger/Open The Modal -->
+            <button  style="background-color:rgb(105,50,183)" class="btn btn-secondary" id="myBtn">Mirar Datos</button>
+              <!-- The Modal -->
+                  <div id="myModal"  class="modal">
+                  <!-- Modal content --> 
+                    <div class="modal-content">
+                     <div class="busqueda" class="my-4">
+                      <div class="input-group">
+                        <div class="form-outline">
+                          <input id="gfgf" type="text" class="form-control" placeholder="">
+                      </div>
+                        <div><h5>&nbsp;Buscar por numero de contrato&nbsp;<span data-feather="search"></span></h5>
+                      </div>
+                  </div>
+                </div>
+                
+                    
+                   <div id="escapar">   <span  class="close">&times;</span> </div>
+                      <table id="ansList" class="table table-striped table-sm fonCol">
+                      </table>
+                    </div>
+                </div>
+                
+                <script src="js/modal.js"></script>
+        <!--End model table-->
+        
+          
           <hr class="my-4">
           <h5 style="width: 100%; text-align: center;">Total Factura Mes</h5>
           <br>
@@ -260,9 +278,9 @@
     <footer class="my-5 pt-5 text-muted text-center text-small">
       <p class="mb-1">&copy; 2022 Intevo S.A.S</p>
       <ul class="list-inline">
-        <li class="list-inline-item"><a href="#">Privacy</a></li>
-        <li class="list-inline-item"><a href="#">Terms</a></li>
-        <li class="list-inline-item"><a href="#">Support</a></li>
+        <li class="list-inline-item"><a href="#" style="text-decoration: none; color:rgb(105,50,183);">Privacy</a></li>
+        <li class="list-inline-item"><a href="#" style="text-decoration: none; color:rgb(105,50,183);">Terms</a></li>
+        <li class="list-inline-item"><a href="#" style="text-decoration: none; color:rgb(105,50,183);"> Support</a></li>
       </ul>
     </footer>
   </div>

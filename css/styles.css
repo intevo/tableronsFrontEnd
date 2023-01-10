@@ -20,6 +20,16 @@
     max-width: 500px;
 }
 
+.scrollTable {
+    overflow-x: scroll;
+    height: fit-content;
+    max-height: 30.4vh;
+    margin-top: 22px;
+    margin: 5px;
+    padding-bottom: 20px;
+    max-width: 100px;
+}
+
 
 .tabla {
     max-width: 66.4vh;

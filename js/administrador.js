@@ -110,13 +110,13 @@ function getContrato() {
 
     const renderResult = (intItem) => {
         let listHTML = `
-            <tr>
-                <th scope="col"><center>Número de Contrato</center></th>
-                <th scope="col"><center>fecha de Incio Contrato</center></th>
-                <th scope="col"><center>fecha de Finalizacion Contrato</center></th>
-                <th scope="col"><center>Valor Contrato</center></th>
-                <th scope="col"><center>Estado</center></th>
-                <th scope="col" colspan="2"><center>Opciones</center></th>
+            <tr style="background-color: rgb(105,50,183) !important;">
+                <th style="Color: white;" scope="col"><center>Número de Contrato</center></th>
+                <th style="Color: white;" scope="col"><center>fecha de Incio Contrato</center></th>
+                <th style="Color: white;" scope="col"><center>fecha de Finalizacion Contrato</center></th>
+                <th style="Color: white;" scope="col"><center>Valor Contrato</center></th>
+                <th style="Color: white;" scope="col"><center>Estado</center></th>
+                <th style="Color: white;" scope="col" colspan="2"><center>Opciones</center></th>
             </tr>
             `
         intItem.forEach(intItem => {
@@ -172,7 +172,7 @@ if (mes < 10)
 document.getElementById('fechaFinalizacionContrato').value = ano + "-" + mes + "-" + dia;
 
 //------------------------------------------------------------------------------------//
-// FUNCIÓN INACTIVACIÓN DEL TECALDO
+// FUNCIÓN INACTIVACIÓN DEL TECLDO
 function solonumeros(e) {
 
     key = e.keyCode || e.which;
@@ -383,9 +383,9 @@ editContrato();
 deleteContrato();
 
 //------------------------------------------------------------------------------------//
-// RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.
+// RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.    
 $(document).ready(function() {
-    $("#gfg").on("keyup", function() {
+    $("#gfgf").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#geeks tr").filter(function() {
           $(this).toggle($(this).text()

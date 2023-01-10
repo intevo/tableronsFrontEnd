@@ -172,16 +172,16 @@ function getFactura() {
 
   const renderResult = (intItem) => {
     let listHTML = `
-         <tr>
-          <th scope="col"><center>ID Factura</center></th>
-          <th scope="col"><center>Fecha Entrega</center></th>
-          <th scope="col"><center>Fecha Registro</center></th>
-          <th scope="col"><center>Factura Total</center></th>
-          <th scope="col"><center>Descripcion de Servicios</center></th>
-          <th scope="col"><center>Contrato</center></th>
-          <th scope="col"><center>Observaciones</center></th>
-          <th scope="col"><center>Valor Total</center></th>
-          <th scope="col" colspan="2"><center>Opciones</center></th>
+         <tr style="background-color: rgb(105,50,183) !important;">
+          <th style="Color: white;" scope="col"><center>ID Factura</center></th>
+          <th style="Color: white;" scope="col"><center>Fecha Entrega</center></th>
+          <th style="Color: white;" scope="col"><center>Fecha Registro</center></th>
+          <th style="Color: white;" scope="col"><center>Factura Total</center></th>
+          <th style="Color: white;" scope="col"><center>Descripcion de Servicios</center></th>
+          <th style="Color: white;" scope="col"><center>Contrato</center></th>
+          <th style="Color: white;" scope="col"><center>Observaciones</center></th>
+          <th style="Color: white;" scope="col"><center>Valor Total</center></th>
+          <th style="Color: white;" scope="col" colspan="2"><center>Opciones</center></th>
         </tr>
 `;
     intItem.forEach(intItem => {

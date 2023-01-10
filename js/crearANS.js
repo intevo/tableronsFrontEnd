@@ -18,18 +18,18 @@ function getAns() {
     const ansList = document.querySelector('#ansList');
     const renderResult = (ansItems) => {
         let listHTML = `
-              <tr>
-                <th align="center">ID ANS</center></th>
-                <th scope="col"><center>ANS</center></center></th>
-                <th scope="col"><center>Porcentaje</center></th>
-                <th scope="col"><center>Valor Factura</center></th>
-                <th scope="col"><center>Valor Descuento</center></th>
-                <th scope="col"><center>Valor Total</center></th>
-                <th scope="col"><center>Factura</center></th>
-                <th scope="col"><center>Observaciones</center></th>
-                <th scope="col"><center>Nota Credito</center></th>
-                <th scope="col"><center>Valor Nota Credito</center></th>
-                <th scope="col" colspan="2"><center>Opciones</center></th>
+              <tr style="background-color: rgb(105,50,183) !important;">
+                <th align="center" style="Color: white;"">ID ANS</center></th>
+                <th style="Color: white;" scope="col"><center>ANS</center></center></th>
+                <th style="Color: white;" scope="col"><center>Porcentaje</center></th>
+                <th style="Color: white;" scope="col"><center>Valor Factura</center></th>
+                <th style="Color: white;" scope="col"><center>Valor Descuento</center></th>
+                <th style="Color: white;" scope="col"><center>Valor Total</center></th>
+                <th style="Color: white;" scope="col"><center>Factura</center></th>
+                <th style="Color: white;" scope="col"><center>Observaciones</center></th>
+                <th style="Color: white;" scope="col"><center>Nota Credito</center></th>
+                <th style="Color: white;" scope="col"><center>Valor Nota Credito</center></th>
+                <th style="Color: white;" scope="col" colspan="2"><center>Opciones</center></th>
               </tr>
               
         `;
@@ -75,6 +75,7 @@ function getAns() {
                 </tboby>`
         })
         ansList.innerHTML = listHTML;
+        window.close(por)
     }
 }
 
