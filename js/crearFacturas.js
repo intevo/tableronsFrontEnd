@@ -6,16 +6,21 @@ function saveData() {
     alert("Debe poner un valor en el campo de factura");
     return;
   } if (facturaTotal.value.length <= 0) {
-    alert("Debe poner un valor en el campo de Factura Total");
+    alert("Debe poner un valor en el campo de Valor Facturado");
+    return;
+  } if (ValorDescuento.value.length <= 0) {
+    alert("Debe poner un valor en el campo de Valor Descuento");
+    return;
+   }if (valorTotalFacturado.value.length <= 0) {
+    alert("Debe poner un valor en el campo de valor Total Facturado (Mensual)");
     return;
   } if (observacionFactura.value.length <= 0) {
     alert("Debe poner un valor en el campo de Observaciones");
     return;
-  }if (contrato.value.length <= 0) {
+  } if (contrato.value.length <= 0) {
       alert("Debe crear un contrato para poder generar una Factura");
       return;
-    }
-  else {
+  }
     let intRes = null;
 
     const getAllInvoice = () => {
@@ -46,15 +51,27 @@ function saveData() {
       } else {
         const createInvoice = () => {
           const formData = new FormData(document.querySelector('#invoiceData'));
+
+          const primero = document.getElementById('facturaTotal');
+          let valorFactura = primero.value.replaceAll('.', '');
+          let facturaTotalFinal = parseInt(valorFactura);
+          const segundo = document.getElementById('ValorDescuento');
+          let valorDescuento = segundo.value.replaceAll('.', '');
+          let valorDescuentoFinal = parseInt(valorDescuento);
+          const tercero = document.getElementById('valorTotalFacturado');
+          let valorNotacredito = tercero.value.replaceAll('.', '');
+          let valorTotalFacturadoFinal = parseInt(valorNotacredito);
+
           const factura = {
             idFactura: formData.get('idFactura').trim(),
             fechaRegistro: formData.get('fechaRegistro'),
             fechaEntrega: formData.get('fechaEntrega'),
-            facturaTotal: formData.get('facturaTotal'),
+            facturaTotal: facturaTotalFinal,
+            valorDescuento: valorDescuentoFinal,
+            valorTotalFacturado: valorTotalFacturadoFinal,
             descripcionServicios: document.getElementById('descripcionServicios').value,
             observacionFactura: formData.get('observacionFactura').trim(),
             contrato: formData.get('contrato'),
-
             valorToral: 0,
           }
 
@@ -77,7 +94,6 @@ function saveData() {
     }
     getAllInvoice();
   }
-}
 
 //------------------------------------------------------------------------------------//
 // LISTA DE DESCRIPCION DE SERVICIOS
@@ -117,10 +133,29 @@ function solonumeros(e) {
     return false;
   }
 }
+//------------------------------------------------------------------------------------//
+// DECIMALES PARA VALOR NOTA CREDITO
+formatMoney = (e) =>{
+  var entrada = e.target.value.split('.').join('');
+  entrada = entrada.split('').reverse();
+  var salida = [];
+  var aux = '';
+  var paginador = Math.ceil(entrada.length / 3);
+  for (let i = 0; i < paginador; i++) {
+      for (let j = 0; j < 3; j++) {
+          "123 4"
+          if (entrada[j + (i * 3)] != undefined) {
+              aux += entrada[j + (i * 3)];
+          }
+      }
+      salida.push(aux);
+      aux = '';
 
+      e.target.value = salida.join('.').split("").reverse().join('');
+  }
+}
 //------------------------------------------------------------------------------------//
 //SEPARADOR DE MILES 
-
 var separador = document.getElementById('facturaTotal');
 
 separador.addEventListener('keyup', (e) => {
@@ -146,7 +181,6 @@ separador.addEventListener('keyup', (e) => {
   }
 
 }, false);
-
 //------------------------------------------------------------------------------------//
 //IMPRIMIR DATOS
 const bodyDoc = document.body;

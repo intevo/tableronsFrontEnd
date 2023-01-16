@@ -157,10 +157,9 @@
           </div>
 
           <div class="col-6">
-            <label for="Factura total" class="form-label">Factura total</label>
+            <label for="Factura total" class="form-label">Valor Facturado</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" name="facturaTotal" id="facturaTotal"
-                onkeypress="return solonumeros(event)" required>
+              <input type="text" class="form-control" name="facturaTotal" id="facturaTotal" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
               <div class="invalid-feedback">
                 Ingrese el valor total de la factura.
               </div>
@@ -170,8 +169,7 @@
           <div class="row">
             <div class="col-6">
               <label for="valorFactura" class="form-label">Precio valor Facturado (Mensual)</label>
-              <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeyup="formatMoney(event)"
-                onkeypress="return solonumeros(event)" required>
+              <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
               <div class="invalid-feedback">
                 Ingrese el valor Facturado.
               </div>
@@ -179,11 +177,10 @@
 
             <div class="col-6">
               <label for="pretotal" class="form-label">Valor Descuento</label>
-              <input type="text" class="form-control" name="valorDescuento" id="valorDescuento"
-                onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
+              <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
               <input type="text" class="form-control" name="idAns" id="idAns" style="display: none;">
               <div class="invalid-feedback">
-                Ingrese el Valor Descuento
+                Ingrese la fecha de entrega.
               </div>
             </div>
           </div>
@@ -225,7 +222,7 @@
             </div>
           </div>
           <div class="col">
-            <label for="Nombre" class="form-label">Contrato</label>
+            <label for="Nombre" class="form-label">Centro de Costos</label>
             <select id="contrato" name="contrato" class="form-control" required></select>
             <div class="invalid-feedback">
               Ingrese un Contrato.
@@ -295,11 +292,11 @@
 
       </main>
 
-      </table>
-    </div>
-
-    <script src="js/modal.js"></script>
-    <!--End model table-->
+  </table>
+         </div>
+         
+         <script src="js/modal.js"></script>
+ <!--End model table-->
 
 
 
