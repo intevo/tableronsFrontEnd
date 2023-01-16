@@ -156,6 +156,36 @@
             </div>
           </div>
 
+          <div class="col-6">
+            <label for="Factura total" class="form-label">Factura total</label>
+            <div class="input-group has-validation">
+              <input type="text" class="form-control" name="facturaTotal" id="facturaTotal"
+                onkeypress="return solonumeros(event)" required>
+              <div class="invalid-feedback">
+                Ingrese el valor total de la factura.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <label for="valorFactura" class="form-label">Precio valor Facturado (Mensual)</label>
+              <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
+              <div class="invalid-feedback">
+                Ingrese el valor Facturado.
+              </div>
+            </div>
+
+            <div class="col-6">
+              <label for="pretotal" class="form-label">Valor Descuento</label>
+              <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
+              <input type="text" class="form-control" name="idAns" id="idAns" style="display: none;">
+              <div class="invalid-feedback">
+                Ingrese el Valor Descuento
+              </div>
+            </div>
+          </div>
+          
           <div class="col-sm-6">
             <label for="registro" class="form-label">Fecha de registro</label>
             <input type="date" class="form-control" id="fechaRegistro" name="fechaRegistro" placeholder="" value=""
@@ -175,16 +205,7 @@
             </div>
           </div>
 
-          <div class="col-6">
-            <label for="Factura total" class="form-label">Factura total</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" name="facturaTotal" id="facturaTotal"
-                onkeypress="return solonumeros(event)" required>
-              <div class="invalid-feedback">
-                Ingrese el valor total de la factura.
-              </div>
-            </div>
-          </div>
+      
           <div class="col">
             <label for="Descripcion de Servicios" class="form-label">Descripción de servicios</label>
             <select id="descripcionServicios" name="descripcionServicios" class="form-control" required>

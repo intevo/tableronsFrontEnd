@@ -149,33 +149,31 @@
             <form id="contratoFormulario" class="needs-validation" novalidate>
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label for="Idfact" class="form-label">Num. Contrato</label>
+                        <label for="Idfact" class="form-label">Centro de Costos</label>
                         <input type="number" class="form-control" name="idContrato" id="idContrato" required>
+                        <div class="invalid-feedback">
+                            Ingrese el Centro de Costos.
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Idfact" class="form-label">Nombre de Contrato</label>
+                        <input type="text" class="form-control" name="nombreContrato" id="nombreContrato" required>
                         <div class="invalid-feedback">
                             Ingrese el id del Contrato.
                         </div>
                     </div>
-
-                    <div class="col-sm-6">
-                        <label for="registro" class="form-label">Fecha de Incio</label>
-                        <input type="date" class="form-control" id="fechaIncioContrato" name="fechaIncioContrato"
-                            required>
-                        <div class="invalid-feedback">
-                            Ingrese la fecha de Incio.
-                        </div>
-                    </div>
-
                     <div class="col-6">
-                        <label for="entrega" class="form-label">Fecha de Finalización</label>
+                        <label for="entrega" class="form-label">Ingrese Valor Neto del Contrato</label>
                         <div class="input-group has-validation">
-                            <input style="z-index: 1;" type="date" class="form-control" id="fechaFinalizacionContrato"
-                                name="fechaFinalizacionContrato" required>
+                            <input style="z-index: 1;" type="text" class="form-control" id="valorNetoContrato" name="valorNetoContrato"
+                                onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
+                            <input   type="text" class="form-control" id="idContrato" name="idContrato"
+                                style="display: none;">
                             <div class="invalid-feedback">
-                                Ingrese la fecha de Finalización.
+                                Valor del Contrato
                             </div>
                         </div>
                     </div>
-
                     <div class="col-6">
                         <label for="entrega" class="form-label">Ingrese Valor del Contrato</label>
                         <div class="input-group has-validation">
@@ -188,13 +186,31 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <label for="registro" class="form-label">Fecha de Incio</label>
+                        <input type="date" class="form-control" id="fechaIncioContrato" name="fechaIncioContrato"
+                            required>
+                        <div class="invalid-feedback">
+                            Ingrese la fecha de Incio.
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <label for="entrega" class="form-label">Fecha de Finalización</label>
+                        <div class="input-group has-validation">
+                            <input style="z-index: 1;" type="date" class="form-control" id="fechaFinalizacionContrato"
+                                name="fechaFinalizacionContrato" required>
+                            <div class="invalid-feedback">
+                                Ingrese la fecha de Finalización.
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="col-6">
                         <div class="input-group has-validation">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" onchange="validaCheckbox()"
                                     id="prorroga" name="prorroga">
-                                <label class="form-check-label" for="test">Generar Prorroga</label>
+                                <label class="form-check-label" for="test">Estado del proyecto</label>
                             </div>
                         </div>
                         <div class="invalid-feedback">

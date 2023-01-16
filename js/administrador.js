@@ -3,15 +3,25 @@ function saveData() {
 
     const valorContrato = document.getElementById('valorContrato');
     const idContrato = document.getElementById("idContrato");
+    const nombreContrato = document.getElementById("nombreContrato");
     const fechaIncioContrato = document.getElementById("fechaIncioContrato");
     const fechaFinalizacionContrato = document.getElementById("fechaFinalizacionContrato");
+    const valorNetoContrato = document.getElementById('valorNetoContrato');
     const prorroga = document.getElementById("prorroga");
     if (idContrato.value.length <= 0) {
-        alert("Debe poner un valor en el campo número de contrato");
+        alert("Debe poner un valor en el campo Centro de Costos");
+        return;
+    }
+    if (nombreContrato.value.length <= 0) {
+        alert("Debe poner un valor en el campo Nombre de contrato");
         return;
     }
     if (valorContrato.value.length <= 0) {
         alert("Debe poner un valor en el campo valor de contrato");
+        return;
+    }
+    if (valorNetoContrato.value.length <= 0) {
+        alert("Debe poner un valor en el campo valor Neto de contrato");
         return;
     }
     let busqueda = parseInt(document.getElementById('idContrato').value);
@@ -25,14 +35,18 @@ function saveData() {
     } else {
         let valorContrato2 = valorContrato.value.replaceAll('.', '');
         let valorContratoFin = parseInt(valorContrato2)
+        let valorNetoContrato2 = valorNetoContrato.value.replaceAll('.', '');
+        let valorNetoContratoFin = parseInt(valorNetoContrato2)
         const API_URL = 'http://localhost:8080/contrato/insert';
         const createInvoice = () => {
 
             const contrato = {
                 idContrato: idContrato.value,
+                nombreContrato: nombreContrato.value,
                 fechaIncioContrato: fechaIncioContrato.value,
                 fechaFinalizacionContrato: fechaFinalizacionContrato.value,
                 valorContrato: valorContratoFin,
+                valorNetoContrato: valorNetoContratoFin,
                 prorroga: prorroga.checked == true ? 1 : 0
             }
 
@@ -70,7 +84,7 @@ function cargarJSON() {
             let html = '';
             data.forEach(function (API_URL) {
                 html += `
-                       <li>${valorContrato} ${numeroContrato} ${fechaIncioContrato} ${fechaFinalizacionContrato} ${prorroga}</li>
+                       <li>${valorContrato} ${nombreContrato} ${valorNetoContrato} ${numeroContrato} ${fechaIncioContrato} ${fechaFinalizacionContrato} ${prorroga}</li>
                    `;
             })
             document.getElementById('prorroga').innerHTML = html;
@@ -83,7 +97,7 @@ function cargarJSON() {
 function validaCheckbox() {
     const checkboxProroga = document.getElementById('prorroga');
     if (checkboxProroga.checked == true)
-        alert('Esta a punto de generar una prorroga en este contrato');
+        alert('Esta a punto de activar un contrato');
 }
 //------------------------------------------------------------------------------------//
 //IMPRIMIR
@@ -111,16 +125,19 @@ function getContrato() {
     const renderResult = (intItem) => {
         let listHTML = `
             <tr style="background-color: rgb(105,50,183) !important;">
-                <th style="Color: white;" scope="col"><center>Número de Contrato</center></th>
+                <th style="Color: white;" scope="col"><center>Centro de Costos</center></th>
+                <th style="Color: white;" scope="col"><center>Nombre Contrato</center></th>
+                <th style="Color: white;" scope="col"><center>Valor Contrato</center></th>
+                <th style="Color: white;" scope="col"><center>Valor Neto Contrato</center></th>
                 <th style="Color: white;" scope="col"><center>fecha de Incio Contrato</center></th>
                 <th style="Color: white;" scope="col"><center>fecha de Finalizacion Contrato</center></th>
-                <th style="Color: white;" scope="col"><center>Valor Contrato</center></th>
                 <th style="Color: white;" scope="col"><center>Estado</center></th>
                 <th style="Color: white;" scope="col" colspan="2"><center>Opciones</center></th>
             </tr>
             `
         intItem.forEach(intItem => {
             const numerovalorContrato = intItem.valorContrato;
+            const valorNeto = intItem.valorNetoContrato;
             const formato = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
                 const rep = '$1.';
@@ -128,16 +145,18 @@ function getContrato() {
             }
             let stringProrroga = '';
             if (intItem.prorroga == 1) stringProrroga = `
-                    <span class="badge bg-success">Prorroga</span>
+                    <span class="badge bg-success">Activo</span>
                     `;
-            else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
+            else stringProrroga = '<span class="badge bg-danger">Inactivo</span>';
             listHTML +=
                 `<tbody id="geeks">
                 <tr contratoId = ${intItem.idContrato}>
                     <td align="center">${intItem.idContrato}</td>
+                    <td align="center">${intItem.nombreContrato}</td>
+                    <td align="center">${formato(numerovalorContrato)}</td>
+                    <td align="center">${formato(valorNeto)}</td>
                     <td align="center">${intItem.fechaIncioContrato}</td>
                     <td align="center">${intItem.fechaFinalizacionContrato}</td>
-                    <td align="center">${formato(numerovalorContrato)}</td>
                     <td align="center">${stringProrroga}</td>
                     <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
                     <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
@@ -253,10 +272,13 @@ const rellenarContrato = () => {
                 dataType: 'json',
                 success: (res) => {
                     $('#IdContrato').val(res.IdContrato);
+                    $('#nombreContrato').val(res.nombreContrato);
                     $('#fechaIncioContrato').val(res.fechaIncioContrato);
                     $('#fechaFinalizacionContrato').val(res.fechaFinalizacionContrato);
                     $('#valorContrato').val(res.valorContrato);
+                    $('#valorNetoContrato').val(res.valorNetoContrato);
                     getFormatMoney(document.getElementById('valorContrato'));
+                    getFormatMoney(document.getElementById('valorNetoContrato'));
                     let check = document.getElementById('prorroga')
                     res.prorroga == 1 ? check.checked = true : check.checked = false
                     document.getElementById('idContrato').value = res.idContrato;
@@ -282,12 +304,19 @@ const editContrato = () => {
         const cambio = document.getElementById('valorContrato');
         let valorContrato = cambio.value.replaceAll('.', '');
         let valorNotacreditoFinal = parseInt(valorContrato);
+        const cambio2 = document.getElementById('valorNetoContrato');
+        let valorNetoContrato2 = cambio2.value.replaceAll('.', '');
+        let valorNetoContratoFin = parseInt(valorNetoContrato2);
+        
+
         const ans = {
             idContrato: id,
             idContrato: $('#idContrato').val(),
+            nombreContrato: $('#nombreContrato').val(),
             fechaIncioContrato: $('#fechaIncioContrato').val(),
             fechaFinalizacionContrato: $('#fechaFinalizacionContrato').val(),
             valorContrato: valorNotacreditoFinal,
+            valorNetoContrato: valorNetoContratoFin,
             prorroga: check,
 
         }
@@ -331,14 +360,6 @@ const editContrato = () => {
     })
 
 }
-
-const reset = () => {
-    $('#numeroContrato').val('');
-    $('#fechaIncioContrato').val('');
-    $('#fechaFinalizacionContrato').val('');
-    $('#valorContrato').val('');
-}
-
 //------------------------------------------------------------------------------------//
 //BOTON ELIMINAR
 const deleteContrato = () => {

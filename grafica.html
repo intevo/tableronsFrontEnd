@@ -198,7 +198,7 @@
   <script>
 
 //------------------------------------------------------------------------------------//
-//
+//CUADRO DE ANS
     const bodyDoc = document.body;
     bodyDoc.onload = getAns();
 
@@ -226,7 +226,6 @@
               <tr>
                 <th nowrap><center>ANS</center></th>
                 <th nowrap><center>PORCENTAJE</center></th>
-                <th nowrap><center>PRECIO TOTAL</center></th>
               </tr>
             </thead>  
         `;
@@ -242,7 +241,6 @@
               <tr>
                     <td><center>${ansItem.descripcion}</center></td>
                     <td nowrap><center>${ansItem.porcentaje}</center></td>
-                    <td nowrap><center>${formato(numerovalorTotal)}</center></td>
               </tr>
             </tbody>
           `
@@ -278,8 +276,10 @@
         let listHTML = `
         <thead>
               <tr> 
-                <th  style="background-color: rgb(105,50,183) !important; color:white">Número Contrato</th> 
-                <th  style="background-color: rgb(105,50,183) !important; color:white">Valor Contrato</th>
+                <th  style="background-color: rgb(105,50,183) !important; color:white">Nombre de Contrato</th> 
+                <th  style="background-color: rgb(105,50,183) !important; color:white">Centro de Costos</th>
+                <th  style="background-color: rgb(105,50,183) !important; color:white">Valor del Contrato</th>
+                <th  style="background-color: rgb(105,50,183) !important; color:white">Valor Neto Contrato</th>
                 <th  style="background-color: rgb(105,50,183) !important; color:white">Estado</th>
               </tr>
         </thead>
@@ -287,15 +287,17 @@
         intItem.forEach(intItem => {
           let stringProrroga = '';
           if (intItem.prorroga == 1) stringProrroga = `
-                    <span class="badge bg-success">Prorroga</span>
+                    <span class="badge bg-success">Activo</span>
                     `;
-          else stringProrroga = '<span class="badge bg-secondary">Sin Prorroga</span>';
+          else stringProrroga = '<span class="badge bg-danger">Inactivo</span>';
 
           listHTML += `           
         <tbody >
           <tr>
+            <td>${intItem.nombreContrato}</td>
             <td>${intItem.idContrato}</td>
             <td> ${formato(intItem.valorContrato)}</td>
+            <td> ${formato(intItem.valorNetoContrato)}</td>
             <td>${stringProrroga}</td>
           </tr>
         <tbody>
