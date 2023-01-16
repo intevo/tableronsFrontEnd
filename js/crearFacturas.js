@@ -155,32 +155,26 @@ formatMoney = (e) =>{
   }
 }
 //------------------------------------------------------------------------------------//
-//SEPARADOR DE MILES 
-var separador = document.getElementById('facturaTotal');
-
-separador.addEventListener('keyup', (e) => {
-  var entrada = e.target.value.split('.').join('');
+//ELIMINAR PUNTOS PARA RELLENAR
+getFormatMoney = (target) =>{
+  var entrada = target.value.split('.').join('');
   entrada = entrada.split('').reverse();
-
   var salida = [];
   var aux = '';
-
   var paginador = Math.ceil(entrada.length / 3);
-
   for (let i = 0; i < paginador; i++) {
-    for (let j = 0; j < 3; j++) {
-      "123 4"
-      if (entrada[j + (i * 3)] != undefined) {
-        aux += entrada[j + (i * 3)];
+      for (let j = 0; j < 3; j++) {
+          "123 4"
+          if (entrada[j + (i * 3)] != undefined) {
+              aux += entrada[j + (i * 3)];
+          }
       }
-    }
-    salida.push(aux);
-    aux = '';
+      salida.push(aux);
+      aux = '';
 
-    e.target.value = salida.join('.').split("").reverse().join('');
+      target.value = salida.join('.').split("").reverse().join('');
   }
-
-}, false);
+}
 //------------------------------------------------------------------------------------//
 //IMPRIMIR DATOS
 const bodyDoc = document.body;
@@ -210,9 +204,11 @@ function getFactura() {
           <th style="Color: white;" scope="col"><center>ID Factura</center></th>
           <th style="Color: white;" scope="col"><center>Fecha Entrega</center></th>
           <th style="Color: white;" scope="col"><center>Fecha Registro</center></th>
-          <th style="Color: white;" scope="col"><center>Factura Total</center></th>
+          <th style="Color: white;" scope="col"><center>Valor Facturado</center></th>
+          <th style="Color: white;" scope="col"><center>Valor descuento</center></th>
+          <th style="Color: white;" scope="col"><center>Valor Total Facturado (Mensual)</center></th>
           <th style="Color: white;" scope="col"><center>Descripcion de Servicios</center></th>
-          <th style="Color: white;" scope="col"><center>Contrato</center></th>
+          <th style="Color: white;" scope="col"><center>Centro de Costos</center></th>
           <th style="Color: white;" scope="col"><center>Observaciones</center></th>
           <th style="Color: white;" scope="col"><center>Valor Total</center></th>
           <th style="Color: white;" scope="col" colspan="2"><center>Opciones</center></th>
@@ -220,7 +216,10 @@ function getFactura() {
 `;
     intItem.forEach(intItem => {
       const numerovalorTotal = intItem.valorTotal;
-      //const numerofacturaTotal = intItem.facturaTotal;
+      const numerofacturaTotal = intItem.facturaTotal;
+      const numerovalorDescuento = intItem.valorDescuento;
+      const numerovalorTotalFacturado = intItem.valorTotalFacturado;
+      
       const formato = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
         const rep = '$1.';
@@ -232,7 +231,9 @@ function getFactura() {
                 <td align="center">${intItem.idFactura}</td>
                 <td align="center">${intItem.fechaEntrega}</td>
                 <td align="center">${intItem.fechaRegistro}</td>
-                <td align="center">${intItem.facturaTotal}</td>
+                <td align="center">${formato(numerofacturaTotal)}</td>
+                <td align="center">${formato(numerovalorDescuento)}</td>
+                <td align="center">${formato(numerovalorTotalFacturado)}</td>
                 <td align="center">${intItem.descripcionServicios}</td>
                 <td align="center">${intItem.contrato}</td>
                 <td align="center">${intItem.observacionFactura}</td>
@@ -287,6 +288,14 @@ const rellenarfactura = () => {
           $('#fechaEntrega').val(res.fechaEntrega);
           $('#fechaRegistro').val(res.fechaRegistro);
           $('#facturaTotal').val(res.facturaTotal);
+          getFormatMoney(document.getElementById('facturaTotal'));
+
+          $('#valorDescuento').val(res.valorDescuento);
+          getFormatMoney(document.getElementById('valorDescuento'));
+
+          $('#valorTotalFacturado').val(res.valorTotalFacturado);
+          getFormatMoney(document.getElementById('valorTotalFacturado'));
+
           $('#descripcionServicios').val(res.descripcionServicios);
           $('#contrato').val(res.contrato);
           $('#observacionFactura').val(res.observacionFactura);
@@ -312,14 +321,25 @@ const editFactura = () => {
     $('#crear').css('display', 'none');
     $('#editar').css('display', 'block');
 
-
+    const primero = document.getElementById('facturaTotal');
+    let valorFactura = primero.value.replaceAll('.', '');
+    let facturaTotalFinal = parseInt(valorFactura);
+    const segundo = document.getElementById('ValorDescuento');
+    let valorDescuento = segundo.value.replaceAll('.', '');
+    let valorDescuentoFinal = parseInt(valorDescuento);
+    const tercero = document.getElementById('valorTotalFacturado');
+    let valorNotacredito = tercero.value.replaceAll('.', '');
+    let valorTotalFacturadoFinal = parseInt(valorNotacredito);
+          
     const factura = {
 
       idFactura: id,
       idFactura: $('#idFactura').val(),
       fechaEntrega: $('#fechaEntrega').val(),
       fechaRegistro: $('#fechaRegistro').val(),
-      facturaTotal: $('#facturaTotal').val(),
+      facturaTotal: facturaTotalFinal,
+      valorDescuento: valorDescuentoFinal,
+      valorTotalFacturado: valorTotalFacturadoFinal,
       descripcionServicios: $('#descripcionServicios').val(),
       contrato: $('#contrato').val(),
       observacionFactura: $('#observacionFactura').val(),
