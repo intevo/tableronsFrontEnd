@@ -88,8 +88,8 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav  id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse jkk">
-      <div  class="position-sticky pt-3 sidebar-sticky">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse jkk">
+      <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="grafica.html">
@@ -170,7 +170,8 @@
           <div class="row">
             <div class="col-6">
               <label for="valorFactura" class="form-label">Precio valor Facturado (Mensual)</label>
-              <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
+              <input type="text" class="form-control" name="valorFactura" id="valorFactura" onkeyup="formatMoney(event)"
+                onkeypress="return solonumeros(event)" required>
               <div class="invalid-feedback">
                 Ingrese el valor Facturado.
               </div>
@@ -178,14 +179,15 @@
 
             <div class="col-6">
               <label for="pretotal" class="form-label">Valor Descuento</label>
-              <input type="text" class="form-control" name="valorDescuento" id="valorDescuento" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
+              <input type="text" class="form-control" name="valorDescuento" id="valorDescuento"
+                onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
               <input type="text" class="form-control" name="idAns" id="idAns" style="display: none;">
               <div class="invalid-feedback">
                 Ingrese el Valor Descuento
               </div>
             </div>
           </div>
-          
+
           <div class="col-sm-6">
             <label for="registro" class="form-label">Fecha de registro</label>
             <input type="date" class="form-control" id="fechaRegistro" name="fechaRegistro" placeholder="" value=""
@@ -205,7 +207,7 @@
             </div>
           </div>
 
-      
+
           <div class="col">
             <label for="Descripcion de Servicios" class="form-label">Descripción de servicios</label>
             <select id="descripcionServicios" name="descripcionServicios" class="form-control" required>
@@ -230,6 +232,19 @@
             </div>
           </div>
 
+          <div class="col">
+            <div class="input-group has-validation">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" onchange="validaCheckbox()" id="prorroga"
+                  name="prorroga" style="margin-top: 26px; margin-left: 5px;">
+                <label class="form-check-label" for="test" style="margin-top: 23px; margin-left: 3px;">Prorroga</label>
+              </div>
+            </div>
+            <div class="invalid-feedback">
+              Generar Prorroga
+            </div>
+          </div>
+
           <!--<div class="col-6">
             <label for="entrega" class="form-label">Cargar Factura (PDF)</label>
             <div class="input-group has-validation">
@@ -249,60 +264,64 @@
           style="display: none;">editar</button>
         <!-- type="submit" -->
       </form>
-      
 
 
 
 
-  <hr class="my-4">
-  <!--Start modal table-->
-   <link rel="stylesheet" href="css/modal.css">
-    <!-- Trigger/Open The Modal -->
-     <button  style="background-color:rgb(105,50,183)" class="btn btn-secondary" id="myBtn">Mirar Datos</button>
-       <!-- The Modal -->
-           <div id="myModal"  class="modal">
-           <!-- Modal content --> 
-             <div class="modal-content">
-              <hr class="my-4">
-      <div class="input-group">
-        <div class="form-outline">
-          <input id="gfgs" type="text" class="form-control" placeholder="">
-        </div>
-        <h4>&nbsp;Buscar por numero de contrato&nbsp;<span data-feather="search"></span></h4>
-      </div>
+
       <hr class="my-4">
-      <div id="escapar">   <span  class="close">&times;</span> </div>
-      <table id="invoiceList" class="table table-striped table-sm">
+      <!--Start modal table-->
+      <link rel="stylesheet" href="css/modal.css">
+      <!-- Trigger/Open The Modal -->
+      <button style="background-color:rgb(105,50,183)" class="btn btn-secondary" id="myBtn">Mirar Datos</button>
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+      <div class="modal-content">
+        <div class="busqueda" class="my-4">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input id="gfgs" type="text" class="form-control" placeholder="">
+            </div>    
+            <div><h5>&nbsp;Buscar por ID de Factura&nbsp;</h5></div>
+            </div>
+        </div>
+        
+             <div id="escapar">   <span  class="close">&times;</span> </div>
+                    <table id="invoiceList" class="table table-striped table-sm" width="70%">
+                </table>
+           </div>
+        </div>
+
+      </main>
+
+      </table>
     </div>
+
+    <script src="js/modal.js"></script>
+    <!--End model table-->
+
+
+
+
+
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2022 Intevo S.A.S</p>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Privacy</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Support</a></li>
+      </ul>
+    </footer>
   </div>
-  </main>
 
-  </table>
-         </div>
-         
-         <script src="js/modal.js"></script>
- <!--End model table-->
-
-
-
-
-
-
-  <footer class="my-5 pt-5 text-muted text-center text-small">
-    <p class="mb-1">&copy; 2022 Intevo S.A.S</p>
-    <ul class="list-inline">
-      <li class="list-inline-item"><a href="#">Privacy</a></li>
-      <li class="list-inline-item"><a href="#">Terms</a></li>
-      <li class="list-inline-item"><a href="#">Support</a></li>
-    </ul>
-  </footer>
-</div>
-
-<script src="form-validation.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-  integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-<script src="dashboard.js"></script>
-<script src="js/crearFacturas.js"></script>
-</body>
+  <script src="form-validation.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+    crossorigin="anonymous"></script>
+  <script src="dashboard.js"></script>
+  <script src="js/crearFacturas.js"></script>
+  </body>
 
 </html>
