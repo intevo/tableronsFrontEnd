@@ -212,7 +212,6 @@ function getFactura() {
           <th style="Color: white;" scope="col"><center>Fecha Registro</center></th>
           <th style="Color: white;" scope="col"><center>Valor Facturado</center></th>
           <th style="Color: white;" scope="col"><center>Valor descuento</center></th>
-          <th style="Color: white;" scope="col"><center>Valor Total Facturado (Mensual)</center></th>
           <th style="Color: white;" scope="col"><center>Descripcion de Servicios</center></th>
           <th style="Color: white;" scope="col"><center>Centro de Costos</center></th>
           <th style="Color: white;" scope="col"><center>Observaciones</center></th>
@@ -231,7 +230,7 @@ function getFactura() {
       const numerovalorTotal = intItem.valorTotal;
       const numerofacturaTotal = intItem.facturaTotal;
       const numerovalorDescuento = intItem.valorDescuento;
-      const numerovalorTotalFacturado = intItem.valorTotalFacturado;
+      // const numerovalorTotalFacturado = intItem.valorTotalFacturado;
       
       const formato = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
@@ -246,7 +245,6 @@ function getFactura() {
                 <td align="center">${intItem.fechaRegistro}</td>
                 <td align="center">${formato(numerofacturaTotal)}</td>
                 <td align="center">${formato(numerovalorDescuento)}</td>
-                <td align="center">${formato(numerovalorTotalFacturado)}</td>
                 <td align="center">${intItem.descripcionServicios}</td>
                 <td align="center">${intItem.contrato}</td>
                 <td align="center">${intItem.observacionFactura}</td>

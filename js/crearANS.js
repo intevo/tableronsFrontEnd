@@ -22,9 +22,6 @@ function getAns() {
                 <th align="center" style="Color: white;"">ID ANS</center></th>
                 <th style="Color: white;" scope="col"><center>ANS</center></center></th>
                 <th style="Color: white;" scope="col"><center>Porcentaje</center></th>
-                <th style="Color: white;" scope="col"><center>Valor Factura</center></th>
-                <th style="Color: white;" scope="col"><center>Valor Descuento</center></th>
-                <th style="Color: white;" scope="col"><center>Valor Total</center></th>
                 <th style="Color: white;" scope="col"><center>Factura</center></th>
                 <th style="Color: white;" scope="col"><center>Observaciones</center></th>
                 <th style="Color: white;" scope="col"><center>Nota Credito</center></th>
@@ -34,10 +31,10 @@ function getAns() {
               
         `;
         ansItems.forEach(ansItem => {
-            const numeroValorfactura = ansItem.valorFactura;
+            // const numeroValorfactura = ansItem.valorFactura;
             const numeroPorcentaje = ansItem.porcentaje;
-            const numerovalorDescuento = ansItem.valorDescuento;
-            const numerovalorTotal = ansItem.valorTotal;
+            // const numerovalorDescuento = ansItem.valorDescuento;
+            // const numerovalorTotal = ansItem.valorTotal;
             const numerovalorNotacredito = ansItem.valorNotacredito;
            
             const formato = (number) => {
@@ -45,6 +42,7 @@ function getAns() {
                 const rep = '$1.';
                 return number.toString().replace(exp, rep);
             }
+
             let stringestadoNotacredito = '';
             if (ansItem.notaCredito == 1) stringestadoNotacredito = `
                     <span class="badge bg-success">Activo</span>
@@ -62,9 +60,6 @@ function getAns() {
                         <td align="center">${ansItem.idAns}</td>
                         <td align="center">${ansItem.descripcion}</td>
                         <td align="center">${formato(numeroPorcentaje)}</td>
-                        <td align="center">${formato(numeroValorfactura)}</td>
-                        <td align="center">${formato(numerovalorDescuento)}</td>
-                        <td align="center">${formato(numerovalorTotal)}</td>
                         <td align="center">${ansItem.factura}</td>
                         <td align="center">${ansItem.observacionAns}</td>
                         <td align="center">${stringestadoNotacredito}</td>
@@ -224,12 +219,12 @@ const rellenarAns = () => {
                 success: (res) => {
                     $('#descripcion').val(res.descripcion);
                     $('#porcentaje').val(res.porcentaje);
-                    $('#valorFactura').val(res.valorFactura);
-                    getFormatMoney(document.getElementById('valorFactura'));
-                    $('#valorDescuento').val(res.valorDescuento);
-                    getFormatMoney(document.getElementById('valorDescuento'));
+                    // $('#valorFactura').val(res.valorFactura);
+                    // getFormatMoney(document.getElementById('valorFactura'));
+                    // $('#valorDescuento').val(res.valorDescuento);
+                    // getFormatMoney(document.getElementById('valorDescuento'));
                     $('#observacionAns').val(res.observacionAns);
-                    $('#valorTotal').val(res.valorTotal);
+                    // $('#valorTotal').val(res.valorTotal);
                     $('#factura').val(res.factura);
                     let check = document.getElementById('notaCredito')
                     res.notaCredito == 1 ? check.checked = true : check.checked = false
@@ -256,23 +251,23 @@ const editAns = () => {
         let inputCheck = document.getElementById('notaCredito')
         let check = inputCheck.checked == true ? 1 : 0;
 
-        const primero = document.getElementById('valorFactura');
-        let valorFactura = primero.value.replaceAll('.', '');
-        let valorFacturaFinal = parseInt(valorFactura);
-        const segundo = document.getElementById('valorDescuento');
-        let valorDescuento = segundo.value.replaceAll('.', '');
-        let valorDescuentoFinal = parseInt(valorDescuento);
-        const tercero = document.getElementById('valorNotacredito');
-        let valorNotacredito = tercero.value.replaceAll('.', '');
-        let valorNotacreditoFinal = parseInt(valorNotacredito);
+        // const primero = document.getElementById('valorFactura');
+        // let valorFactura = primero.value.replaceAll('.', '');
+        // let valorFacturaFinal = parseInt(valorFactura);
+        // const segundo = document.getElementById('valorDescuento');
+        // let valorDescuento = segundo.value.replaceAll('.', '');
+        // let valorDescuentoFinal = parseInt(valorDescuento);
+        // const tercero = document.getElementById('valorNotacredito');
+        // let valorNotacredito = tercero.value.replaceAll('.', '');
+        // let valorNotacreditoFinal = parseInt(valorNotacredito);
 
         const ans = {
             idAns: id,
             descripcion: $('#descripcion').val(),
             porcentaje: parseFloat($('#porcentaje').val()),
-            valorFactura: valorFacturaFinal,
-            valorDescuento: valorDescuentoFinal,
-            valorTotal: parseInt($('#valorTotal').val()),
+            // valorFactura: valorFacturaFinal,
+            // valorDescuento: valorDescuentoFinal,
+            // valorTotal: parseInt($('#valorTotal').val()),
             factura: parseInt($('#factura').val()),
             observacionAns: $('#observacionAns').val(),
             notaCredito: check,
@@ -344,80 +339,80 @@ deleteAns();
 bodyDoc.onload = getValor();
 
 function getValor() {
-    const total = document.querySelector('#tbodyTotales');
-    fetch('http://localhost:8080/ans')
-        .then(res => res.json())
-        .then(json => {
-            renderResult(json)
-        })
+//     const total = document.querySelector('#tbodyTotales');
+//     fetch('http://localhost:8080/ans')
+//         .then(res => res.json())
+//         .then(json => {
+//             renderResult(json)
+//         })
 
-    const renderResult = (arrayData) => {
-        let facturas = [];
-        let listHTML = "";
-        let printJson = [];
-        arrayData.forEach(e => {
-            if (!facturas.includes(e.factura)) facturas.push(e.factura)
-        })
+//     const renderResult = (arrayData) => {
+//         let facturas = [];
+//         let listHTML = "";
+//         let printJson = [];
+//         arrayData.forEach(e => {
+//             if (!facturas.includes(e.factura)) facturas.push(e.factura)
+//         })
 
-        facturas.forEach(e => {
+//         facturas.forEach(e => {
 
-            let factura = e;
-            let acomulado = 0;
-            arrayData.forEach(element => {
-                console.log("Prueba" + element);
-                if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
-            })
+//             let factura = e;
+//             let acomulado = 0;
+//             arrayData.forEach(element => {
+//                 console.log("Prueba" + element);
+//                 if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
+//             })
 
 
-            let elemento = {
-                idFactura: factura,
-                fechaRegistro: "2022-11-30",
-                fechaEntrega: "2022-11-30",
-                valorTotal: acomulado
-            }
-            printJson.push(elemento);
-        })
+//             let elemento = {
+//                 idFactura: factura,
+//                 fechaRegistro: "2022-11-30",
+//                 fechaEntrega: "2022-11-30",
+//                 valorTotal: acomulado
+//             }
+//             printJson.push(elemento);
+//         })
 
-        printJson.forEach(e => {
-            const numerovacomulado = e.valorTotal;
-            const valorTotal = (number) => {
-                const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-                const rep = '$1.';
-                return number.toString().replace(exp, rep);
-            }
-            listHTML += `
-                <tr>
-                <td>${e.idFactura}</td>
-                <td>${valorTotal(numerovacomulado)}</td>
-                </tr>
-            `;
-            fetch('http://localhost:8080/factura/' + e.idFactura, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-                .then(res => {
-                    res.valorTotal = e.valorTotal;
-                    functionUpdate(res)
-                })
-        })
+//         printJson.forEach(e => {
+//             const numerovacomulado = e.valorTotal;
+//             const valorTotal = (number) => {
+//                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+//                 const rep = '$1.';
+//                 return number.toString().replace(exp, rep);
+//             }
+//             listHTML += `
+//                 <tr>
+//                 <td>${e.idFactura}</td>
+//                 <td>${valorTotal(numerovacomulado)}</td>
+//                 </tr>
+//             `;
+//             fetch('http://localhost:8080/factura/' + e.idFactura, {
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 }
+//             }).then(res => res.json())
+//                 .then(res => {
+//                     res.valorTotal = e.valorTotal;
+//                     functionUpdate(res)
+//                 })
+//         })
 
-        const functionUpdate = (object) => {
-            fetch('http://localhost:8080/factura/update', {
-                method: 'POST',
-                body: JSON.stringify(object),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(res => res.json())
-                .then(response => {
-                    console.log('Test')
-                    console.log(response)
-                }).catch(error => console.log(error))
-        }
-        total.innerHTML = listHTML;
-    }
+//         const functionUpdate = (object) => {
+//             fetch('http://localhost:8080/factura/update', {
+//                 method: 'POST',
+//                 body: JSON.stringify(object),
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 }
+//             })
+//                 .then(res => res.json())
+//                 .then(response => {
+//                     console.log('Test')
+//                     console.log(response)
+//                 }).catch(error => console.log(error))
+//         }
+//         total.innerHTML = listHTML;
+//     }
 }
 
 //------------------------------------------------------------------------------------//
