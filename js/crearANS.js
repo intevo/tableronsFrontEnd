@@ -75,7 +75,7 @@ function getAns() {
                 </tboby>`
         })
         ansList.innerHTML = listHTML;
-        window.close(por)
+        // window.close(por)
     }
 }
 
@@ -95,16 +95,16 @@ function saveData() {
         alert("Error, Porcentaje no valido");
         return;
     }
-    const prueba = document.getElementById('valorFactura');
-    if (prueba.value.length <= 0) {
-        alert("Debe poner un valor en el campo de Precio valor Facturado");
-        return;
-    }
-    const prueba2 = document.getElementById('valorDescuento');
-    if (prueba2.value.length <= 0) {
-        alert("Debe poner un valor en el campo de Valor Descuento");
-        return;
-    }
+    // const prueba = document.getElementById('valorFactura');
+    // if (prueba.value.length <= 0) {
+    //     alert("Debe poner un valor en el campo de Precio valor Facturado");
+    //     return;
+    // }
+    // const prueba2 = document.getElementById('valorDescuento');
+    // if (prueba2.value.length <= 0) {
+    //     alert("Debe poner un valor en el campo de Valor Descuento");
+    //     return;
+    // }
     if (factura.value.length <= 0) {
         alert("Debe elegir un valor en el campo de Factura");
         return;
@@ -121,27 +121,27 @@ function saveData() {
         const formData = new FormData(document.querySelector('#ansForm'));
         const notaCredito = document.getElementById("notaCredito");
 
-        const primero = document.getElementById('valorFactura');
-        let valorFactura = primero.value.replaceAll('.', '');
-        let valorFacturaFinal = parseInt(valorFactura);
-        const segundo = document.getElementById('valorDescuento');
-        let valorDescuento = segundo.value.replaceAll('.', '');
-        let valorDescuentoFinal = parseInt(valorDescuento);
-        const tercero = document.getElementById('valorNotacredito');
-        let valorNotacredito = tercero.value.replaceAll('.', '');
-        let valorNotacreditoFinal = parseInt(valorNotacredito);
+        // const primero = document.getElementById('valorFactura');
+        // let valorFactura = primero.value.replaceAll('.', '');
+        // let valorFacturaFinal = parseInt(valorFactura);
+        // const segundo = document.getElementById('valorDescuento');
+        // let valorDescuento = segundo.value.replaceAll('.', '');
+        // let valorDescuentoFinal = parseInt(valorDescuento);
+        // const tercero = document.getElementById('valorNotacredito');
+        // let valorNotacredito = tercero.value.replaceAll('.', '');
+        // let valorNotacreditoFinal = parseInt(valorNotacredito);
 
         const ans = {
             descripcion: document.getElementById('descripcion').value,
             porcentaje: formData.get('porcentaje'),
-            valorFactura: valorFacturaFinal,
-            valorDescuento: valorDescuentoFinal,
-            valorNotacredito: valorNotacreditoFinal,
-            valorTotal: formData.get('valorTotal'),
+            // valorFactura: valorFacturaFinal,
+            // valorDescuento: valorDescuentoFinal,
+            // valorNotacredito: valorNotacreditoFinal,
+            // valorTotal: formData.get('valorTotal'),
             factura: document.getElementById('factura').value,
             observacionAns: formData.get('observacionAns').trim(),
             notaCredito: notaCredito.checked == true ? 1 : 0,
-            valorTotal: formData.get('valorTotal'),
+            // valorTotal: formData.get('valorTotal'),
         }
 
         fetch(API_URL, {
