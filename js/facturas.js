@@ -32,7 +32,6 @@ function getFactura() {
         <th style="Color: white;" scope="col"><center>Observaciones</center></th>
         <th style="Color: white;" scope="col"><center>Valor Total</center></th>
         <th style="Color: white;" scope="col"><center>Prorroga</center></th>
-        <th style="Color: white;" scope="col" colspan="2"><center>Opciones</center></th>
       </tr>`;
     let acumulador = 0;
     let facturado = 0;
@@ -42,12 +41,17 @@ function getFactura() {
       let numerofacturaTotal = intItem.facturaTotal;
       let numerovalorDescuento = intItem.valorDescuento;
       let numerovalorTotalFacturado = intItem.valorTotalFacturado;
-      
-      
+
+      let stringProrroga = '';
+      if (intItem.prorroga == 1) stringProrroga = `
+                    <span class="badge bg-success">Activo</span>
+                    `;
+      else stringProrroga = '<span class="badge bg-danger">Inactivo</span>';
+
       acumulador = acumulador + parseInt(intItem.valorTotal)
       // let valorFactura = numerofacturaTotal.replaceAll('.', '');    
-      facturado = facturado + parseInt(valorFactura)
-    
+      // facturado = facturado + parseInt(valorFactura)
+
 
       listHTML += `
         <tr>      
@@ -61,6 +65,7 @@ function getFactura() {
           <td align="center">${intItem.contrato}</td>
           <td align="center">${intItem.observacionFactura}</td>
           <td align="center">${formato(numerovalorTotal)}</td>
+          <td align="center">${stringProrroga}</td>
         </tr>`;
     })
     document.getElementById("valorFacturado").innerHTML = "FACTURADO: " + formato(facturado);
