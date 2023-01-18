@@ -21,14 +21,16 @@ function getFactura() {
   const renderResult = (intItem) => {
     let listHTML = `
          <tr>
-         <th scope="col"><center>ID Factura</center></th>
+         <th scope="col"><center>N° Factura</center></th>
+          <th scope="col"><center>Valor Facturado</center></th>
+          <th scope="col"><center>Valor Facturado Mensual</center></th>  
+          <th scope="col"><center>Valor Descuento</center></th>
+          <th scope="col"><center>Fecha Registro</center></th>  
           <th scope="col"><center>Fecha Entrega</center></th>
-          <th scope="col"><center>Fecha Registro</center></th>
-          <th scope="col"><center>Factura Total</center></th>
           <th scope="col"><center>Descripcion de Servicios</center></th>
-          <th scope="col"><center>Contrato</center></th>
           <th scope="col"><center>Observaciones</center></th>
-          <th scope="col"><center>Valor Total</center></th>
+          <th scope="col"><center>Centro de costos</center></th>
+          <th scope="col"><center>Prorroga</center></th>
         </tr>`;
     let acumulador = 0;
     let facturado = 0;

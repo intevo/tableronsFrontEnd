@@ -267,6 +267,90 @@ function getFactura() {
 }
 
 //------------------------------------------------------------------------------------//
+// FETCH ACTULAIZACIÓN CAMPO VALORTOTAL TABLA FACTURA
+
+bodyDoc.onload = getValor();
+
+function getValor() {
+    const total = document.querySelector('#tbodyTotales');
+    fetch('http://localhost:8080/ans')
+        .then(res => res.json())
+        .then(json => {
+            renderResult(json)
+        })
+
+    const renderResult = (arrayData) => {
+        let facturas = [];
+        let listHTML = "";
+        let printJson = [];
+        arrayData.forEach(e => {
+            if (!facturas.includes(e.factura)) facturas.push(e.factura)
+        })
+
+        facturas.forEach(e => {
+
+            let factura = e;
+            let acomulado = 0;
+            arrayData.forEach(element => {
+                console.log("Prueba" + element);
+                if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
+            })
+
+
+            let elemento = {
+                idFactura: factura,
+                fechaRegistro: "2022-11-30",
+                fechaEntrega: "2022-11-30",
+                valorTotal: acomulado
+            }
+            printJson.push(elemento);
+        })
+
+        printJson.forEach(e => {
+            const numerovacomulado = e.valorTotal;
+            const valorTotal = (number) => {
+                const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+                const rep = '$1.';
+                return number.toString().replace(exp, rep);
+            }
+            listHTML += `
+                <tr>
+                <td>${e.idFactura}</td>
+                <td>${valorTotal(numerovacomulado)}</td>
+                </tr>
+            `;
+            fetch('http://localhost:8080/factura/' + e.idFactura, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .then(res => {
+                    res.valorTotal = e.valorTotal;
+                    functionUpdate(res)
+                })
+        })
+
+        const functionUpdate = (object) => {
+            fetch('http://localhost:8080/factura/update', {
+                method: 'POST',
+                body: JSON.stringify(object),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(response => {
+                    console.log('Test')
+                    console.log(response)
+                }).catch(error => console.log(error))
+        }
+        total.innerHTML = listHTML;
+    }
+}
+
+
+
+//------------------------------------------------------------------------------------//
 // RELLENAR DATOS DE FORMULARIO FACTURA
 
 const rellenarfactura = () => {
