@@ -21,16 +21,14 @@ function getFactura() {
   const renderResult = (intItem) => {
     let listHTML = `
          <tr>
-         <th scope="col"><center>N° Factura</center></th>
-          <th scope="col"><center>Valor Facturado</center></th>
-          <th scope="col"><center>Valor Facturado Mensual</center></th>  
-          <th scope="col"><center>Valor Descuento</center></th>
-          <th scope="col"><center>Fecha Registro</center></th>  
+         <th scope="col"><center>ID Factura</center></th>
           <th scope="col"><center>Fecha Entrega</center></th>
+          <th scope="col"><center>Fecha Registro</center></th>
+          <th scope="col"><center>Factura Total</center></th>
           <th scope="col"><center>Descripcion de Servicios</center></th>
+          <th scope="col"><center>Contrato</center></th>
           <th scope="col"><center>Observaciones</center></th>
-          <th scope="col"><center>Centro de costos</center></th>
-          <th scope="col"><center>Prorroga</center></th>
+          <th scope="col"><center>Valor Total</center></th>
         </tr>`;
     let acumulador = 0;
     let facturado = 0;
@@ -38,8 +36,12 @@ function getFactura() {
       console.log(intItem)
       const numerovalorTotal = intItem.valorTotal;
       let numerofacturaTotal = intItem.facturaTotal;
+      let numerovalorDescuento = intItem.valorDescuento;
+      let numerovalorTotalFacturado = intItem.valorTotalFacturado;
+      
+      
       acumulador = acumulador + parseInt(intItem.valorTotal)
-      let valorFactura = numerofacturaTotal.replaceAll('.', '');    
+      // let valorFactura = numerofacturaTotal.replaceAll('.', '');    
       facturado = facturado + parseInt(valorFactura)
     
 
@@ -49,6 +51,8 @@ function getFactura() {
           <td align="center">${intItem.fechaEntrega}</td>
           <td align="center">${intItem.fechaRegistro}</td>
           <td align="center">${formato(numerofacturaTotal)}</td>
+          <td align="center">${formato(numerovalorDescuento)}</td>
+          <td align="center">${formato(numerovalorTotalFacturado)}</td>
           <td align="center">${intItem.descripcionServicios}</td>
           <td align="center">${intItem.contrato}</td>
           <td align="center">${intItem.observacionFactura}</td>
