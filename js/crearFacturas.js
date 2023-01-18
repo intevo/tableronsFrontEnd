@@ -8,7 +8,7 @@ function saveData() {
   } if (facturaTotal.value.length <= 0) {
     alert("Debe poner un valor en el campo de Valor Facturado");
     return;
-  } if (ValorDescuento.value.length <= 0) {
+  }if (valorDescuento.value.length <= 0) {
     alert("Debe poner un valor en el campo de Valor Descuento");
     return;
    }if (valorTotalFacturado.value.length <= 0) {
@@ -51,11 +51,15 @@ function saveData() {
       } else {
         const createInvoice = () => {
           const formData = new FormData(document.querySelector('#invoiceData'));
+          let prorroga = 0;
+          if(document.getElementById("prorroga") != null){
+           prorroga = document.getElementById("prorroga");
+          }
 
           const primero = document.getElementById('facturaTotal');
           let valorFactura = primero.value.replaceAll('.', '');
           let facturaTotalFinal = parseInt(valorFactura);
-          const segundo = document.getElementById('ValorDescuento');
+          const segundo = document.getElementById('valorDescuento');
           let valorDescuento = segundo.value.replaceAll('.', '');
           let valorDescuentoFinal = parseInt(valorDescuento);
           const tercero = document.getElementById('valorTotalFacturado');
@@ -72,7 +76,8 @@ function saveData() {
             descripcionServicios: document.getElementById('descripcionServicios').value,
             observacionFactura: formData.get('observacionFactura').trim(),
             contrato: formData.get('contrato'),
-            valorToral: 0,
+            prorroga: prorroga.checked == true ? 1 : 0,
+            valorToral: 0
           }
 
           fetch(API_URL, {
@@ -86,6 +91,7 @@ function saveData() {
             .then(response => {
               console.log(response)
             }).catch(error => console.log(error))
+            
         }
         alert("Factura Creada Exitosamente");
         location.reload();
@@ -156,25 +162,25 @@ formatMoney = (e) =>{
 }
 //------------------------------------------------------------------------------------//
 //ELIMINAR PUNTOS PARA RELLENAR
-getFormatMoney = (target) =>{
-  var entrada = target.value.split('.').join('');
-  entrada = entrada.split('').reverse();
-  var salida = [];
-  var aux = '';
-  var paginador = Math.ceil(entrada.length / 3);
-  for (let i = 0; i < paginador; i++) {
-      for (let j = 0; j < 3; j++) {
-          "123 4"
-          if (entrada[j + (i * 3)] != undefined) {
-              aux += entrada[j + (i * 3)];
-          }
-      }
-      salida.push(aux);
-      aux = '';
+  getFormatMoney = (target) =>{
+    var entrada = target.value.split('.').join('');
+    entrada = entrada.split('').reverse();
+    var salida = [];
+    var aux = '';
+    var paginador = Math.ceil(entrada.length / 3);
+    for (let i = 0; i < paginador; i++) {
+        for (let j = 0; j < 3; j++) {
+            "123 4"
+            if (entrada[j + (i * 3)] != undefined) {
+                aux += entrada[j + (i * 3)];
+            }
+        }
+        salida.push(aux);
+        aux = '';
 
-      target.value = salida.join('.').split("").reverse().join('');
+        target.value = salida.join('.').split("").reverse().join('');
+    }
   }
-}
 //------------------------------------------------------------------------------------//
 //IMPRIMIR DATOS
 const bodyDoc = document.body;
@@ -211,10 +217,17 @@ function getFactura() {
           <th style="Color: white;" scope="col"><center>Centro de Costos</center></th>
           <th style="Color: white;" scope="col"><center>Observaciones</center></th>
           <th style="Color: white;" scope="col"><center>Valor Total</center></th>
+          <th style="Color: white;" scope="col"><center>Prorroga</center></th>
           <th style="Color: white;" scope="col" colspan="2"><center>Opciones</center></th>
         </tr>
 `;
     intItem.forEach(intItem => {
+      let stringProrroga = '';
+          if (intItem.prorroga == 1) stringProrroga = `
+                    <span class="badge bg-success">Activo</span>
+                    `;
+          else stringProrroga = '<span class="badge bg-danger">Inactivo</span>';
+      
       const numerovalorTotal = intItem.valorTotal;
       const numerofacturaTotal = intItem.facturaTotal;
       const numerovalorDescuento = intItem.valorDescuento;
@@ -238,6 +251,7 @@ function getFactura() {
                 <td align="center">${intItem.contrato}</td>
                 <td align="center">${intItem.observacionFactura}</td>
                 <td align="center">${formato(numerovalorTotal)}</td>
+                <td align="center">${stringProrroga}</td>
                 <td><button type="button" class="btn btn-info" id="btn-edit"><img src="https://cdn-icons-png.flaticon.com/512/126/126794.png" width="20px" heigth="20px"></button></td>
                 <td><button type="button" class="btn btn-danger" id="btn-delete"><img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="20px" heigth="20px"></button></td>
         </tr>
@@ -289,16 +303,15 @@ const rellenarfactura = () => {
           $('#fechaRegistro').val(res.fechaRegistro);
           $('#facturaTotal').val(res.facturaTotal);
           getFormatMoney(document.getElementById('facturaTotal'));
-
           $('#valorDescuento').val(res.valorDescuento);
           getFormatMoney(document.getElementById('valorDescuento'));
-
           $('#valorTotalFacturado').val(res.valorTotalFacturado);
           getFormatMoney(document.getElementById('valorTotalFacturado'));
-
           $('#descripcionServicios').val(res.descripcionServicios);
           $('#contrato').val(res.contrato);
           $('#observacionFactura').val(res.observacionFactura);
+          let check = document.getElementById('prorroga')
+          res.prorroga == 1 ? check.checked = true : check.checked = false
           // let check = document.getElementById('notaCredito')
           // res.notaCredito == 1 ? check.checked = true : check.checked = false
           // $('#valorNotacredito').val(res.valorNotacredito);
@@ -321,10 +334,13 @@ const editFactura = () => {
     $('#crear').css('display', 'none');
     $('#editar').css('display', 'block');
 
+    let inputCheck = document.getElementById('prorroga')
+    let check = inputCheck.checked == true ? 1 : 0;
+
     const primero = document.getElementById('facturaTotal');
     let valorFactura = primero.value.replaceAll('.', '');
     let facturaTotalFinal = parseInt(valorFactura);
-    const segundo = document.getElementById('ValorDescuento');
+    const segundo = document.getElementById('valorDescuento');
     let valorDescuento = segundo.value.replaceAll('.', '');
     let valorDescuentoFinal = parseInt(valorDescuento);
     const tercero = document.getElementById('valorTotalFacturado');
@@ -343,6 +359,7 @@ const editFactura = () => {
       descripcionServicios: $('#descripcionServicios').val(),
       contrato: $('#contrato').val(),
       observacionFactura: $('#observacionFactura').val(),
+      prorroga: check,
     }
 
     $.ajax({
@@ -356,24 +373,23 @@ const editFactura = () => {
         $('#editar').css('display', 'none');
         $('#crear').css('display', 'block');
         document.getElementById('idFactura').disabled=false;
-
         reset();
         getFactura();
       }
-
     })
+    
   })
 
 }
 
-const reset = () => {
-  $('#idFactura').val('');
-  $('#fechaRegistro').val('');
-  $('#fechaEntrega').val('');
-  $('#facturaTotal').val('');
-  $('#descripcionServicios').val('');
-  $('#observacionFactura').val('');
-}
+// const reset = () => {
+//   $('#idFactura').val('');
+//   $('#fechaRegistro').val('');
+//   $('#fechaEntrega').val('');
+//   $('#facturaTotal').val('');
+//   $('#descripcionServicios').val('');
+//   $('#observacionFactura').val('');
+// }
 
 //------------------------------------------------------------------------------------//
 // BOTON ELIMINAR
@@ -429,3 +445,10 @@ $(document).ready(function() {
    });
 });
  //------------------------------------------------------------------------------------//
+ // VALIDADOR CHECK.
+function validaCheckboxnotaCredito() {
+  const checkboxnotaCredito = document.getElementById(' ');
+  if (checkboxnotaCredito.checked == true)
+      alert('Esta a punto de generar una Prorroga');
+}
+//------------------------------------------------------------------------------------//

@@ -415,3 +415,10 @@ $(document).ready(function() {
      });
   });
 //------------------------------------------------------------------------------------//
+// VALIDADOR CHECK.
+function validaCheckboxnotaCredito() {
+    const checkboxnotaCredito = document.getElementById('notaCredito');
+    if (checkboxnotaCredito.checked == true)
+        alert('Esta a punto de generar una Nota Credito');
+}
+//------------------------------------------------------------------------------------//
