@@ -447,8 +447,8 @@ $(document).ready(function() {
  //------------------------------------------------------------------------------------//
  // VALIDADOR CHECK.
 function validaCheckboxnotaCredito() {
-  const checkboxnotaCredito = document.getElementById(' ');
+  const checkboxnotaCredito = document.getElementById('prorroga');
   if (checkboxnotaCredito.checked == true)
-      alert('Esta a punto de generar una Prorroga');
+    alert('Esta a punto de generar una Prorroga');
 }
 //------------------------------------------------------------------------------------//
