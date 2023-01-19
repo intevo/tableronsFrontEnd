@@ -279,6 +279,10 @@ const rellenarfactura = () => {
   $(document).on('click', '#btn-edit', function () {
     if (confirm('¿Seguro de Editar?')) {
       let btnEdit = $(this)[0].parentElement.parentElement;
+      //--------------funcion cerrar modal--------------------//
+      '<script src="modal.js"></script>'
+      modalClose("myModal");
+      //-------------------------------------------------------//
       let id = $(btnEdit).attr('facturaId');
 
       $('#crear').hide();

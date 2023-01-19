@@ -27,6 +27,9 @@
     }
 
   }
+  function modalClose(idM){
+    document.getElementById(idM).style.display = "none";
+  }
 
 
 
