@@ -186,8 +186,7 @@ function getContrato() {
             else stringProrroga = '<span class="badge bg-danger">Inactivo</span>';
             listHTML +=
                 `<tbody id="geeks">
-                <tr>
-                    contratoId = ${intItem.idContrato}>
+                <tr contratoId = ${intItem.idContrato}>
                     <td align="center">${intItem.idContrato}</td>
                     <td align="center">${intItem.nombreContrato}</td>
                     <td align="center">${formato(numerovalorContrato)}</td>
