@@ -1,98 +1,126 @@
 // FUNCION DE DATOS Y VALIDACIONES
 function saveData() {
   const API_URL = 'http://localhost:8080/factura';
+  let fechaRegistroComparacion = fechaRegistro.value;
+  let fechaEntregaComparacion = fechaEntrega.value;
+
+  var fecha = new Date();
+  var mes = fecha.getMonth() + 1;
+  var dia = fecha.getDate();
+  var ano = fecha.getFullYear();
+  if (dia < 10)
+    dia = '0' + dia;
+  if (mes < 10)
+    mes = '0' + mes
+  let fechaLimite = ano + "-" + mes + "-" + dia;
 
   if (idFactura.value.length <= 0) {
     alert("Debe poner un valor en el campo de factura");
     return;
-  } if (facturaTotal.value.length <= 0) {
+  }
+  if (facturaTotal.value.length <= 0) {
     alert("Debe poner un valor en el campo de Valor Facturado");
     return;
-  }if (valorDescuento.value.length <= 0) {
+  }
+  if (valorDescuento.value.length <= 0) {
     alert("Debe poner un valor en el campo de Valor Descuento");
     return;
-   }if (observacionFactura.value.length <= 0) {
+  }
+  if (fechaRegistroComparacion > fechaEntregaComparacion) {
+    alert("Validar el campo Fecha Registro");
+    return;
+  }
+  if (fechaEntregaComparacion == fechaRegistroComparacion) {
+    alert("Validar el campos Fecha Registro y Fecha Entrega");
+    return;
+  }
+  if (fechaEntregaComparacion < fechaRegistroComparacion) {
+    alert("Validar el campo Fecha Entrega");
+    return;
+  }
+  if (observacionFactura.value.length <= 0) {
     alert("Debe poner un valor en el campo de Observaciones");
     return;
-  } if (contrato.value.length <= 0) {
-      alert("Debe crear un contrato para poder generar una Factura");
-      return;
   }
-    let intRes = null;
+  if (contrato.value.length <= 0) {
+    alert("Debe crear un contrato para poder generar una Factura");
+    return;
+  }
+  let intRes = null;
 
-    const getAllInvoice = () => {
-      fetch(API_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(res => res.json())
-        .then(json => {
-          intRes = json;
-          // console.log(json);
-          renderResult(intRes);
-        })
-    }
-
-    const renderResult = (intRes) => {
-
-      let busqueda = parseInt(document.getElementById('idFactura').value);
-
-      let existe = false;
-      intRes.forEach(element => {
-        if (element.idFactura == busqueda) existe = true, console.log(element.idFactura), console.log(busqueda)
-      });
-
-      if (existe) {
-        window.alert("ERROR: Id de Factura ya esta registrado");
-      } else {
-        const createInvoice = () => {
-          const formData = new FormData(document.querySelector('#invoiceData'));
-          let prorroga = 0;
-          if(document.getElementById("prorroga") != null){
-           prorroga = document.getElementById("prorroga");
-          }
-
-          const primero = document.getElementById('facturaTotal');
-          let valorFactura = primero.value.replaceAll('.', '');
-          let facturaTotalFinal = parseInt(valorFactura);
-          const segundo = document.getElementById('valorDescuento');
-          let valorDescuento = segundo.value.replaceAll('.', '');
-          let valorDescuentoFinal = parseInt(valorDescuento);
-
-          const factura = {
-            idFactura: formData.get('idFactura').trim(),
-            fechaRegistro: formData.get('fechaRegistro'),
-            fechaEntrega: formData.get('fechaEntrega'),
-            facturaTotal: facturaTotalFinal,
-            valorDescuento: valorDescuentoFinal,
-            descripcionServicios: document.getElementById('descripcionServicios').value,
-            observacionFactura: formData.get('observacionFactura').trim(),
-            contrato: formData.get('contrato'),
-            prorroga: prorroga.checked == true ? 1 : 0,
-            valorToral: 0
-          }
-
-          fetch(API_URL, {
-            method: 'POST',
-            body: JSON.stringify(factura),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-            .then(res = res.json())
-            .then(response => {
-              console.log(response)
-            }).catch(error => console.log(error))
-            
-        }
-        alert("Factura Creada Exitosamente");
-        location.reload();
-        createInvoice();
+  const getAllInvoice = () => {
+    fetch(API_URL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
       }
-    }
-    getAllInvoice();
+    }).then(res => res.json())
+      .then(json => {
+        intRes = json;
+        // console.log(json);
+        renderResult(intRes);
+      })
   }
+
+  const renderResult = (intRes) => {
+
+    let busqueda = parseInt(document.getElementById('idFactura').value);
+
+    let existe = false;
+    intRes.forEach(element => {
+      if (element.idFactura == busqueda) existe = true, console.log(element.idFactura), console.log(busqueda)
+    });
+
+    if (existe) {
+      window.alert("ERROR: Id de Factura ya esta registrado");
+    } else {
+      const createInvoice = () => {
+        const formData = new FormData(document.querySelector('#invoiceData'));
+        let prorroga = 0;
+        if (document.getElementById("prorroga") != null) {
+          prorroga = document.getElementById("prorroga");
+        }
+
+        const primero = document.getElementById('facturaTotal');
+        let valorFactura = primero.value.replaceAll('.', '');
+        let facturaTotalFinal = parseInt(valorFactura);
+        const segundo = document.getElementById('valorDescuento');
+        let valorDescuento = segundo.value.replaceAll('.', '');
+        let valorDescuentoFinal = parseInt(valorDescuento);
+
+        const factura = {
+          idFactura: formData.get('idFactura').trim(),
+          fechaRegistro: formData.get('fechaRegistro'),
+          fechaEntrega: formData.get('fechaEntrega'),
+          facturaTotal: facturaTotalFinal,
+          valorDescuento: valorDescuentoFinal,
+          descripcionServicios: document.getElementById('descripcionServicios').value,
+          observacionFactura: formData.get('observacionFactura').trim(),
+          contrato: formData.get('contrato'),
+          prorroga: prorroga.checked == true ? 1 : 0,
+          valorToral: 0
+        }
+
+        fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify(factura),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(res = res.json())
+          .then(response => {
+            console.log(response)
+          }).catch(error => console.log(error))
+
+      }
+      alert("Factura Creada Exitosamente");
+      location.reload();
+      createInvoice();
+    }
+  }
+  getAllInvoice();
+}
 
 //------------------------------------------------------------------------------------//
 // LISTA DE DESCRIPCION DE SERVICIOS
@@ -134,46 +162,46 @@ function solonumeros(e) {
 }
 //------------------------------------------------------------------------------------//
 // DECIMALES PARA VALOR NOTA CREDITO
-formatMoney = (e) =>{
+formatMoney = (e) => {
   var entrada = e.target.value.split('.').join('');
   entrada = entrada.split('').reverse();
   var salida = [];
   var aux = '';
   var paginador = Math.ceil(entrada.length / 3);
   for (let i = 0; i < paginador; i++) {
-      for (let j = 0; j < 3; j++) {
-          "123 4"
-          if (entrada[j + (i * 3)] != undefined) {
-              aux += entrada[j + (i * 3)];
-          }
+    for (let j = 0; j < 3; j++) {
+      "123 4"
+      if (entrada[j + (i * 3)] != undefined) {
+        aux += entrada[j + (i * 3)];
       }
-      salida.push(aux);
-      aux = '';
+    }
+    salida.push(aux);
+    aux = '';
 
-      e.target.value = salida.join('.').split("").reverse().join('');
+    e.target.value = salida.join('.').split("").reverse().join('');
   }
 }
 //------------------------------------------------------------------------------------//
 //ELIMINAR PUNTOS PARA RELLENAR
-  getFormatMoney = (target) =>{
-    var entrada = target.value.split('.').join('');
-    entrada = entrada.split('').reverse();
-    var salida = [];
-    var aux = '';
-    var paginador = Math.ceil(entrada.length / 3);
-    for (let i = 0; i < paginador; i++) {
-        for (let j = 0; j < 3; j++) {
-            "123 4"
-            if (entrada[j + (i * 3)] != undefined) {
-                aux += entrada[j + (i * 3)];
-            }
-        }
-        salida.push(aux);
-        aux = '';
-
-        target.value = salida.join('.').split("").reverse().join('');
+getFormatMoney = (target) => {
+  var entrada = target.value.split('.').join('');
+  entrada = entrada.split('').reverse();
+  var salida = [];
+  var aux = '';
+  var paginador = Math.ceil(entrada.length / 3);
+  for (let i = 0; i < paginador; i++) {
+    for (let j = 0; j < 3; j++) {
+      "123 4"
+      if (entrada[j + (i * 3)] != undefined) {
+        aux += entrada[j + (i * 3)];
+      }
     }
+    salida.push(aux);
+    aux = '';
+
+    target.value = salida.join('.').split("").reverse().join('');
   }
+}
 //------------------------------------------------------------------------------------//
 //IMPRIMIR DATOS
 const bodyDoc = document.body;
@@ -216,15 +244,15 @@ function getFactura() {
 `;
     intItem.forEach(intItem => {
       let stringProrroga = '';
-          if (intItem.prorroga == 1) stringProrroga = `
+      if (intItem.prorroga == 1) stringProrroga = `
                     <span class="badge bg-success">Activo</span>
                     `;
-          else stringProrroga = '<span class="badge bg-danger">Inactivo</span>';
-      
+      else stringProrroga = '<span class="badge bg-danger">Inactivo</span>';
+
       const numerovalorTotal = intItem.valorTotal;
       const numerofacturaTotal = intItem.facturaTotal;
       const numerovalorDescuento = intItem.valorDescuento;
-      
+
       const formato = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
         const rep = '$1.';
@@ -283,7 +311,8 @@ const rellenarfactura = () => {
 
       $('#crear').hide();
       $('#editar').show();
-      document.getElementById('idFactura').disabled=true;
+      document.getElementById('idFactura').disabled = true;
+      document.getElementById('contrato').disabled = true;
 
       $.ajax({
         url: 'http://localhost:8080/factura/' + id,
@@ -333,7 +362,21 @@ const editFactura = () => {
     const segundo = document.getElementById('valorDescuento');
     let valorDescuento = segundo.value.replaceAll('.', '');
     let valorDescuentoFinal = parseInt(valorDescuento);
-          
+
+
+
+    if ($('#facturaTotal').val().length <= 0) {
+      alert("Error: El campo Valor Facturado esta vacio");
+      return;
+    }if ($('#valorDescuento').val().length <= 0) {
+      alert("Error: El campo Valor Descuento esta vacio");
+      return;
+    }if ($('#observacionFactura').val().length <= 0) {
+      alert("Error: El campo Observaciones esta vacio");
+      return;
+    }
+  
+
     const factura = {
 
       idFactura: id,
@@ -358,12 +401,12 @@ const editFactura = () => {
         alert("Factura Editada");
         $('#editar').css('display', 'none');
         $('#crear').css('display', 'block');
-        document.getElementById('idFactura').disabled=false;
+        document.getElementById('idFactura').disabled = false;
         reset();
         getFactura();
       }
     })
-    
+
   })
 
 }
@@ -408,30 +451,30 @@ deletefactura();
 //------------------------------------------------------------------------------------//
 // FETCH PARA HACER DATALIST DE CONTRATO
 fetch('http://localhost:8080/contrato')
-    .then(response => response.json())
-    .then(data => {
-        const select = document.getElementById("contrato");
-        data.forEach(element => {
-            var option = document.createElement("option");
-            var ansText = document.createTextNode(element.idContrato);
-            option.appendChild(ansText);
-            option.value = element.idContrato;
-            select.appendChild(option);
-        });
+  .then(response => response.json())
+  .then(data => {
+    const select = document.getElementById("contrato");
+    data.forEach(element => {
+      var option = document.createElement("option");
+      var ansText = document.createTextNode(element.idContrato);
+      option.appendChild(ansText);
+      option.value = element.idContrato;
+      select.appendChild(option);
     });
+  });
 //------------------------------------------------------------------------------------//
 // RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.
-$(document).ready(function() {
-  $("#gfgs").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#geeks tr").filter(function() {
-        $(this).toggle($(this).text()
+$(document).ready(function () {
+  $("#gfgs").on("keyup", function () {
+    var value = $(this).val().toLowerCase();
+    $("#geeks tr").filter(function () {
+      $(this).toggle($(this).text()
         .toLowerCase().indexOf(value) > -1)
-      });
-   });
+    });
+  });
 });
- //------------------------------------------------------------------------------------//
- // VALIDADOR CHECK.
+//------------------------------------------------------------------------------------//
+// VALIDADOR CHECK.
 function validaCheckboxnotaCredito() {
   const checkboxnotaCredito = document.getElementById('prorroga');
   if (checkboxnotaCredito.checked == true)
