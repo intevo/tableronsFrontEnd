@@ -8,12 +8,48 @@ function saveData() {
     const fechaFinalizacionContrato = document.getElementById("fechaFinalizacionContrato");
     const valorNetoContrato = document.getElementById('valorNetoContrato');
     const prorroga = document.getElementById("prorroga");
+    let fechaInicioComparacion = fechaIncioContrato.value;
+    let fechaComparacion = fechaFinalizacionContrato.value;
+
+    var fecha = new Date();
+    var mes = fecha.getMonth() + 1;
+    var dia = fecha.getDate();
+    var ano = fecha.getFullYear();
+    if (dia < 10)
+        dia = '0' + dia;
+    if (mes < 10)
+        mes = '0' + mes
+    let fechaLimite = ano + "-" + mes + "-" + dia;
+
     if (idContrato.value.length <= 0) {
         alert("Debe poner un valor en el campo Centro de Costos");
         return;
     }
     if (nombreContrato.value.length <= 0) {
         alert("Debe poner un valor en el campo Nombre de contrato");
+        return;
+    }
+    if((fechaInicioComparacion >= fechaLimite) && (fechaComparacion > fechaLimite)){
+        document.getElementById('prorroga').checked=true;
+        document.getElementById('prorroga').disabled=true;
+        alert("Ingresando");
+        validaCheckbox();
+    }
+    if (fechaInicioComparacion < fechaLimite){
+        alert("Error la Fecha de incio no es correcta");
+        document.getElementById('prorroga').checked=false;
+        document.getElementById('prorroga').disabled=true;
+        return;
+    }
+    if (fechaComparacion < fechaLimite){
+        document.getElementById('prorroga').checked=false;
+        document.getElementById('prorroga').disabled=true;
+        alert("Advertencia: Contrato Inactivo");
+    }
+    if((fechaInicioComparacion == fechaLimite) && (fechaComparacion == fechaLimite)){
+        alert("Error validar las fechas ingresadas");
+        document.getElementById('prorroga').checked=false;
+        document.getElementById('prorroga').disabled=true;
         return;
     }
     if (valorContrato.value.length <= 0) {
@@ -265,6 +301,7 @@ const rellenarContrato = () => {
             $('#crear').hide();
             $('#editar').show();
             document.getElementById('idContrato').disabled=true;
+            document.getElementById('fechaIncioContrato').disabled=true;
 
             $.ajax({
                 url: 'http://localhost:8080/contrato/' + id,
@@ -301,13 +338,41 @@ const editContrato = () => {
         let inputCheck = document.getElementById('prorroga')
         let check = inputCheck.checked == true ? 1 : 0;
 
+        var fecha = new Date();
+        var mes = fecha.getMonth() + 1;
+        var dia = fecha.getDate();
+        var ano = fecha.getFullYear();
+        if (dia < 10)
+            dia = '0' + dia;
+        if (mes < 10)
+            mes = '0' + mes
+        let fechaLimite = ano + "-" + mes + "-" + dia;
+
         const cambio = document.getElementById('valorContrato');
         let valorContrato = cambio.value.replaceAll('.', '');
         let valorNotacreditoFinal = parseInt(valorContrato);
         const cambio2 = document.getElementById('valorNetoContrato');
         let valorNetoContrato2 = cambio2.value.replaceAll('.', '');
         let valorNetoContratoFin = parseInt(valorNetoContrato2);
-        
+
+        if ($('#nombreContrato').val().length <= 0) {
+            alert("Debe poner un valor en el campo Nombre de contrato");
+            return;
+        }
+        if ($('#fechaFinalizacionContrato').val() < fechaLimite){
+            document.getElementById('prorroga').checked=false;
+            document.getElementById('prorroga').disabled=true;
+            alert("Advertencia: Contrato Inactivo / Validar fecha");
+            return;
+        }
+        if ($('#valorContrato').val().length <= 0) {
+            alert("Debe poner un valor en el campo valor de contrato");
+            return;
+        }
+        if ($('#valorNetoContrato').val().length <= 0) {
+            alert("Debe poner un valor en el campo valor Neto de contrato");
+            return;
+        }
 
         const ans = {
             idContrato: id,
@@ -414,11 +479,4 @@ $(document).ready(function() {
         });
      });
   });
-//------------------------------------------------------------------------------------//
-// VALIDADOR CHECK.
-function validaCheckboxnotaCredito() {
-    const checkboxnotaCredito = document.getElementById('notaCredito');
-    if (checkboxnotaCredito.checked == true)
-        alert('Esta a punto de generar una Nota Credito');
-}
 //------------------------------------------------------------------------------------//
