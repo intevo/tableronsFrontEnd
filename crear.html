@@ -161,6 +161,15 @@
             </div>
           </div>
 
+          <div class="col">
+            <label for="Descripcion de Servicios" class="form-label">Descripción de servicios</label>
+            <select id="descripcionServicios" name="descripcionServicios" class="form-control" required>
+            </select>
+            <div class="invalid-feedback">
+              Ingrese Nombre o Descripción del servicio.
+            </div>
+          </div>
+
           <div class="col-6">
             <label for="Factura total" class="form-label">Valor Facturado</label>
             <div class="input-group has-validation">
@@ -178,16 +187,6 @@
               onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
             <div class="invalid-feedback">
               Ingrese el valor descuento.
-            </div>
-          </div>
-
-          <div class="col-6">
-            <label for="entrega" class="form-label">Valor Total Facturado (Mensual)</label>
-            <div class="input-group has-validation">
-              <input type="text" class="form-control" id="valorTotalFacturado" name="valorTotalFacturado" onkeyup="formatMoney(event)" onkeypress="return solonumeros(event)" required>
-              <div class="invalid-feedback">
-                Ingrese la fecha de entrega.
-              </div>
             </div>
           </div>
 
@@ -210,15 +209,6 @@
             </div>
           </div>
 
-
-          <div class="col">
-            <label for="Descripcion de Servicios" class="form-label">Descripción de servicios</label>
-            <select id="descripcionServicios" name="descripcionServicios" class="form-control" required>
-            </select>
-            <div class="invalid-feedback">
-              Ingrese Nombre o Descripción del servicio.
-            </div>
-          </div>
           <div class="col">
             <label for="Nombre" class="form-label">Observacion</label>
             <textarea id="observacionFactura" name="observacionFactura" class="form-control" required
