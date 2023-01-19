@@ -11,10 +11,7 @@ function saveData() {
   }if (valorDescuento.value.length <= 0) {
     alert("Debe poner un valor en el campo de Valor Descuento");
     return;
-   }if (valorTotalFacturado.value.length <= 0) {
-    alert("Debe poner un valor en el campo de valor Total Facturado (Mensual)");
-    return;
-  } if (observacionFactura.value.length <= 0) {
+   }if (observacionFactura.value.length <= 0) {
     alert("Debe poner un valor en el campo de Observaciones");
     return;
   } if (contrato.value.length <= 0) {
@@ -62,9 +59,6 @@ function saveData() {
           const segundo = document.getElementById('valorDescuento');
           let valorDescuento = segundo.value.replaceAll('.', '');
           let valorDescuentoFinal = parseInt(valorDescuento);
-          const tercero = document.getElementById('valorTotalFacturado');
-          let valorNotacredito = tercero.value.replaceAll('.', '');
-          let valorTotalFacturadoFinal = parseInt(valorNotacredito);
 
           const factura = {
             idFactura: formData.get('idFactura').trim(),
@@ -72,7 +66,6 @@ function saveData() {
             fechaEntrega: formData.get('fechaEntrega'),
             facturaTotal: facturaTotalFinal,
             valorDescuento: valorDescuentoFinal,
-            valorTotalFacturado: valorTotalFacturadoFinal,
             descripcionServicios: document.getElementById('descripcionServicios').value,
             observacionFactura: formData.get('observacionFactura').trim(),
             contrato: formData.get('contrato'),
@@ -231,7 +224,6 @@ function getFactura() {
       const numerovalorTotal = intItem.valorTotal;
       const numerofacturaTotal = intItem.facturaTotal;
       const numerovalorDescuento = intItem.valorDescuento;
-      const numerovalorTotalFacturado = intItem.valorTotalFacturado;
       
       const formato = (number) => {
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
@@ -246,7 +238,7 @@ function getFactura() {
                 <td align="center">${intItem.fechaRegistro}</td>
                 <td align="center">${formato(numerofacturaTotal)}</td>
                 <td align="center">${formato(numerovalorDescuento)}</td>
-                <td align="center">${formato(numerovalorTotalFacturado)}</td>
+                <td align="center">${formato(numerovalorTotal)}</td>
                 <td align="center">${intItem.descripcionServicios}</td>
                 <td align="center">${intItem.contrato}</td>
                 <td align="center">${intItem.observacionFactura}</td>
@@ -305,8 +297,6 @@ const rellenarfactura = () => {
           getFormatMoney(document.getElementById('facturaTotal'));
           $('#valorDescuento').val(res.valorDescuento);
           getFormatMoney(document.getElementById('valorDescuento'));
-          $('#valorTotalFacturado').val(res.valorTotalFacturado);
-          getFormatMoney(document.getElementById('valorTotalFacturado'));
           $('#descripcionServicios').val(res.descripcionServicios);
           $('#contrato').val(res.contrato);
           $('#observacionFactura').val(res.observacionFactura);
@@ -343,9 +333,6 @@ const editFactura = () => {
     const segundo = document.getElementById('valorDescuento');
     let valorDescuento = segundo.value.replaceAll('.', '');
     let valorDescuentoFinal = parseInt(valorDescuento);
-    const tercero = document.getElementById('valorTotalFacturado');
-    let valorNotacredito = tercero.value.replaceAll('.', '');
-    let valorTotalFacturadoFinal = parseInt(valorNotacredito);
           
     const factura = {
 
@@ -355,7 +342,6 @@ const editFactura = () => {
       fechaRegistro: $('#fechaRegistro').val(),
       facturaTotal: facturaTotalFinal,
       valorDescuento: valorDescuentoFinal,
-      valorTotalFacturado: valorTotalFacturadoFinal,
       descripcionServicios: $('#descripcionServicios').val(),
       contrato: $('#contrato').val(),
       observacionFactura: $('#observacionFactura').val(),
