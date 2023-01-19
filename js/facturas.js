@@ -54,7 +54,7 @@ function getFactura() {
 
 
       listHTML += `
-        <tr>      
+        <tr style="background-color: white ">      
           <td align="center">${intItem.idFactura}</td>
           <td align="center">${intItem.fechaEntrega}</td>
           <td align="center">${intItem.fechaRegistro}</td>

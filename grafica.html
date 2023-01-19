@@ -68,11 +68,16 @@
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
     }
+
+    body{
+      background-image: url(img/Fondo-intevo.png);
+    }
+
   </style>
 </head>
 
-<body>
-
+<body background-imagen="url(C:\xampp\htdocs\tableronsFrontEnd\img)">
+  
   <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-10 shadow">
 
     <a href="grafica.html"><img src="img/intevo-logo.png" id="icon" alt="User Icon"></a>
@@ -175,26 +180,26 @@
           <tr>
               <!--<div id="chartContainer" class="grafico"></div>-->
               <center>
-              <iframe src="http://localhost/tableronsFrontEnd/graph.html" style="width: 990px; height: 590px; margin: 0 auto;"></iframe>
+              <iframe src="http://localhost/tableronsFrontEnd/graph.html" style="width: 990px; height: 390px; margin: 0 auto;"></iframe>
               </center> 
             </td>
           </tr>
-        </table>
+        </table><td width="90%">
+          <center>
+            <div class="outer-wrapper">  
+              <div class="table-wrapper">
+                <table class="tabla" id="ansList">   
+                </table>
+              </div>
+            </div>
+          </center> 
+    </td>
     </div>
     </main>
   </div>
   </div>
 
-  <td width="90%">
-        <center>
-          <div class="outer-wrapper">  
-            <div class="table-wrapper">
-              <table class="tabla" id="ansList">   
-              </table>
-            </div>
-          </div>
-        </center> 
-  </td>
+  
   
   <script>
 
@@ -294,7 +299,7 @@
 
           listHTML += `           
         <tbody >
-          <tr>
+          <tr style="background-color: white">
             <td>${intItem.nombreContrato}</td>
             <td>${intItem.idContrato}</td>
             <td> ${formato(intItem.valorContrato)}</td>
