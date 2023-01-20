@@ -13,18 +13,22 @@
 }
 
 body {
-    background: #DBDBDB;
+    background: #eee4fb;
     font-family: "Poppins", sans-serif;
+    height: 120vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 /* FORMULARIO =================================== */
 
 .form_wrap {
-    width: 1050px;
-    height: 750px;
-    margin: 50px auto;
-    display: flex;
-
+    width: 70%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
@@ -37,50 +41,42 @@ body {
     content: '';
     width: 100%;
     height: 100%;
-
     position: absolute;
     top: 0;
     left: 0;
-
-    background: #874BD7;
-    opacity: 0.9;
+    background-image: url(../img/Fondo.png);
+    background-size: cover;
+    
 }
 
 .cantact_info {
-    width: 38%;
     position: relative;
-
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 15% 70% 15%;
     align-items: center;
     justify-content: center;
-
     background-size: cover;
     background-position: center center;
-
 }
 
 .info_title,
 .info_items {
     position: relative;
     z-index: 2;
-    color: #fff;
-    margin-top: 70px;
-}
-
-.info_title {
-    margin-bottom: 65px;
+    color: rgb(70, 48, 99);
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 .info_title span {
     font-size: 100px;
     display: block;
-    text-align: center;
-    margin-bottom: 15px;
+
 }
 
 .info_title h2 {
-    font-size: 35px;
+    font-size: 40px;
     text-align: center;
 }
 
@@ -107,7 +103,6 @@ body {
 
 /* Formulario de contacto*/
 form.form_contact {
-    width: 62%;
     padding: 30px 40px;
 }
 
@@ -119,13 +114,9 @@ form.form_contact h2 {
     
 }
 
-.titulo{
-    margin-top: 40px;;
-}
 
 form.form_contact .user_info {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
 }
 
 form.form_contact label {
@@ -221,8 +212,51 @@ form.form_contact input[type="button"]:hover {
 }
 
 .volver-form{
-    margin-top: 160px;
-    margin-right: 220px;
+    margin-top: 5%;
+    grid-row-start: 4;
     position: relative;
 }
- 
+
+div .container{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+div .container div {
+    padding: 5%;
+}
+
+.PrimerDiv{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-template-columns: 60% 40%;
+    display: grid;
+    padding: 2% !important;
+}
+.PrimerDiv .segunDiv1 input{
+    margin-top: 4px !important;
+}
+.TerserDiv{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.divCorreo{
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.container input{
+    transition: .4s;
+}
+.container input:focus{
+    border-color: rgb(163, 83, 255);
+}
+
+.contacInf{
+    height: 100%;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: grid;
+    grid-template-rows: 20% 60% 20% ;
+}

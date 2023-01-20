@@ -25,19 +25,24 @@
             padding: 10px;
             border: none;
             border-radius: 25px;
-            margin-left: 400px;
             align-self: flex-end;
-
             color: #fff;
             font-family: "Poppins", sans-serif;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
         }
+        .botonRegis{
+            grid-column-start: 1;
+            grid-column-end: 3;
+            display: grid;
+            justify-content: end;
+        }
 
         .boton_enviar:hover,
         .btnClose:hover {
             background: gray;
+            transition:.3s;
         }
 
         .btnClose {
@@ -46,13 +51,13 @@
             padding: 10px;
             border: none;
             border-radius: 25px;
-            margin-left: 60px;
             align-self: flex-end;
             color: #874BD7;
             font-family: "Poppins", sans-serif;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            box-shadow: 0px 0px 5px #29005f7c;
         }
     </style>
 </head>
@@ -61,45 +66,62 @@
     <section class="form_wrap">
 
         <section class="cantact_info">
-            <section class="info_title">
-                <span class="fa fa-user-circle"></span>
-                <h2 class="titulo">INFORMACION<br>DE REGISTRO</h2>
-            </section>
-            <section class="info_items">
-                <img src="../img/logo.png" width="250px" height="100px" style="border-radius: 10%;">
-            </section>
-            <section class="volver-form">
-                <a href="../index.html" style="text-decoration:none"><button type="button" class="btnClose">Volver</button></a>
-            </section>
+            <div class="contacInf">
+                <section class="info_title">
+                    <span class="fa fa-user-circle"></span>
+                    <h2 class="titulo">INFORMACION<br>DE REGISTRO</h2>
+                </section>
+                <section class="info_items">
+                    <img src="../img/logo.png" width="400px" height="110px" style="border-radius: 10%;">
+                </section>
+                <section class="volver-form">
+                    <a href="../index.html" style="text-decoration:none"><button type="button" class="btnClose">Volver</button></a>
+                </section>
+            </div>
         </section>
 
         <form id="dataRegistro" class="form_contact">
-            <h2>Envia un mensaje</h2>
+            <center><h2>Datos</h2></center>
             <div class="user_info">
                 <div class="container">
-
-                    <label for="names">Nombres</label>
-                    <input type="text" id="nombres" name="nombres" required class="conv" value="" onkeyup="javascript:this.value=this.value.toUpperCase()">
-
-                    <label for="phone">Telefono / Celular</label>
-                    <input type="number" min="3" id="telefono" name="telefono" required>
-
-                    <label for="email">Correo electronico</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="terminos">Proyecto</label>
-                    <select type="text" id="proyecto" name="proyecto" required class="conv" value="" onkeyup="javascript:this.value=this.value.toUpperCase()">
-                    </select>
-                    <label for="control">Cargo</label>
-                    <input type="text" id="cargo" name="cargo" required class="conv" value="" onkeyup="javascript:this.value=this.value.toUpperCase()">
-
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="pass" name="pass" required>
-
-                    <label for="password">Repetir Contraseña</label>
-                    <input type="password" id="pass1" name="pass1" required>
-
-                    <button type="button" id="registrar" class="boton_enviar" onClick="saveData()">Registrarse</button>
+                    <div class="PrimerDiv">
+                        <div>
+                            <label for="names">Nombres</label>
+                            <input type="text" id="nombres" name="nombres" required class="conv" value="" onkeyup="javascript:this.value=this.value.toUpperCase()">
+                        </div>
+                        <div class="segunDiv1">
+                            <label for="phone">Celular</label>
+                            <input type="number" id="telefono" name="telefono" required>
+                        </div>
+                    </div>
+                    <div class="divCorreo">
+                        <label for="email">Correo electronico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="TerserDiv">
+                        <div>
+                            <label for="terminos">Proyecto</label>
+                            <select type="text" id="proyecto" name="proyecto" required class="conv" value="" onkeyup="javascript:this.value=this.value.toUpperCase()">
+                            </select>
+                        </div>
+                        <div>
+                            <label for="control">Cargo</label>
+                            <input type="text" id="cargo" name="cargo" required class="conv" value="" onkeyup="javascript:this.value=this.value.toUpperCase()">
+                        </div>
+                    </div>
+                    <div class="TerserDiv">
+                        <div>
+                            <label for="password">Contraseña</label>
+                            <input type="password" id="pass" name="pass" required>
+                        </div>
+                        <div>
+                            <label for="password">Repetir Contraseña</label>
+                            <input type="password" id="pass1" name="pass1" required>
+                        </div>
+                    </div>
+                    <div class="botonRegis">
+                        <button type="button" id="registrar" class="boton_enviar" onClick="saveData()">Registrarse</button>
+                    </div>
                 </div>
         </form>
     </section>
