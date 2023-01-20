@@ -345,8 +345,6 @@ const editFactura = () => {
       alert("Error: El campo Observaciones esta vacio");
       return;
     }
-
->>>>>>> 7b7bf41 ('Cambios FrontEnd')
     const factura = {
 
       idFactura: id,
