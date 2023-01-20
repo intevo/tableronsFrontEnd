@@ -2,7 +2,7 @@
 const bodyDoc = document.body;
 const ANS = [];
 bodyDoc.onload = getAns();
-
+document.getElementById('valorNotacredito').disabled=true;
 function getAns() {
     const API_URL = 'http://localhost:8080/ans';
     let ansItem = [];
@@ -39,7 +39,7 @@ function getAns() {
             const numerovalorDescuento = ansItem.valorDescuento;
             const numerovalorTotal = ansItem.valorTotal;
             const numerovalorNotacredito = ansItem.valorNotacredito;
-           
+
             const formato = (number) => {
                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
                 const rep = '$1.';
@@ -55,7 +55,7 @@ function getAns() {
             // const decendente = (numberD) => {
             //     return numberD.sort((a, b)=> b - a)
             // }
-                    
+
             listHTML +=
                 `<tbody id="geeks">
                     <tr ansId = ${ansItem.idAns}>
@@ -83,6 +83,8 @@ function getAns() {
 // FETCH ENVIO DE INFORMACIÓN AL JSON API REST //
 function saveData() {
     const API_URL = 'http://localhost:8080/ans';
+
+
     if (descripcion.value.length <= 0) {
         alert("Debe poner un valor en el campo de Nombre Ans");
         return;
@@ -109,64 +111,67 @@ function saveData() {
         alert("Debe elegir un valor en el campo de Factura");
         return;
     }
-    if(observacionAns.value.length <= 0){
+    if (observacionAns.value.length <= 0) {
         alert("Debe elegir un comentario en observaciones");
         return;
     }
+    
 
-//------------------------------------------------------------------------------------//
-//VARIABLE PARA TRANSFORMAR VALORES A DECIMALES
+    //------------------------------------------------------------------------------------//
+    //VARIABLE PARA TRANSFORMAR VALORES A DECIMALES
 
- 
-        const formData = new FormData(document.querySelector('#ansForm'));
-        const notaCredito = document.getElementById("notaCredito");
 
-        // const primero = document.getElementById('valorFactura');
-        // let valorFactura = primero.value.replaceAll('.', '');
-        // let valorFacturaFinal = parseInt(valorFactura);
-        // const segundo = document.getElementById('valorDescuento');
-        // let valorDescuento = segundo.value.replaceAll('.', '');
-        // let valorDescuentoFinal = parseInt(valorDescuento);
-        // const tercero = document.getElementById('valorNotacredito');
-        // let valorNotacredito = tercero.value.replaceAll('.', '');
-        // let valorNotacreditoFinal = parseInt(valorNotacredito);
+    const formData = new FormData(document.querySelector('#ansForm'));
+    const notaCredito = document.getElementById("notaCredito");
+    
 
-        const ans = {
-            descripcion: document.getElementById('descripcion').value,
-            porcentaje: formData.get('porcentaje'),
-            // valorFactura: valorFacturaFinal,
-            // valorDescuento: valorDescuentoFinal,
-            // valorNotacredito: valorNotacreditoFinal,
-            // valorTotal: formData.get('valorTotal'),
-            factura: document.getElementById('factura').value,
-            observacionAns: formData.get('observacionAns').trim(),
-            notaCredito: notaCredito.checked == true ? 1 : 0,
-            // valorTotal: formData.get('valorTotal'),
-        }
+    // const primero = document.getElementById('valorFactura');
+    // let valorFactura = primero.value.replaceAll('.', '');
+    // let valorFacturaFinal = parseInt(valorFactura);
+    // const segundo = document.getElementById('valorDescuento');
+    // let valorDescuento = segundo.value.replaceAll('.', '');
+    // let valorDescuentoFinal = parseInt(valorDescuento);
+    const tercero = document.getElementById('valorNotacredito');
+    let valorNotacredito = tercero.value.replaceAll('.', '');
+    let valorNotacreditoFinal = parseInt(valorNotacredito);
 
-        fetch(API_URL, {
-            method: 'POST',
-            body: JSON.stringify(ans),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(response => {
-                console.log(response)
-                alert('Ans creado')
-                location.reload();
-            }).catch(error => console.log(error))
+    const ans = {
+        descripcion: document.getElementById('descripcion').value,
+        porcentaje: formData.get('porcentaje'),
+        // valorFactura: valorFacturaFinal,
+        // valorDescuento: valorDescuentoFinal,
+        valorNotacredito: valorNotacreditoFinal,
+        // valorTotal: formData.get('valorTotal'),
+        factura: document.getElementById('factura').value,
+        observacionAns: formData.get('observacionAns').trim(),
+        notaCredito: notaCredito.checked == true ? 1 : 0,
+        // valorTotal: formData.get('valorTotal'),
     }
-   
+
+    fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(ans),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .then(response => {
+            console.log(response)
+            alert('Ans creado')
+            location.reload();
+        }).catch(error => console.log(error))
+}
+
 function validaCheckboxnotaCredito() {
     const checkboxnotaCredito = document.getElementById('notaCredito');
     if (checkboxnotaCredito.checked == true)
+        document.getElementById('valorNotacredito').disabled=false;
         alert('Esta a punto de generar una Nota Credito');
 }
 //------------------------------------------------------------------------------------//
 // DECIMALES PARA VALOR NOTA CREDITO
-formatMoney = (e) =>{
+formatMoney = (e) => {
     var entrada = e.target.value.split('.').join('');
     entrada = entrada.split('').reverse();
     var salida = [];
@@ -187,7 +192,7 @@ formatMoney = (e) =>{
 }
 //------------------------------------------------------------------------------------//
 //ELIMINAR PUNTOS PARA RELLENAR
-getFormatMoney = (target) =>{
+getFormatMoney = (target) => {
     var entrada = target.value.split('.').join('');
     entrada = entrada.split('').reverse();
     var salida = [];
@@ -213,15 +218,23 @@ const rellenarAns = () => {
         if (confirm('¿Seguro de Editar?')) {
             let btnEdit = $(this)[0].parentElement.parentElement;
             let id = $(btnEdit).attr('ansId');
-
             $('#crear').hide();
             $('#editar').show();
+            
+            
 
             $.ajax({
                 url: 'http://localhost:8080/ans/' + id,
                 type: 'GET',
                 dataType: 'json',
                 success: (res) => {
+                    if(res.notaCredito == 1){
+                        document.getElementById('valorNotacredito').disabled=false;
+                    }
+                    if(res.notaCredito == 0){
+                        document.getElementById('valorNotacredito').disabled=true;
+                    }
+
                     $('#descripcion').val(res.descripcion);
                     $('#porcentaje').val(res.porcentaje);
                     $('#valorFactura').val(res.valorFactura);
@@ -247,36 +260,39 @@ const rellenarAns = () => {
 const editAns = () => {
 
     $('#editar').on('click', function ($event) {
-        
+
         let id = $('#idAns').val();
         console.log("Pasando por aqui " + id)
         $('#crear').css('display', 'none');
         $('#editar').css('display', 'block');
 
-        let inputCheck = document.getElementById('notaCredito')
-        let check = inputCheck.checked == true ? 1 : 0;
-
-        const primero = document.getElementById('valorFactura');
-        let valorFactura = primero.value.replaceAll('.', '');
-        let valorFacturaFinal = parseInt(valorFactura);
-        const segundo = document.getElementById('valorDescuento');
-        let valorDescuento = segundo.value.replaceAll('.', '');
-        let valorDescuentoFinal = parseInt(valorDescuento);
         const tercero = document.getElementById('valorNotacredito');
         let valorNotacredito = tercero.value.replaceAll('.', '');
         let valorNotacreditoFinal = parseInt(valorNotacredito);
+        let inputCheck = document.getElementById('notaCredito')
+        let check = inputCheck.checked == true ? 1 : 0;
+
+        // const primero = document.getElementById('valorFactura');
+        // let valorFactura = primero.value.replaceAll('.', '');
+        // let valorFacturaFinal = parseInt(valorFactura);
+        // const segundo = document.getElementById('valorDescuento');
+        // let valorDescuento = segundo.value.replaceAll('.', '');
+        // let valorDescuentoFinal = parseInt(valorDescuento);
+        // const tercero = document.getElementById('valorNotacredito');
+        // let valorNotacredito = tercero.value.replaceAll('.', '');
+        // let valorNotacreditoFinal = parseInt(valorNotacredito);
 
         const ans = {
             idAns: id,
             descripcion: $('#descripcion').val(),
             porcentaje: parseFloat($('#porcentaje').val()),
-            valorFactura: valorFacturaFinal,
-            valorDescuento: valorDescuentoFinal,
-            valorTotal: parseInt($('#valorTotal').val()),
+            // valorFactura: valorFacturaFinal,
+            // valorDescuento: valorDescuentoFinal,
+            // valorTotal: parseInt($('#valorTotal').val()),
             factura: parseInt($('#factura').val()),
             observacionAns: $('#observacionAns').val(),
             notaCredito: check,
-            valorNotacredito: valorNotacreditoFinal
+            valorNotacredito: valorNotacreditoFinal,
         }
 
         $.ajax({
@@ -293,7 +309,7 @@ const editAns = () => {
                 reset();
                 getAns();
             }
-            
+
         })
     })
 
@@ -344,80 +360,80 @@ deleteAns();
 bodyDoc.onload = getValor();
 
 function getValor() {
-    const total = document.querySelector('#tbodyTotales');
-    fetch('http://localhost:8080/ans')
-        .then(res => res.json())
-        .then(json => {
-            renderResult(json)
-        })
+//     const total = document.querySelector('#tbodyTotales');
+//     fetch('http://localhost:8080/ans')
+//         .then(res => res.json())
+//         .then(json => {
+//             renderResult(json)
+//         })
 
-    const renderResult = (arrayData) => {
-        let facturas = [];
-        let listHTML = "";
-        let printJson = [];
-        arrayData.forEach(e => {
-            if (!facturas.includes(e.factura)) facturas.push(e.factura)
-        })
+//     const renderResult = (arrayData) => {
+//         let facturas = [];
+//         let listHTML = "";
+//         let printJson = [];
+//         arrayData.forEach(e => {
+//             if (!facturas.includes(e.factura)) facturas.push(e.factura)
+//         })
 
-        facturas.forEach(e => {
+//         facturas.forEach(e => {
 
-            let factura = e;
-            let acomulado = 0;
-            arrayData.forEach(element => {
-                console.log("Prueba" + element);
-                if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
-            })
+//             let factura = e;
+//             let acomulado = 0;
+//             arrayData.forEach(element => {
+//                 console.log("Prueba" + element);
+//                 if (element.factura == factura) acomulado = acomulado + parseInt(element.valorTotal)
+//             })
 
 
-            let elemento = {
-                idFactura: factura,
-                fechaRegistro: "2022-11-30",
-                fechaEntrega: "2022-11-30",
-                valorTotal: acomulado
-            }
-            printJson.push(elemento);
-        })
+//             let elemento = {
+//                 idFactura: factura,
+//                 fechaRegistro: "2022-11-30",
+//                 fechaEntrega: "2022-11-30",
+//                 valorTotal: acomulado
+//             }
+//             printJson.push(elemento);
+//         })
 
-        printJson.forEach(e => {
-            const numerovacomulado = e.valorTotal;
-            const valorTotal = (number) => {
-                const exp = /(\d)(?=(\d{3})+(?!\d))/g;
-                const rep = '$1.';
-                return number.toString().replace(exp, rep);
-            }
-            listHTML += `
-                <tr>
-                <td>${e.idFactura}</td>
-                <td>${valorTotal(numerovacomulado)}</td>
-                </tr>
-            `;
-            fetch('http://localhost:8080/factura/' + e.idFactura, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(res => res.json())
-                .then(res => {
-                    res.valorTotal = e.valorTotal;
-                    functionUpdate(res)
-                })
-        })
+//         printJson.forEach(e => {
+//             const numerovacomulado = e.valorTotal;
+//             const valorTotal = (number) => {
+//                 const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+//                 const rep = '$1.';
+//                 return number.toString().replace(exp, rep);
+//             }
+//             listHTML += `
+//                 <tr>
+//                 <td>${e.idFactura}</td>
+//                 <td>${valorTotal(numerovacomulado)}</td>
+//                 </tr>
+//             `;
+//             fetch('http://localhost:8080/factura/' + e.idFactura, {
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 }
+//             }).then(res => res.json())
+//                 .then(res => {
+//                     res.valorTotal = e.valorTotal;
+//                     functionUpdate(res)
+//                 })
+//         })
 
-        const functionUpdate = (object) => {
-            fetch('http://localhost:8080/factura/update', {
-                method: 'POST',
-                body: JSON.stringify(object),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(res => res.json())
-                .then(response => {
-                    console.log('Test')
-                    console.log(response)
-                }).catch(error => console.log(error))
-        }
-        total.innerHTML = listHTML;
-    }
+//         const functionUpdate = (object) => {
+//             fetch('http://localhost:8080/factura/update', {
+//                 method: 'POST',
+//                 body: JSON.stringify(object),
+//                 headers: {
+//                     'Content-Type': 'application/json'
+//                 }
+//             })
+//                 .then(res => res.json())
+//                 .then(response => {
+//                     console.log('Test')
+//                     console.log(response)
+//                 }).catch(error => console.log(error))
+//         }
+//         total.innerHTML = listHTML;
+//     }
 }
 
 //------------------------------------------------------------------------------------//
@@ -495,13 +511,13 @@ function comaPorcentaje(e) {
 }
 //------------------------------------------------------------------------------------//
 // RECUADROS DE DATOS PARA FILTRAR BUSQUEDA.    
-  $(document).ready(function() {
-    $("#gfgf").on("keyup", function() {
+$(document).ready(function () {
+    $("#gfgf").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("#geeks tr").filter(function() {
-          $(this).toggle($(this).text()
-          .toLowerCase().indexOf(value) > -1)
+        $("#geeks tr").filter(function () {
+            $(this).toggle($(this).text()
+                .toLowerCase().indexOf(value) > -1)
         });
-     });
-  });
+    });
+});
 //------------------------------------------------------------------------------------//

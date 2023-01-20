@@ -333,7 +333,20 @@ const editFactura = () => {
     const segundo = document.getElementById('valorDescuento');
     let valorDescuento = segundo.value.replaceAll('.', '');
     let valorDescuentoFinal = parseInt(valorDescuento);
-          
+
+
+    if ($('#facturaTotal').val().length <= 0) {
+      alert("Error: El campo Valor Facturado esta vacio");
+      return;
+    }if ($('#valorDescuento').val().length <= 0) {
+      alert("Error: El campo Valor Descuento esta vacio");
+      return;
+    }if ($('#observacionFactura').val().length <= 0) {
+      alert("Error: El campo Observaciones esta vacio");
+      return;
+    }
+
+>>>>>>> 7b7bf41 ('Cambios FrontEnd')
     const factura = {
 
       idFactura: id,

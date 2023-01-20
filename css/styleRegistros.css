@@ -133,6 +133,7 @@ form.form_contact label {
 }
 
 form.form_contact input,
+form.form_contact select,
 form.form_contact textarea {
     width: 100%;
     padding: 8px 0px 5px;

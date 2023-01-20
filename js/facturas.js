@@ -49,7 +49,7 @@ function getFactura() {
 
       acumulador = acumulador + parseInt(intItem.valorTotal)
       // let valorFactura = numerofacturaTotal.replaceAll('.', '');    
-      // facturado = facturado + parseInt(valorFactura)
+      facturado = facturado + parseInt(intItem.facturaTotal)
 
 
       listHTML += `

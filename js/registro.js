@@ -25,10 +25,6 @@ function saveData() {
         swal("ERROR", "Debe ingresar un valor en el campo de Email", "info");
         return;
     }
-    else if (proyecto.value.length <= 0) {
-        swal("ERROR", "Debe ingresar un valor en el campo de Proyecto", "info");
-        return;
-    }
     else if (cargo.value.length <= 0) {
         swal("ERROR", "Debe ingresar un valor en el campo de Cargo", "info");
         return;
@@ -52,7 +48,7 @@ function saveData() {
             nombres: formData.get('nombres').trim(),
             telefono: formData.get('telefono'),
             email: formData.get('email').trim(),
-            proyecto: formData.get('proyecto').trim(),
+            proyecto: document.getElementById('proyecto').value,
             cargo: formData.get('cargo').trim(),
             pass: formData.get('pass').trim(),
         }
@@ -75,6 +71,19 @@ function saveData() {
     }
     twoLowercase(conv);
 }
+
+fetch('http://localhost:8080/dataProyectos')
+    .then(response => response.json())
+    .then(data => {
+        const select = document.getElementById("proyecto");
+        data.forEach(element => {
+            var option = document.createElement("option");
+            var ansText = document.createTextNode(element.descripcionProyectos);
+            option.appendChild(ansText);
+            option.value = element.descripcionProyectos;
+            select.appendChild(option);
+        });
+    });
 
 
 
