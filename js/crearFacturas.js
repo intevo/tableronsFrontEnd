@@ -367,8 +367,6 @@ const editFactura = () => {
     let valorDescuento = segundo.value.replaceAll('.', '');
     let valorDescuentoFinal = parseInt(valorDescuento);
 
-
-
     if ($('#facturaTotal').val().length <= 0) {
       alert("Error: El campo Valor Facturado esta vacio");
       return;
@@ -379,7 +377,6 @@ const editFactura = () => {
       alert("Error: El campo Observaciones esta vacio");
       return;
     }
-  
 
     const factura = {
 
