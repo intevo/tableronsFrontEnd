@@ -357,9 +357,9 @@ const editFactura = () => {
     $('#crear').css('display', 'none');
     $('#editar').css('display', 'block');
 
-    let inputCheck = document.getElementById('prorroga')
+    let inputCheck = document.getElementById('prorroga');
     let check = inputCheck.checked == true ? 1 : 0;
-
+    
     const primero = document.getElementById('facturaTotal');
     let valorFactura = primero.value.replaceAll('.', '');
     let facturaTotalFinal = parseInt(valorFactura);

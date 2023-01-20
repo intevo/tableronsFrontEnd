@@ -342,6 +342,7 @@ const deleteAns = () => {
 
             })
             alert("Ans Eliminado");
+            location.reload();
             getAns();
         }
     })

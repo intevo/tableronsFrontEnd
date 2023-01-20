@@ -351,7 +351,7 @@ const editContrato = () => {
         if (mes < 10)
             mes = '0' + mes
         let fechaLimite = ano + "-" + mes + "-" + dia;
-
+        // alert($('#fechaFinalizacionContrato').val())
         const cambio = document.getElementById('valorContrato');
         let valorContrato = cambio.value.replaceAll('.', '');
         let valorNotacreditoFinal = parseInt(valorContrato);
@@ -366,8 +366,13 @@ const editContrato = () => {
         if ($('#fechaFinalizacionContrato').val() < fechaLimite){
             document.getElementById('prorroga').checked=false;
             document.getElementById('prorroga').disabled=true;
+            check = 0;
             alert("Advertencia: Contrato Inactivo / Validar fecha");
-            return;
+        }
+        if ($('#fechaFinalizacionContrato').val() >= fechaLimite){
+            document.getElementById('prorroga').checked=true;
+            document.getElementById('prorroga').disabled=true;
+            check = 1;
         }
         if ($('#valorContrato').val().length <= 0) {
             alert("Debe poner un valor en el campo valor de contrato");
@@ -377,7 +382,7 @@ const editContrato = () => {
             alert("Debe poner un valor en el campo valor Neto de contrato");
             return;
         }
-
+        
         const ans = {
             idContrato: id,
             idContrato: $('#idContrato').val(),
@@ -389,7 +394,8 @@ const editContrato = () => {
             prorroga: check,
 
         }
-
+        //alert($('#fechaFinalizacionContrato').val())
+        
         $.ajax({
             url: 'http://localhost:8080/contrato/' + id,
             contentType: 'application/json',
